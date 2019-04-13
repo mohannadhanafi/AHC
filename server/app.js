@@ -13,13 +13,9 @@ app.set('port', process.env.PORT || 3000)
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
   .use('/api/v1', controller)
-  .use(express.static(path.join(__dirname, '..', 'clients', 'Home', 'build')))
-  .use(express.static(path.join(__dirname, '..', 'clients', 'Admin', 'build')))
-  .get('/admin*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'clients', 'Admin', 'build', 'index.html'));
-  })
+  .use(express.static(path.join(__dirname, '..', 'client', 'build')))
   .get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'clients', 'Home', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 
 module.exports = app;
