@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './style.css';
 
 export default class index extends Component {
   state = {};

@@ -35,6 +35,7 @@ export default class index extends Component {
       const { testimonials } = this.state;
       return (
         <section className="section-wrap pt-48">
+        <div className="container">
           <div className="slick-custom-arrows">
           {testimonials.map(testimonial => (
             <div className="slick-slide ">
@@ -58,6 +59,7 @@ export default class index extends Component {
           </div>
           ))}
           </div>
+        </div>
         </section>
       );
     }
