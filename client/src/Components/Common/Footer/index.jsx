@@ -25,15 +25,66 @@ export default class index extends Component {
                 </div>
 
 
-                <div className="col-lg-3 offset-lg-3 col-md-6">
+                <div className="col-lg-4 offset-lg-2 col-md-6">
                   <div className="widget widget_nav_menu">
-                    <h5 className="widget-title">Solutions</h5>
+                    <h5 className="widget-title">Opening Hours</h5>
                     <ul>
-                      <li><a href="#">Finance Strategy</a></li>
-                      <li><a href="#">Advertising</a></li>
-                      <li><a href="#">SMM</a></li>
-                      <li><a href="#">SEO</a></li>
-                      <li><a href="#">Google AdWords</a></li>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Monday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Tuesday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Wednesday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Thursday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Friday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Saturday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li><a href="#">Sunday: </a></li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li><a href="#">08 AM - 06 PM</a></li>
+                        </div>
+                      </div>
                     </ul>
                   </div>
                 </div>
@@ -106,8 +157,37 @@ export default class index extends Component {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   &copy; 2019 Casumi, Made by
-                    {' '}
+{' '}
                     <a href="https://deothemes.com">DeoThemes</a>
                   </span>
                 </div>
