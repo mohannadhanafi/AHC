@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Components/Pages/Home';
+import Contact from './Components/Pages/ContactUs';
 import Header from './Components/Common/Navbar';
 import BackTop from './Components/Common/BackTop';
 import Footer from './Components/Common/Footer';
@@ -16,6 +17,7 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/contact" component={Contact} />
           </Switch>
           <BackTop />
           <Footer />
