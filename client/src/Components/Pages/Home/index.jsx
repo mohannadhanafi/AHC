@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Hero from './Hero';
 import Services from './Services';
-import Promo from './Promo';
+import Promo from '../../Common/Promo';
 import Plan from './Plan';
 import Testimonials from './Testimonials';
 import LatestNews from './LatestNews';
