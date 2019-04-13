@@ -36,6 +36,10 @@ export default class index extends Component {
     ],
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     const { title, services, slider } = this.state;
     return (
