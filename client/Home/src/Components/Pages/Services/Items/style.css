@@ -1,0 +1,16 @@
+.services--page .spec--service:hover{
+    box-shadow: 0px 5px 10px rgba(64, 90, 128, 0.05);
+    top: 2px;
+    border: 2px solid #F53B30;
+    border-top: none;
+}
+.services--page .spec--service a {
+    color: #FFF !important
+}
+.services--page .service--cta {
+    display: none;
+}
+
+.services--page .spec--service:hover .service--cta {
+    display: block
+}
