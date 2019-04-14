@@ -41,6 +41,7 @@ class Registration extends Component {
     pic: 'noPic.jpg',
     removedFile: [],
     disable: false,
+    mobile: '',
 
   };
 
@@ -49,7 +50,7 @@ componentDidMount = async () => {
   const res = await axios.get('/api/v2/getoptions');
   const { data } = res;
   const {
-    logo: pic, copyrights, email, address,
+    logo: pic, copyrights, email, address, mobile,
   } = data[0];
   const fileList = [];
   await axios.get(`/api/v2/getFile/${pic}`).then(() => {
@@ -62,7 +63,7 @@ componentDidMount = async () => {
   }).catch((error) => {
   });
   this.setState({
-    pic, copyrights, fileList, email, address,
+    pic, copyrights, fileList, email, address, mobile,
   });
 }
 
@@ -149,7 +150,7 @@ componentDidMount = async () => {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      fileList, previewVisible, pic, email, address, copyrights, disable,
+      fileList, previewVisible, pic, email, address, copyrights, disable, mobile,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -219,6 +220,11 @@ componentDidMount = async () => {
                 },
               ],
             })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Mobile">
+            {getFieldDecorator('mobile', {
+              initialValue: mobile,
+            })(<Input type="number" />)}
           </FormItem>
           <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
             {getFieldDecorator('copyrights', {

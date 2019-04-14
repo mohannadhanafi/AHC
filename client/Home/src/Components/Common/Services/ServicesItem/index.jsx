@@ -14,9 +14,9 @@ export default class index extends Component {
               {services.map(service => (
                 <div key={uuid()} className="col-lg-4">
                   <Link to="/" className="service box-shadow hover-line hover-down">
-                    <i className={`service__icon ${service.icon}`} />
+                    <i className="service__icon o-business-report-1" />
                     <h4 className="service__title">{service.title}</h4>
-                    <p className="service__text">{service.description}</p>
+                    <p className="service__text">{service.desc}</p>
                   </Link>
                 </div>
               ))}

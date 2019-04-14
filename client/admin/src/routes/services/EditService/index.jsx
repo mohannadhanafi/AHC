@@ -44,7 +44,7 @@ class Registration extends Component {
     removedFile: [],
     fileName: '',
     seo: '',
-    disable: false 
+    disable: false,
   };
 
 
@@ -88,16 +88,10 @@ handleEditorChange = (e) => {
         const {
           icon, content, removedFile, fileList, fileName,
         } = this.state;
-        console.log(fileName);
-
         if (fileName !== '') {
-          console.log(55);
-
           values.icon = fileName;
         }
         values.body = content;
-        console.log(values);
-
         const {
           match: {
             params: { id },
@@ -198,7 +192,7 @@ handleEditorChange = (e) => {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      title, desc, icon, content, fileList, previewVisible, seo,disable
+      title, desc, icon, content, fileList, previewVisible, seo, disable,
     } = this.state;
     const uploadButton = (
       <div>
@@ -320,17 +314,17 @@ handleEditorChange = (e) => {
             ) : null}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-          {!disable
-            ? (
+            {!disable
+              ? (
                 <Button type="primary" htmlType="submit">
               Save
                 </Button>
-            )
-            : (
+              )
+              : (
                 <Button type="primary" disabled htmlType="submit">
          Save
                 </Button>
-            ) }
+              ) }
           </FormItem>
         </Form>
         <NotificationContainer />

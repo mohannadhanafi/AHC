@@ -35,8 +35,7 @@ export default class index extends Component {
         <div className="content-wrapper oh">
           <Hero />
           <Services
-            title={title}
-            services={services}
+            slider={false}
           />
           <Form />
           {/* <div id="google-map" className="gmap" data-address="V Tytana St, Manila, Philippines" /> */}

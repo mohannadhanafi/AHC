@@ -4,25 +4,36 @@
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './style.css';
 
 export default class index extends Component {
     state = {
-      title: 'AHC\'s Affordable Insurance Plan!',
-      description: 'AHC offers a unique insurance plan with an affordable payment process suitable for all beneficiaries',
+      title: '',
+      description: '',
       plan: ['$30 enrollment fee', '$30 per month', '$30 copay to any emergency visit or non-specialized physician visit.'],
       video: 'mov_bbb',
+      image: '',
+    }
+
+    componentDidMount() {
+      axios('/api/v2/getTitle').then((result) => {
+        const { data } = result;
+        const { plantitle, plandesc, planimage } = data[0];
+        this.setState({ title: plantitle, description: plandesc, image: planimage });
+      });
     }
 
     render() {
       const {
-        title, description, plan, video,
+        title, description, plan, video, image,
       } = this.state;
       return (
         <section className="plan">
           <div className="container">
             <div className="row">
               <div className="col-lg-6 mt-md-72">
+              {/* <img src={`/api/v2/getFile/${image}`} alt="" /> */}
               <video width="400" controls>
                 <source src={`${video}.mp4`} type="video/mp4" />
                 <source src={`${video}.ogg`} type="video/ogg" />

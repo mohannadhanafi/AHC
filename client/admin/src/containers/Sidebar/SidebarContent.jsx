@@ -200,6 +200,120 @@ class SidebarContent extends Component {
                   </Link>
                 </Menu.Item>
               </SubMenu>
+              <Menu.Item key="promo">
+                <Link to="/admin/promo">
+                  <i className="icon icon-setting" />
+                  <IntlMessages id="sidebar.promo" />
+                </Link>
+              </Menu.Item>
+              <SubMenu
+                key="blogs"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-widgets" />
+                    <IntlMessages id="sidebar.blogs" />
+                  </span>
+)}
+              >
+                <Menu.Item key="blogs/viewblogs">
+                  <Link to="/admin/blogs/viewblogs/all">
+                    <i className="icon icon-plain-list-divider" />
+                    <IntlMessages id="sidebar.blogs.view" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="blogs/pending">
+                  <Link to="/admin/blogs/add">
+                    <i className="icon icon-add" />
+                    <IntlMessages id="sidebar.blogs.add" />
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="plan"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-extensions" />
+                    <IntlMessages id="sidebar.plan" />
+                  </span>
+)}
+              >
+                <Menu.Item key="plan/viewplan">
+                  <Link to="/admin/plan/viewplan">
+                    <i className="icon icon-plain-list-divider" />
+                    <IntlMessages id="sidebar.viewplan" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="plan/addPlan">
+                  <Link to="/admin/plan/addPlan">
+                    <i className="icon icon-add" />
+                    <IntlMessages id="sidebar.addPlan" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="plan/settings">
+                  <Link to="/admin/plan/settings">
+                    <i className="icon icon-setting" />
+                    <IntlMessages id="sidebar.settings" />
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="options"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-setting" />
+                    <IntlMessages id="sidebar.options" />
+                  </span>
+)}
+              >
+                <Menu.Item key="options/main">
+                  <Link to="/admin/options/main">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.main" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="options/social">
+                  <Link to="/admin/options/social">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.social" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="options/footer">
+                  <Link to="/admin/options/footer">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.footer" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="options/hours">
+                  <Link to="/admin/options/hours">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.hours" />
+                  </Link>
+                </Menu.Item>
+                {/* <Menu.Item key="options/contact">
+                  <Link to="/admin/options/contact">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.Contact" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="options/icon">
+                  <Link to="/admin/options/icon">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.icon" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="options/map">
+                  <Link to="/admin/options/map">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.map" />
+                  </Link>
+                </Menu.Item> */}
+              </SubMenu>
               {/* <SubMenu
                 key="aboutMenu"
                 className={this.getNavStyleSubMenuClass(navStyle)}
@@ -316,86 +430,8 @@ class SidebarContent extends Component {
                 </Menu.Item>
               </SubMenu>
 
-              <SubMenu
-                key="blogs"
-                className={this.getNavStyleSubMenuClass(navStyle)}
-                title={(
-                  <span>
-                    {' '}
-                    <i className="icon icon-widgets" />
-                    <IntlMessages id="sidebar.blogs" />
-                  </span>
-)}
-              >
-                <Menu.Item key="blogs/viewblogs">
-                  <Link to="/admin/blogs/viewblogs/all">
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.blogs.view" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="blogs/pending">
-                  <Link to="/admin/blogs/add">
-                    <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.blogs.add" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="comments">
-                  <Link to="/admin/comments/all">
-                    <i className="icon icon-chat" />
-                    <IntlMessages id="sidebar.comments" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
 
-
-              <SubMenu
-                key="options"
-                className={this.getNavStyleSubMenuClass(navStyle)}
-                title={(
-                  <span>
-                    {' '}
-                    <i className="icon icon-setting" />
-                    <IntlMessages id="sidebar.options" />
-                  </span>
-)}
-              >
-                <Menu.Item key="options/main">
-                  <Link to="/admin/options/main">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.main" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="options/social">
-                  <Link to="/admin/options/social">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.social" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="options/footer">
-                  <Link to="/admin/options/footer">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.footer" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="options/contact">
-                  <Link to="/admin/options/contact">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.Contact" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="options/icon">
-                  <Link to="/admin/options/icon">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.icon" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="options/map">
-                  <Link to="/admin/options/map">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.map" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu> */}
+               */}
             </Menu>
           </CustomScrollbars>
         </div>

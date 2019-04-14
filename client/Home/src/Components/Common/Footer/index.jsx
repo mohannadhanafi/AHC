@@ -1,12 +1,45 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './style.css';
 
 export default class index extends Component {
-  state = {};
+  state = {
+    logo: '',
+    address: '',
+    copyrights: '',
+    email: '',
+    mobile: '',
+    facebook: '',
+    twitter: '',
+    google: '',
+  };
+
+  componentWillMount() {
+    axios('/api/v2/hours/getAll').then((result) => {
+      const { data } = result;
+      const { monday_start, monday_end } = data[0];
+      console.log(data);
+    });
+  }
+
+  componentDidMount() {
+    axios('/api/v2/getoptions').then((result) => {
+      const { data } = result;
+      const {
+        logo, address, copyrights, email, mobile, facebook, twitter, google, footer_logo,
+      } = data[0];
+      this.setState({
+        logo, address, copyrights, email, mobile, facebook, twitter, google, footer_logo,
+      });
+    });
+  }
 
   render() {
+    const {
+      logo, address, copyrights, email, mobile, facebook, twitter, google, footer_logo,
+    } = this.state;
     return (
       <footer className="footer">
         <div className="container">
@@ -14,16 +47,26 @@ export default class index extends Component {
             <div className="row">
               <div className="col-lg-3 col-md-6">
                 <div className="widget widget-about-us">
-                  <a href="index.html" className="logo-container flex-child">
-                    <img
-                      className="logo"
-                      src="https://i.ibb.co/R7C00gt/logo.png"
-                      alt="logo"
-                    />
-                  </a>
+                  {footer_logo ? (
+                    <Link to="/" className="logo-container flex-child">
+                      <img
+                        className="logo"
+                        src={`/api/v2/getFile/${footer_logo}`}
+                        alt="logo"
+                      />
+                    </Link>
+                  ) : (
+                    <Link to="/" className="logo-container flex-child">
+                      <img
+                        className="logo"
+                        src={`/api/v2/getFile/${logo}`}
+                        alt="logo"
+                      />
+                    </Link>
+                  )}
                   <div className="socials mt-32">
                     <a
-                      href="#"
+                      href={twitter || null}
                       className="social social-twitter"
                       aria-label="twitter"
                       title="twitter"
@@ -32,7 +75,7 @@ export default class index extends Component {
                       <i className="ui-twitter" />
                     </a>
                     <a
-                      href="#"
+                      href={facebook || null}
                       className="social social-facebook"
                       aria-label="facebook"
                       title="facebook"
@@ -41,7 +84,7 @@ export default class index extends Component {
                       <i className="ui-facebook" />
                     </a>
                     <a
-                      href="#"
+                      href={google || null}
                       className="social social-google-plus"
                       aria-label="google plus"
                       title="google plus"
@@ -151,18 +194,21 @@ export default class index extends Component {
                   <ul>
                     <li>
                       <address>
-                        8910 University Center Lane Suite 620 San Diego, CA
-                        92102
+                        {address || null}
                       </address>
                     </li>
+                    {mobile && (
                     <li>
                       <span>Phone: </span>
-                      <a href="tel:+1-800-1554-456-123">+ 1 (800) 155 4561</a>
+                      <a href={mobile}>{mobile}</a>
                     </li>
+                    )}
+                    {email && (
                     <li>
                       <span>Email: </span>
-                      <a href="mailto:hi@margin.com">hi@margin.com</a>
+                      <a href={email}>{email}</a>
                     </li>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -194,12 +240,13 @@ export default class index extends Component {
                   </ul>
                 </div>
               </div>
+              {copyrights && (
               <div className="col-lg-6 text-right text-md-center">
                 <span className="copyright">
-                  &copy; 2019 Casumi, Made by
-                  <a href="https://deothemes.com">DeoThemes</a>
+                  &copy; {copyrights}
                 </span>
               </div>
+              )}
             </div>
           </div>
         </div>

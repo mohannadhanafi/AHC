@@ -13,7 +13,6 @@
   "sidebar.core": "Core Items",
   "sidebar.addcore": "Add Core",
   "sidebar.comments": "Comments",
-
   "sidebar.viewcore": "View Core",
   "sidebar.dashboard": "Dashboard",
   "sidebar.categories": "Categories",
@@ -333,7 +332,6 @@
   "sidebar.addauther": "Add Auther",
   "sidebar.options": "Options",
   "sidebar.newsletter": "News Letter",
-  "sidebar.comments": "Comments",
   "sidebar.ads": "Advertisement",
   "sidebar.addads": "Add Advertisement",
   "sidebar.viewads": "View Advertisement",
@@ -377,5 +375,10 @@
   "sidebar.statistics": "Statistics",
   "sidebar.statistics.view": "View Statistics",
   "sidebar.statistics.add": "Add Statistic",
-  "sidebar.icon": "Icon"
+  "sidebar.icon": "Icon",
+  "sidebar.promo": "Promo",
+  "sidebar.plan": "Plan",
+  "sidebar.viewplan": "View Plan",
+  "sidebar.addPlan": "Add Plan",
+  "sidebar.hours": "Openning Hours"
 }

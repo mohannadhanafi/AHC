@@ -15,7 +15,6 @@ export default class index extends Component {
     componentWillMount() {
       axios('/api/v2/statistics').then((result) => {
         const { data } = result;
-        console.log(data);
         this.setState({ statistcs: data });
       });
     }

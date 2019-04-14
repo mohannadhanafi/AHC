@@ -3,6 +3,7 @@
 /* eslint-disable no-trailing-spaces */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class index extends Component {
     state = {
@@ -11,6 +12,14 @@ export default class index extends Component {
       From layout to copy to design, there are limitless combinations of changes that may improve your visitor-to-sale conversion rate.`,
       first_image: 'https://deothemes.com/envato/casumi/html/img/promo/promo_img_1.jpg',
       second_image: 'https://deothemes.com/envato/casumi/html/img/promo/promo_img_2.jpg',
+    }
+
+    componentDidMount() {
+      axios('/api/v2/getTitle').then((result) => {
+        const { data } = result;
+        const { promotitle, promodesc } = data[0];
+        this.setState({ title: promotitle, description: promodesc });
+      });
     }
 
     render() {

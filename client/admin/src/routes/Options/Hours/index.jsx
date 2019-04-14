@@ -18,6 +18,7 @@ import {
   Card,
   Form,
   Input,
+  TimePicker,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -27,25 +28,13 @@ const FormItem = Form.Item;
 
 class Registration extends Component {
   state = {
-    confirmDirty: false,
-    autoCompleteResult: [],
-    fileList: [],
-    previewVisible: false,
-    previewImage: '',
-    categories: [],
-    fileName: '',
-    facebook: '',
-    twitter: '',
-    whats: '',
-    google: '',
-    logo: '',
     disable: false,
   };
 
   handleCancel = () => this.setState({ previewVisible: false });
 
 componentDidMount = async () => {
-  const res = await axios.get('/api/v2/getoptions');
+  const res = await axios.get('/api/v2/hours/getAll');
   const { data } = res;
   const {
     facebook, twitter, whats, google, logo, email, address, youtube, instagram,
@@ -94,45 +83,6 @@ componentDidMount = async () => {
   };
 
 
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
-  };
-
-  removeFile = async (file) => {
-    if ((file.status = 'removed')) {
-      const {
-        response: { fullName: pic },
-      } = file;
-      await axios.post('/api/v2/removeFile', { pic }).then(() => {
-        this.setState({ fileName: '' });
-      });
-    }
-  };
-
-  handleChange = ({ file, fileList }) => {
-    const isJPG = file.type === 'image/jpeg';
-    const isPNG = file.type === 'image/png';
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isJPG && !isPNG) {
-      NotificationManager.error('You can only upload image files!', 'ERROR', 2000);
-    } else if (!isLt2M) {
-      NotificationManager.error('Image must smaller than 2MB!', 'ERROR', 2000);
-    } else {
-      this.setState({ fileList });
-      const { status } = file;
-      if (status === 'done') {
-        const {
-          response: { fullName },
-        } = file;
-        this.setState({ fileName: fullName });
-      }
-    }
-  };
-
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
@@ -163,26 +113,19 @@ componentDidMount = async () => {
     return (
       <Card className="gx-card" title="Social Media">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem {...formItemLayout} label={<span>Facebook</span>}>
-            {getFieldDecorator('facebook', { initialValue: facebook })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Twitter</span>}>
-            {getFieldDecorator('twitter', { initialValue: twitter })(<Input />)}
-          </FormItem>
-
-          <FormItem {...formItemLayout} label={<span>Google</span>}>
-            {getFieldDecorator('google', { initialValue: google })(<Input />)}
-          </FormItem>
+          <TimePicker
+            value={this.state.value}
+            onChange={this.onChange} />
           <FormItem {...tailFormItemLayout}>
             {!disable
               ? (
                 <Button type="primary" htmlType="submit">
-              Save
+                    submit
                 </Button>
               )
               : (
                 <Button type="primary" disabled htmlType="submit">
-Save
+                    submit
                 </Button>
               ) }
           </FormItem>

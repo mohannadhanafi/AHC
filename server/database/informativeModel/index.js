@@ -20,6 +20,7 @@ const portfolio = require('./portfolio');
 const statistics = require('./statistics');
 const comments = require('./comments');
 const contact = require('./contact');
+const hours = require('./hours');
 
 aboutItem.belongsTo(about, {
   onDelete: 'CASCADE',
@@ -74,4 +75,5 @@ module.exports = {
   statistics,
   comments,
   contact,
+  hours
 };

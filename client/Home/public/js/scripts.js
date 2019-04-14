@@ -44,6 +44,28 @@ var DEOTHEMES = DEOTHEMES || {};
     },
 
     slickCarousel() {
+      $('.slick-service-boxes').slick({
+        arrows: false,
+        dots: true,
+        slidesToShow: 3,
+        infinite: false,
+
+        responsive: [
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+            },
+          },
+        ],
+      });
+
       $('.slick-service-boxes--1').slick({
         arrows: true,
         dots: false,

@@ -28,8 +28,8 @@ const { TextArea } = Input;
 
 class Registration extends Component {
   state = {
-    statisticstitle: '',
-    statisticsdesc: '',
+    promotitle: '',
+    promodesc: '',
     disable: false,
   };
 
@@ -50,7 +50,7 @@ class Registration extends Component {
               this.setState({ loading: false }, () => {
                 NotificationManager.success(message, 'SUCCESS', 2000);
                 setTimeout(() => {
-                  this.props.history.push('/admin/statistics/settings');
+                  this.props.history.push('/admin/promo');
                   this.setState({ disable: false });
                 }, 3000);
               });
@@ -87,12 +87,12 @@ class Registration extends Component {
     const result = await axios.get('/api/v2/getTitle');
     const { data } = result;
     const {
-      statisticstitle,
-      statisticsdesc,
+      promotitle,
+      promodesc,
     } = data[0];
     this.setState(() => ({
-      statisticstitle,
-      statisticsdesc,
+      promotitle,
+      promodesc,
     }));
   };
 
@@ -100,8 +100,8 @@ class Registration extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      statisticstitle,
-      statisticsdesc,
+      promotitle,
+      promodesc,
       disable,
     } = this.state;
     const formItemLayout = {
@@ -130,8 +130,8 @@ class Registration extends Component {
       <Card className="gx-card" title="Settings">
         <Form onSubmit={this.handleSubmit}>
           <FormItem {...formItemLayout} label={<span>Title</span>}>
-            {getFieldDecorator('statisticstitle', {
-              initialValue: statisticstitle,
+            {getFieldDecorator('promotitle', {
+              initialValue: promotitle,
               rules: [
                 {
                   required: true,
@@ -146,8 +146,8 @@ class Registration extends Component {
             })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label={<span>Subtitle</span>}>
-            {getFieldDecorator('statisticsdesc', {
-              initialValue: statisticsdesc,
+            {getFieldDecorator('promodesc', {
+              initialValue: promodesc,
               rules: [
                 {
                   required: true,

@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './style.css';
 
 export default class index extends Component {
-  state = {}
+  state = {
+    logo: '',
+  }
+
+  componentDidMount() {
+    axios('/api/v2/getoptions').then((result) => {
+      const { data } = result;
+      const { logo } = data[0];
+      this.setState({ logo });
+    });
+  }
 
   render() {
+    const { logo } = this.state;
     return (
       <header className="nav">
         <div className="nav__holder nav--sticky">
@@ -18,9 +30,9 @@ export default class index extends Component {
               </form>
 
               <div className="nav__header">
-                <a href="index.html" className="logo-container">
-                  <img className="logo" src="https://i.ibb.co/R7C00gt/logo.png" alt="logo" />
-                </a>
+                <Link to="/" className="logo-container">
+                  <img className="logo" src={`/api/v2/getFile/${logo}`} alt="logo" />
+                </Link>
 
                 <button type="button" className="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                   <span className="sr-only">Toggle navigation</span>

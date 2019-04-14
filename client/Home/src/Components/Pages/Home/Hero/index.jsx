@@ -3,34 +3,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import uuid from 'uuid';
-import $ from 'jquery';
 import axios from 'axios';
 
 export default class index extends Component {
     state= {
       hero: [],
-    }
-
-    componentDidMount() {
-      $(document).ready(() => {
-        (function ($) {
-          $('.slick-custom-arrows').each(function (idx, item) {
-            const carouselId = `carousel-${idx}`;
-            this.id = carouselId;
-            $(this).slick({
-              slide: `#${carouselId} .slick-slide`,
-              appendArrows: `#${carouselId} .slick-custom-nav`,
-              arrows: true,
-              nextArrow: `#${carouselId} .slick-custom-nav__next`,
-              prevArrow: `#${carouselId} .slick-custom-nav__prev`,
-              slidesToShow: 1,
-              fade: true,
-              adaptiveHeight: true,
-              cssEase: 'linear',
-            });
-          });
-        }(window.jQuery));
-      });
     }
 
     componentWillMount() {
@@ -57,7 +34,6 @@ export default class index extends Component {
                       <button className="slick-custom-nav__prev slick-prev slick-arrow" type="button" aria-label="prev">Prev ></button>
                       <button className="slick-custom-nav__next slick-next slick-arrow" type="button" aria-label="next">Next ></button>
                     </div>
-
                   </div>
                   <div className="col-lg-8 order-1 order-lg-2">
                     <div className="hero__text-holder">
@@ -72,7 +48,6 @@ export default class index extends Component {
                   </div>
                 </div>
               </div>
-              // </div>
             ))}
           </div>
         </section>

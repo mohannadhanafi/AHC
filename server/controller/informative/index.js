@@ -21,6 +21,7 @@ const portfolio = require('./portfolio');
 const statistics = require('./statistics');
 const contact = require('./contact');
 const comments = require('./comments');
+const hours = require('./hours');
 
 const router = express.Router();
 router
@@ -52,7 +53,9 @@ router
   .post('/contact', contact.post)
   .post('/comments/create', comments.post)
   .get('/contact/getAll', contact.get)
+  .get('/hours/getAll', hours.get)
   .use(Auth.checkToken)
+  .post('/hours', hours.update)
   .get('/posts/getAll', posts.getAll)
   .post('/about', about.update)
   .get('/core/:id', core.getCore)
