@@ -42,52 +42,67 @@ class Registration extends Component {
     fileName: '',
     pic: 'noPic.jpg',
     removedFile: [],
-    disable: false
+    disable: false,
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      const { fileList, fileName } = this.state;
+      const { fileList, fileName, removedFile } = this.state;
       if (!err) {
-        this.setState({ disable: true });
         const {
           match: {
             params: { id },
           },
         } = this.props;
-        axios
-          .post(`/api/v2/clients/update/${id}`, values)
-          .then((result) => {
-            const {
-              data: { message },
-              statusText,
-            } = result;
-            if (result.status === 200) {
-              NotificationManager.success(message, 'SUCCESS', 2000);
-              setTimeout(() => {
-                this.props.history.push('/admin/testimonials/view');
-                this.setState({ disable: true });
-              }, 3000);
-            } else {
-              NotificationManager.error(message || statusText, 'ERROR', 2000);
-              setTimeout(() => {
-                this.setState({ disable: false });
-              }, 2000);
-            }
-          })
-          .catch((error) => {
-            this.setState({ loading: false }, () => {
+        if (fileName !== '') {
+          values.image = fileName;
+        }
+        this.setState({ disable: true });
+        if (fileList.length) {
+          axios
+            .post(`/api/v2/clients/update/${id}`, values)
+            .then((result) => {
               const {
-                data: { message: errorMessage },
-                statusText: statusMessage,
-              } = error.response;
-              NotificationManager.error(errorMessage || statusMessage, 'ERROR', 2000);
-              setTimeout(() => {
-                this.setState({ disable: false });
-              }, 2000);
+                data: { message },
+                statusText,
+              } = result;
+              if (result.status === 200) {
+                NotificationManager.success(message, 'SUCCESS', 2000);
+                setTimeout(() => {
+                  this.props.history.push('/admin/testimonials/view');
+                  this.setState({ disable: true });
+                }, 3000);
+              } else {
+                NotificationManager.error(message || statusText, 'ERROR', 2000);
+                setTimeout(() => {
+                  this.setState({ disable: false });
+                }, 2000);
+              }
+              if (removedFile.length) {
+                removedFile.map(async (file) => {
+                  await axios.post('/api/v2/removeFile', { pic: file });
+                });
+              }
+            })
+            .catch((error) => {
+              this.setState({ loading: false }, () => {
+                const {
+                  data: { message: errorMessage },
+                  statusText: statusMessage,
+                } = error.response;
+                NotificationManager.error(errorMessage || statusMessage, 'ERROR', 2000);
+                setTimeout(() => {
+                  this.setState({ disable: false });
+                }, 2000);
+              });
             });
-          });
+        } else {
+          NotificationManager.error('Please Choose an image !', 'ERROR', 2000);
+          setTimeout(() => {
+            this.setState({ disable: false });
+          }, 2000);
+        }
       }
     });
   };
@@ -142,6 +157,7 @@ class Registration extends Component {
         image,
         description,
         jobTitle,
+        title,
       } = data;
       const fileList = [];
       await axios
@@ -158,6 +174,7 @@ class Registration extends Component {
         fileList,
         description,
         jobTitle,
+        title,
       });
     }).catch((error) => {
       const {
@@ -180,7 +197,8 @@ class Registration extends Component {
       name,
       description,
       jobTitle,
-      disable
+      disable,
+      title,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -213,6 +231,30 @@ class Registration extends Component {
     return (
       <Card className="gx-card" title="Edit Testimonial Details">
         <Form onSubmit={this.handleSubmit}>
+          <FormItem {...formItemLayout} label="Image">
+            <Upload
+              action="/api/v2/uploadFile"
+              listType="picture-card"
+              fileList={fileList}
+              onPreview={this.handlePreview}
+              onChange={this.handleChange}
+              withCredentials
+              onRemove={this.removeFile}
+              >
+              {fileList.length >= 1 ? null : uploadButton}
+            </Upload>
+            <Modal
+              visible={previewVisible}
+              footer={null}
+              onCancel={this.handleCancel}
+              >
+              <img
+                alt="example"
+                style={{ width: '100%' }}
+                src={`/api/v2/getFile/${pic}`}
+                />
+            </Modal>
+          </FormItem>
           <FormItem {...formItemLayout} label={<span>name</span>}>
             {getFieldDecorator('name', {
               initialValue: name,
@@ -222,6 +264,11 @@ class Registration extends Component {
             {getFieldDecorator('jobTitle', {
               initialValue: jobTitle,
 
+            })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label={<span>Title</span>}>
+            {getFieldDecorator('title', {
+              initialValue: title,
             })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label={<span>Description</span>}>
@@ -234,17 +281,17 @@ class Registration extends Component {
             })(<TextArea rows={4} />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-          {!disable
-            ? (
+            {!disable
+              ? (
                 <Button type="primary" htmlType="submit">
               Save
                 </Button>
-            )
-            : (
+              )
+              : (
                 <Button type="primary" disabled htmlType="submit">
          Save
                 </Button>
-            ) }
+              ) }
           </FormItem>
         </Form>
         <NotificationContainer />

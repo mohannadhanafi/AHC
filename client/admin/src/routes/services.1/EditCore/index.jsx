@@ -26,10 +26,7 @@ import {
 import uuid from 'uuid';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
-import MaterialUiIconPicker from 'react-material-ui-icon-picker';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import { Editor } from '@tinymce/tinymce-react';
-import ClearFix from 'material-ui/internal/ClearFix';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -203,7 +200,7 @@ handleEditorChange = (e) => {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      title, desc, icon, content, fileList, previewVisible,disable
+      title, desc, icon, content, fileList, previewVisible, disable,
     } = this.state;
     const uploadButton = (
       <div>
@@ -290,14 +287,14 @@ handleEditorChange = (e) => {
           </FormItem>
 
           <FormItem {...tailFormItemLayout}>
-          {!disable
+            {!disable
             ? (
-                <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit">
               Save
                 </Button>
             )
             : (
-                <Button type="primary" disabled htmlType="submit">
+              <Button type="primary" disabled htmlType="submit">
          Save
                 </Button>
             ) }

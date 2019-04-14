@@ -117,20 +117,20 @@ class SidebarContent extends Component {
                   <span>
                     {' '}
                     <i className="icon icon-widgets" />
-                    <IntlMessages id="sidebar.core" />
+                    <IntlMessages id="sidebar.services" />
                   </span>
 )}
               >
                 <Menu.Item key="core/viewcore">
                   <Link to="/admin/core/viewcore">
                     <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.viewcore" />
+                    <IntlMessages id="sidebar.viewServices" />
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="core/addcore">
                   <Link to="/admin/core/addcore">
                     <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.addcore" />
+                    <IntlMessages id="sidebar.addService" />
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="core/settings">
@@ -141,6 +141,66 @@ class SidebarContent extends Component {
                 </Menu.Item>
               </SubMenu>
               <SubMenu
+                key="testimonials"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-plain-list-divider" />
+                    <IntlMessages id="sidebar.testimonials" />
+                  </span>
+)}
+              >
+                <Menu.Item key="testimonials/view">
+                  <Link to="/admin/testimonials/view">
+                    <i className="icon icon-plain-list-divider" />
+                    <IntlMessages id="sidebar.testimonials.view" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="testimonials/add">
+                  <Link to="/admin/testimonials/add">
+                    <i className="icon icon-add" />
+                    <IntlMessages id="sidebar.testimonials.add" />
+                  </Link>
+                </Menu.Item>
+                {/* <Menu.Item key="testimonials/settings">
+                  <Link to="/admin/testimonials/settings">
+                    <i className="icon icon-setting" />
+                    <IntlMessages id="sidebar.settings" />
+                  </Link>
+                </Menu.Item> */}
+              </SubMenu>
+              <SubMenu
+                key="statistics"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-chart-line" />
+                    <IntlMessages id="sidebar.statistics" />
+                  </span>
+)}
+              >
+                <Menu.Item key="statistics/view">
+                  <Link to="/admin/statistics/view">
+                    <i className="icon icon-plain-list-divider" />
+                    <IntlMessages id="sidebar.statistics.view" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="statistics/add">
+                  <Link to="/admin/statistics/add">
+                    <i className="icon icon-add" />
+                    <IntlMessages id="sidebar.statistics.add" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="statistics/settings">
+                  <Link to="/admin/statistics/settings">
+                    <i className="icon icon-setting" />
+                    <IntlMessages id="sidebar.settings" />
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              {/* <SubMenu
                 key="aboutMenu"
                 className={this.getNavStyleSubMenuClass(navStyle)}
                 title={(
@@ -219,37 +279,6 @@ class SidebarContent extends Component {
                 </Menu.Item>
               </SubMenu>
 
-              <SubMenu
-                key="testimonials"
-                className={this.getNavStyleSubMenuClass(navStyle)}
-                title={(
-                  <span>
-                    {' '}
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.testimonials" />
-                  </span>
-)}
-              >
-                <Menu.Item key="testimonials/view">
-                  <Link to="/admin/testimonials/view">
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.testimonials.view" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="testimonials/add">
-                  <Link to="/admin/testimonials/add">
-                    <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.testimonials.add" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="testimonials/settings">
-                  <Link to="/admin/testimonials/settings">
-                    <i className="icon icon-setting" />
-                    <IntlMessages id="sidebar.settings" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
-
               <Menu.Item key="whyUs">
                 <Link to="/admin/whyUs">
                   <i className="icon icon-widgets" />
@@ -318,31 +347,6 @@ class SidebarContent extends Component {
                 </Menu.Item>
               </SubMenu>
 
-              <SubMenu
-                key="statistics"
-                className={this.getNavStyleSubMenuClass(navStyle)}
-                title={(
-                  <span>
-                    {' '}
-                    <i className="icon icon-chart-line" />
-                    <IntlMessages id="sidebar.statistics" />
-                  </span>
-)}
-              >
-                <Menu.Item key="statistics/view">
-                  <Link to="/admin/statistics/view">
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.statistics.view" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="statistics/add">
-                  <Link to="/admin/statistics/add">
-                    <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.statistics.add" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
-
 
               <SubMenu
                 key="options"
@@ -391,7 +395,7 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.map" />
                   </Link>
                 </Menu.Item>
-              </SubMenu>
+              </SubMenu> */}
             </Menu>
           </CustomScrollbars>
         </div>

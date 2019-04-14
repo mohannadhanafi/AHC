@@ -43,7 +43,7 @@ export default class index extends Component {
         )}
         <Promo />
         <Plan />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <Statistcs />
         <LatestNews />
         <CallToAction />

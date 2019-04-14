@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Input,
+  Button, Card, Form, Input, Upload, Modal, Icon,
 } from 'antd';
 import axios from 'axios';
 import {
@@ -29,112 +29,207 @@ const { TextArea } = Input;
 class Registration extends Component {
   state = {
     disable: false,
+    fileList: [],
+    previewVisible: false,
+    previewImage: '',
+    fileName: '',
+    removedFile: [],
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      
       if (!err) {
         this.setState({ disable: true });
-        axios
-          .post('/api/v2/statistics', values)
-          .then((result) => {
-            const {
-              data: { message },
-            } = result;
-            NotificationManager.success(message, 'SUCCESS', 2000);
-            setTimeout(() => {
-              this.props.history.push('/admin/statistics/view');
-              this.setState({ disable: false });
-            }, 2000);
-          })
-          .catch(async (error) => {
-            const {
-              data: { message },
-              statusText,
-            } = error.response;
-            NotificationManager.error(message || statusText, 'ERROR', 2000);
-            setTimeout(() => {
-              this.setState({ disable: false });
-            }, 2000);
-          });
+        const { fileList, removedFile } = this.state;
+        const files = [];
+        fileList.map((value) => {
+          files.push(value.response.fullName);
+          return files;
+        });
+        if (files.length !== 0) {
+          values.icon = files[0];
+          axios
+            .post('/api/v2/statistics', values)
+            .then((result) => {
+              const {
+                data: { message },
+              } = result;
+              NotificationManager.success(message, 'SUCCESS', 2000);
+              setTimeout(() => {
+                this.props.history.push('/admin/statistics/view');
+                this.setState({ disable: false });
+              }, 2000);
+            })
+            .catch(async (error) => {
+              const {
+                data: { message },
+                statusText,
+              } = error.response;
+              NotificationManager.error(message || statusText, 'ERROR', 2000);
+              setTimeout(() => {
+                this.setState({ disable: false });
+              }, 2000);
+            });
+        } else {
+          NotificationManager.error(
+            'Please Choose image or video !',
+            'ERROR',
+            2000,
+          );
+          setTimeout(() => {
+            this.setState({ disable: false });
+          }, 2000);
+        }
+        values.icon = files[0];
       }
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    const { disable } = this.state;
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 18 },
-      },
+  handleCancel = () => this.setState({ previewVisible: false });
+
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  };
+
+    removeFile = async (file) => {
+      const { removedFile } = this.state;
+      const {
+        response: { fullName },
+      } = file;
+      removedFile.push(fullName);
+      this.setState({ removedFile });
     };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
+
+    handleChange = ({ file, fileList }) => {
+      this.setState({ fileList });
+      const isSvg = file.type === 'image/svg+xml';
+      const isPNG = file.type === 'image/png';
+      if (!isSvg && !isPNG) {
+        NotificationManager.error(
+          'You can only upload svg files!',
+          'ERROR',
+          2000,
+        );
+        this.setState({ fileList: [] });
+      } else {
+        const { status } = file;
+        if (status === 'done') {
+          const {
+            response: { fullName },
+          } = file;
+          this.setState({ fileName: fullName });
+        }
+      }
     };
-    return (
-      <Card className="gx-card" title="Add Statistic">
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem {...formItemLayout} label={<span>Title</span>}>
-            {getFieldDecorator('title', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input the title!',
-                  whitespace: true,
-                },
-                {
-                  max: 20,
-                  message: 'Max is 20 letter',
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Count</span>}>
-            {getFieldDecorator('count', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input the subtitle!',
-                  whitespace: true,
-                },
-              ],
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...tailFormItemLayout}>
-            {!disable
-            ? (
+
+    render() {
+      const { getFieldDecorator } = this.props.form;
+      const {
+        disable, previewVisible, fileList, previewImage,
+      } = this.state;
+      const uploadButton = (
+        <div>
+          <Icon type="plus" />
+          <div className="ant-upload-text">Upload</div>
+        </div>
+      );
+      const formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 6 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 18 },
+        },
+      };
+      const tailFormItemLayout = {
+        wrapperCol: {
+          xs: {
+            span: 24,
+            offset: 0,
+          },
+          sm: {
+            span: 16,
+            offset: 8,
+          },
+        },
+      };
+      return (
+        <Card className="gx-card" title="Add Statistic">
+          <Form onSubmit={this.handleSubmit}>
+            <FormItem {...formItemLayout} label={<span>Icon</span>}>
+              <>
+                <Upload
+                  action="/api/v2/uploadFile"
+                  listType="picture-card"
+                  fileList={fileList}
+                  onPreview={this.handlePreview}
+                  onChange={this.handleChange}
+                  onRemove={this.removeFile}
+                  accept="image/png, image/svg+xml"
+              >
+                  {fileList.length === 1 ? null : uploadButton}
+                </Upload>
+                <Modal
+                  visible={previewVisible}
+                  footer={null}
+                  onCancel={this.handleCancel}
+              >
+                  <img
+                    alt="example"
+                    style={{ width: '100%' }}
+                    src={previewImage}
+                />
+                </Modal>
+              </>
+            </FormItem>
+            <FormItem {...formItemLayout} label={<span>Title</span>}>
+              {getFieldDecorator('title', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input the title!',
+                    whitespace: true,
+                  },
+                  {
+                    max: 20,
+                    message: 'Max is 20 letter',
+                  },
+                ],
+              })(<Input />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label={<span>Count</span>}>
+              {getFieldDecorator('count', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input the subtitle!',
+                    whitespace: true,
+                  },
+                ],
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...tailFormItemLayout}>
+              {!disable ? (
                 <Button type="primary" htmlType="submit">
-              Submit
+                Submit
                 </Button>
-            )
-            : (
+              ) : (
                 <Button type="primary" disabled htmlType="submit">
-         Submit
+                Submit
                 </Button>
-            ) }
-          </FormItem>
-        </Form>
-        <NotificationContainer />
-      </Card>
-    );
-  }
+              )}
+            </FormItem>
+          </Form>
+          <NotificationContainer />
+        </Card>
+      );
+    }
 }
 
 const RegistrationForm = Form.create()(Registration);

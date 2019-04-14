@@ -9,9 +9,10 @@ const App = ({ match }) => (
       <Route path={`${match.url}/users`} component={asyncComponent(() => import('./Users'))} />
       <Route path={`${match.url}/core`} component={asyncComponent(() => import('./services.1'))} />
       <Route path={`${match.url}/hero`} component={asyncComponent(() => import('./Hero'))} />
+      <Route path={`${match.url}/testimonials`} component={asyncComponent(() => import('./Testimonials'))} />
+      <Route path={`${match.url}/statistics`} component={asyncComponent(() => import('./Statistics'))} />
       {/* <Route path={`${match.url}/blogs`} component={asyncComponent(() => import('./Blogs'))} />
       <Route path={`${match.url}/services`} component={asyncComponent(() => import('./services'))} />
-      <Route path={`${match.url}/testimonials`} component={asyncComponent(() => import('./Testimonials'))} />
       <Route path={`${match.url}/features`} component={asyncComponent(() => import('./Features'))} />
       <Route path={`${match.url}/options`} component={asyncComponent(() => import('./Options'))} />
       <Route path={`${match.url}/partners`} component={asyncComponent(() => import('./Partners'))} />
@@ -19,7 +20,6 @@ const App = ({ match }) => (
       <Route path={`${match.url}/categories`} component={asyncComponent(() => import('./Categories'))} />
       <Route path={`${match.url}/about`} component={asyncComponent(() => import('./About'))} />
       <Route path={`${match.url}/whyUs`} component={asyncComponent(() => import('./WhyUs'))} />
-      <Route path={`${match.url}/statistics`} component={asyncComponent(() => import('./Statistics'))} />
       <Route path={`${match.url}/comments/:status`} component={asyncComponent(() => import('./Comments'))} /> */}
 
       <Route

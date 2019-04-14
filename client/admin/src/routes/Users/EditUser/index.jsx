@@ -210,7 +210,7 @@ class Registration extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      name, email, rule, previewVisible, fileList, pic, bio, disable
+      name, email, rule, previewVisible, fileList, pic, bio, disable,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -320,7 +320,7 @@ class Registration extends Component {
           </FormItem>
 
           <FormItem {...tailFormItemLayout}>
-          {!disable
+            {!disable
               ? (
                 <Button type="primary" htmlType="submit">
               Save

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PageTitle from '../../Common/PageTitle';
 import Team from './Team';
 import Promo from '../../Common/Promo';
-import CallToAction from '../../Common/CallToAction';
 import Statistcs from '../../Common/Statistics';
+import CallToAction from '../../Common/CallToAction';
 
 export default class index extends Component {
   state = {

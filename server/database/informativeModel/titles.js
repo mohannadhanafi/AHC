@@ -3,6 +3,8 @@ const connection = require('../config');
 
 const titles = connection.define('titles', {
   coreTitle: Sequelize.TEXT,
+  statisticstitle: Sequelize.TEXT,
+  statisticsdesc: Sequelize.TEXT,
   // servicetitle: { type: Sequelize.TEXT },
   // background: {
   //   type: Sequelize.TEXT,

@@ -6,9 +6,7 @@ const clients = connection.define('clients', {
   jobTitle: Sequelize.TEXT,
   image: Sequelize.TEXT,
   description: Sequelize.TEXT,
-  facebook: Sequelize.TEXT,
-  linkedin: Sequelize.TEXT,
-  twitter: Sequelize.TEXT,
+  title: Sequelize.TEXT,
   createdAt: {
     allowNull: false,
     defaultValue: Sequelize.NOW,

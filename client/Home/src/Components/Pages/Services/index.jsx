@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Hero from './Hero';
 import Items from './Items';
+import Statistics from '../../Common/Statistics';
+import CallToAction from '../../Common/CallToAction';
 
 export default class index extends Component {
   componentDidMount() {
@@ -12,6 +14,10 @@ export default class index extends Component {
       <>
         <Hero />
         <Items />
+        <Statistics
+          background
+        />
+        <CallToAction />
       </>
     );
   }

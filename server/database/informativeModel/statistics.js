@@ -11,6 +11,7 @@ const statistics = connection.define('statistics', {
     allowNull: false,
   },
   type: Sequelize.TEXT,
+  icon: Sequelize.TEXT,
   createdAt: {
     allowNull: false,
     defaultValue: new Date(),

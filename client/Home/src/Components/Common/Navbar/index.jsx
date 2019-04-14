@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './style.css';
 
 export default class index extends Component {
   state = {}
@@ -50,7 +51,9 @@ export default class index extends Component {
 
 
                 <div className="nav__phone-mobile d-lg-none">
-                  <a href="tel:1-800-995-3959" className="nav__phone-number">1-800-995-3959</a>
+                  <Link to="/contact" className="btn btn--lg btn--color donate-button">
+                    <span>Donate</span>
+                  </Link>
                 </div>
 
 
@@ -66,7 +69,9 @@ export default class index extends Component {
 
               <div className="nav__right d-none d-lg-flex">
                 <div className="nav__right-item">
-                  <a href="tel:1-800-995-3959" className="nav__phone-number">1-800-995-3959</a>
+                  <Link to="/contact" className="btn btn--lg btn--color donate-button">
+                    <span>Donate</span>
+                  </Link>
                 </div>
                 <div className="nav__right-item nav__search">
                   <a href="#" className="nav__search-trigger" id="nav__search-trigger">

@@ -139,7 +139,9 @@ class Registration extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { previewVisible, fileList, previewImage, disable } = this.state;
+    const {
+      previewVisible, fileList, previewImage, disable,
+    } = this.state;
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -228,7 +230,7 @@ class Registration extends Component {
             })(<TextArea />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-          {!disable
+            {!disable
               ? (
                 <Button type="primary" htmlType="submit">
               Submit

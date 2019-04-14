@@ -46,6 +46,18 @@ class Dynamic extends React.Component {
         const { data } = result;
         const columns = [
           {
+            title: 'image',
+            dataIndex: 'image',
+            key: 'image',
+            render: (text, record) => (
+              <img
+                className="thumb--image gx-mr-2"
+                src={`/api/v2/getFile/${record.image}`}
+                alt=""
+              />
+            ),
+          },
+          {
             title: 'name',
             dataIndex: 'name',
             key: 'name',
