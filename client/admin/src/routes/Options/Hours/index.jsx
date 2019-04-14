@@ -113,9 +113,9 @@ componentDidMount = async () => {
     return (
       <Card className="gx-card" title="Social Media">
         <Form onSubmit={this.handleSubmit}>
-          <TimePicker
-            value={this.state.value}
-            onChange={this.onChange} />
+          <FormItem {...formItemLayout} label={<span>Google</span>}>
+            {getFieldDecorator('monday_start')(<Input />)}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
             {!disable
               ? (
