@@ -22,6 +22,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
+import { Link } from 'react-router-dom';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -42,46 +43,45 @@ class Registration extends Component {
       if (!err) {
         this.setState({ disable: true });
         const { fileList, removedFile } = this.state;
-        const files = [];
-        fileList.map((value) => {
-          files.push(value.response.fullName);
-          return files;
-        });
-        if (files.length !== 0) {
-          values.icon = files[0];
-          axios
-            .post('/api/v2/statistics', values)
-            .then((result) => {
-              const {
-                data: { message },
-              } = result;
-              NotificationManager.success(message, 'SUCCESS', 2000);
-              setTimeout(() => {
-                this.props.history.push('/admin/statistics/view');
-                this.setState({ disable: false });
-              }, 2000);
-            })
-            .catch(async (error) => {
-              const {
-                data: { message },
-                statusText,
-              } = error.response;
-              NotificationManager.error(message || statusText, 'ERROR', 2000);
-              setTimeout(() => {
-                this.setState({ disable: false });
-              }, 2000);
-            });
-        } else {
-          NotificationManager.error(
-            'Please Choose image or video !',
-            'ERROR',
-            2000,
-          );
-          setTimeout(() => {
-            this.setState({ disable: false });
-          }, 2000);
-        }
-        values.icon = files[0];
+        // const files = [];
+        // fileList.map((value) => {
+        //   files.push(value.response.fullName);
+        //   return files;
+        // });
+        // if (files.length !== 0) {
+        //   values.icon = files[0];
+        axios
+          .post('/api/v2/statistics', values)
+          .then((result) => {
+            const {
+              data: { message },
+            } = result;
+            NotificationManager.success(message, 'SUCCESS', 2000);
+            setTimeout(() => {
+              this.props.history.push('/admin/statistics/view');
+              this.setState({ disable: false });
+            }, 2000);
+          })
+          .catch(async (error) => {
+            const {
+              data: { message },
+              statusText,
+            } = error.response;
+            NotificationManager.error(message || statusText, 'ERROR', 2000);
+            setTimeout(() => {
+              this.setState({ disable: false });
+            }, 2000);
+          });
+        // } else {
+        //   NotificationManager.error(
+        //     'Please Choose image or video !',
+        //     'ERROR',
+        //     2000,
+        //   );
+        //   setTimeout(() => {
+        //     this.setState({ disable: false });
+        //   }, 2000);
+        // }
       }
     });
   };
@@ -162,7 +162,19 @@ class Registration extends Component {
       return (
         <Card className="gx-card" title="Add Statistic">
           <Form onSubmit={this.handleSubmit}>
-            <FormItem {...formItemLayout} label={<span>Icon</span>}>
+            {/* <label>choose from </label> */}
+            <FormItem {...formItemLayout} label={<span><a href="https://deothemes.com/envato/casumi/html/icons.html" target="_blank">Icons</a></span>}>
+              {getFieldDecorator('icon', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input the icon!',
+                    whitespace: true,
+                  },
+                ],
+              })(<Input />)}
+            </FormItem>
+            {/* <FormItem {...formItemLayout} label={<span>Icon</span>}>
               <>
                 <Upload
                   action="/api/v2/uploadFile"
@@ -187,7 +199,7 @@ class Registration extends Component {
                 />
                 </Modal>
               </>
-            </FormItem>
+            </FormItem> */}
             <FormItem {...formItemLayout} label={<span>Title</span>}>
               {getFieldDecorator('title', {
                 rules: [

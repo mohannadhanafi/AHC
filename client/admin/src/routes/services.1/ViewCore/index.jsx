@@ -43,17 +43,17 @@ class Dynamic extends React.Component {
       axios.get('/api/v2/core').then((result) => {
         const { data } = result;
         const columns = [
-          {
-            title: 'Image',
-            dataIndex: 'icon',
-            render: (text, record) => (
-              <img
-                className="gx-size-30 gx-mr-2"
-                src={`/api/v2/getFile/${record.icon}`}
-                alt=""
-              />
-            ),
-          },
+          // {
+          //   title: 'Image',
+          //   dataIndex: 'icon',
+          //   render: (text, record) => (
+          //     <img
+          //       className="gx-size-30 gx-mr-2"
+          //       src={`/api/v2/getFile/${record.icon}`}
+          //       alt=""
+          //     />
+          //   ),
+          // },
           {
             title: 'Title',
             dataIndex: 'title',

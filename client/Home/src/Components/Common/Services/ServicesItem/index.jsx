@@ -11,10 +11,10 @@ export default class index extends Component {
         <div className="section-wrap offset-top-100 pt-0">
           <div className="container">
             <div className="row">
-              {services.map(service => (
+              {services.slice(0, 6).map(service => (
                 <div key={uuid()} className="col-lg-4">
                   <Link to="/" className="service box-shadow hover-line hover-down">
-                    <i className="service__icon o-business-report-1" />
+                    <i className={`service__icon ${service.icon}`} />
                     <h4 className="service__title">{service.title}</h4>
                     <p className="service__text">{service.desc}</p>
                   </Link>

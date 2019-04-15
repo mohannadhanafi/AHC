@@ -67,6 +67,8 @@ const options = connection.define('options', {
   footer_logo: Sequelize.TEXT,
   latitude: Sequelize.DECIMAL,
   longitude: Sequelize.DECIMAL,
+  ctatitle: Sequelize.TEXT,
+  ctasub: Sequelize.TEXT,
   createdAt: {
     allowNull: false,
     defaultValue: new Date(),

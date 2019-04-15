@@ -61,8 +61,6 @@ class Registration extends Component {
     const {
       cta, description, title, image: pic, body,
     } = data[0];
-    console.log(data[0].body);
-
     const fileList = [];
     if (pic !== '') {
       await axios

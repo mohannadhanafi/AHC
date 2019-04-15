@@ -2154,6 +2154,7 @@ a.cc-btn.cc-dismiss {
 	.entry__header {
 		margin-bottom: 32px; }
 	.entry__img {
+		height: 190px;
 		width: 100%; }
 	.entry__body {
 		padding-bottom: 24px; }
@@ -2221,6 +2222,7 @@ a.cc-btn.cc-dismiss {
 		float: left;
 		align-items: center; }
 	.entry__meta-author-img {
+		border-radius: 50%;
 		width: 24px;
 		height: 24px;
 		margin-right: 10px; }

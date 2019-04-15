@@ -26,6 +26,7 @@ import {
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import TextArea from 'antd/lib/input/TextArea';
 
 const FormItem = Form.Item;
 
@@ -50,7 +51,7 @@ componentDidMount = async () => {
   const res = await axios.get('/api/v2/getoptions');
   const { data } = res;
   const {
-    logo: pic, copyrights, email, address, mobile,
+    logo: pic, copyrights, email, address, mobile, ctatitle, ctasub,
   } = data[0];
   const fileList = [];
   await axios.get(`/api/v2/getFile/${pic}`).then(() => {
@@ -63,7 +64,7 @@ componentDidMount = async () => {
   }).catch((error) => {
   });
   this.setState({
-    pic, copyrights, fileList, email, address, mobile,
+    pic, copyrights, fileList, email, address, mobile, ctatitle, ctasub,
   });
 }
 
@@ -150,7 +151,7 @@ componentDidMount = async () => {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      fileList, previewVisible, pic, email, address, copyrights, disable, mobile,
+      fileList, previewVisible, pic, email, address, copyrights, disable, mobile, ctatitle, ctasub,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -231,6 +232,18 @@ componentDidMount = async () => {
               initialValue: copyrights,
               rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
             })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label={<span>CTA Title</span>}>
+            {getFieldDecorator('ctatitle', {
+              initialValue: ctatitle,
+              rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
+            })(<TextArea rows={4} />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label={<span>CTA SubTitle</span>}>
+            {getFieldDecorator('ctasub', {
+              initialValue: ctasub,
+              rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
+            })(<TextArea rows={8} />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
             {!disable

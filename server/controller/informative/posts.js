@@ -41,7 +41,7 @@ exports.getAll = async (req, res) => {
         include: [
           {
             model: users,
-            attributes: ['name'],
+            attributes: ['name', 'pic'],
           },
         ],
       });

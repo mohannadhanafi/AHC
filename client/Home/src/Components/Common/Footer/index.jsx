@@ -20,7 +20,6 @@ export default class index extends Component {
     axios('/api/v2/hours/getAll').then((result) => {
       const { data } = result;
       const { monday_start, monday_end } = data[0];
-      console.log(data);
     });
   }
 

@@ -42,7 +42,6 @@ class Registration extends Component {
 componentDidMount = async () => {
   const res = await axios.get('/api/v2/getoptions');
   const { data } = res;
-  console.log(data);
   const {
     latitude, longitude,
   } = data[0];

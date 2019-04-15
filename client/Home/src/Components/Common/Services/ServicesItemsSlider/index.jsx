@@ -42,10 +42,10 @@ export default class index extends Component {
         <div className="offset-top-100">
           <div className="container">
             <div className="slick-service-boxes slick-slider-row">
-              {services.map(service => (
+              {services.slice(0, 5).map(service => (
                 <div key={uuid()} className="slick-slide slick-slider-col slick-service-boxes__item">
                   <Link to="/" className="service box-shadow hover-line hover-down">
-                    <i className="service__icon o-business-report-1" />
+                    <i className={`service__icon ${service.icon}`} />
                     <h4 className="service__title">{service.title}</h4>
                     <p className="service__text">{service.desc}</p>
                   </Link>

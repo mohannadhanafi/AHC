@@ -1,36 +1,20 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 export default class index extends Component {
     state = {
       title: 'Latest News',
-      news: [
-        {
-          image: 'https://deothemes.com/envato/casumi/html/img/blog/masonry/blog_post_1.jpg',
-          tags: ['Finance', 'Management'],
-          title: 'Business Mistakes to Avoid When Starting a Business',
-          user: 'Alexander Samokhin',
-          avatar: 'https://deothemes.com/envato/casumi/html/img/blog/author.png',
-          date: 'July 06, 2019',
-        },
-        {
-          image: 'https://deothemes.com/envato/casumi/html/img/blog/masonry/blog_post_2.jpg',
-          tags: ['Taxes'],
-          title: 'Utilize these nine resources to help you take the stress out of preparing your taxes',
-          user: 'Alexander Samokhin',
-          avatar: 'https://deothemes.com/envato/casumi/html/img/blog/author.png',
-          date: 'July 06, 2019',
-        },
-        {
-          image: 'https://deothemes.com/envato/casumi/html/img/blog/masonry/blog_post_3.jpg',
-          tags: ['Productivity'],
-          title: 'Investment Update, Successful people ask better questions',
-          user: 'Alexander Samokhin',
-          avatar: 'https://deothemes.com/envato/casumi/html/img/blog/author.png',
-          date: 'July 06, 2019',
-        },
-      ],
+      news: [],
+    }
+
+    componentDidMount() {
+      axios('/api/v2/posts/getAll').then((result) => {
+        const { data } = result;
+        this.setState({ news: data });
+      });
     }
 
     render() {
@@ -42,36 +26,38 @@ export default class index extends Component {
               <h2 className="section-title">{title}</h2>
             </div>
             <div className="row">
-              {news.map(item => (
-                <div key={uuid()} className="col-lg-4">
-                  <article className="entry entry-card">
-                    <div className="entry__header">
-                      <Link to="/">
-                        <img src={item.image} className="entry__img" alt="" />
-                      </Link>
-                      <div className="entry__category">
-                        {item.tags.map(element => (
-                          <Link key={uuid()} to="/" className="entry__category-item">{element}</Link>
-                        ))}
+              {news.length && (
+                news.slice(0, 3).map(item => (
+                  <div key={uuid()} className="col-lg-4">
+                    <article className="entry entry-card">
+                      <div className="entry__header">
+                        <Link to="/">
+                          <img src={`/api/v2/getFile/${item.header_media[0]}`} className="entry__img" alt="" />
+                        </Link>
+                        <div className="entry__category">
+                          {/* {item.tags.map(element => (
+                            <Link key={uuid()} to="/" className="entry__category-item">{element}</Link>
+                          ))} */}
+                        </div>
                       </div>
-                    </div>
-                    <div className="entry__body">
-                      <h4 className="entry__title">
-                        <Link to="/">{item.title}</Link>
-                      </h4>
-                      <div className="entry__meta">
-                        <span className="entry__meta-item entry__meta-author">
-                          <Link to="/" className="entry__meta-author-url">
-                            <img src={item.avatar} className="entry__meta-author-img" alt="" />
-                            <span className="entry__meta-author-name">{item.user}</span>
-                          </Link>
-                        </span>
-                        <span className="entry__meta-item entry__meta-date">{item.date}</span>
+                      <div className="entry__body">
+                        <h4 className="entry__title">
+                          <Link to="/">{item.title}</Link>
+                        </h4>
+                        <div className="entry__meta">
+                          <span className="entry__meta-item entry__meta-author">
+                            <Link to="/" className="entry__meta-author-url">
+                              <img src={`/api/v2/getFile/${item.user.pic}`} className="entry__meta-author-img" alt="" />
+                              <span className="entry__meta-author-name">{item.user.name}</span>
+                            </Link>
+                          </span>
+                          <span className="entry__meta-item entry__meta-date">{moment(item.createdAt).format('MMM DD, YYYY')}</span>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                </div>
-              ))}
+                    </article>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </section>

@@ -86,64 +86,64 @@ handleEditorChange = (e) => {
         const {
           icon, content, removedFile, fileList, fileName,
         } = this.state;
-        if (fileName !== '') {
-          values.icon = fileName;
-        }
+        // if (fileName !== '') {
+        //   values.icon = fileName;
+        // }
         values.body = content;
         const {
           match: {
             params: { id },
           },
         } = this.props;
-        if (fileList.length) {
-          axios.post('/api/v2/core/updateCore', {
-            data: values,
-            params: { id },
-          }).then((result) => {
-            const {
-              data: { message },
-              statusText,
-              status,
-            } = result;
-            if (status === 200) {
-              this.setState({ loading: false }, () => {
-                NotificationManager.success(message, 'SUCCESS', 2000);
-                setTimeout(() => {
-                  this.props.history.push('/admin/core/viewcore');
-                  this.setState({ disable: false });
-                }, 3000);
-                if (removedFile.length) {
-                  removedFile.map(async (file) => {
-                    await axios.post('/api/v2/removeFile', { pic: file });
-                  });
-                }
-              });
-            } else {
-              this.setState({ loading: false }, () => {
-                NotificationManager.error(message || statusText, 'ERROR', 2000);
-                setTimeout(() => {
-                  this.setState({ disable: false });
-                }, 2000);
-              });
-            }
-          }).catch((error) => {
+        // if (fileList.length) {
+        axios.post('/api/v2/core/updateCore', {
+          data: values,
+          params: { id },
+        }).then((result) => {
+          const {
+            data: { message },
+            statusText,
+            status,
+          } = result;
+          if (status === 200) {
             this.setState({ loading: false }, () => {
-              const {
-                data: { message },
-                statusText,
-              } = error.response;
-              NotificationManager.error(message || statusText, 'ERRRO', 2000);
+              NotificationManager.success(message, 'SUCCESS', 2000);
+              setTimeout(() => {
+                this.props.history.push('/admin/core/viewcore');
+                this.setState({ disable: false });
+              }, 3000);
+              // if (removedFile.length) {
+              //   removedFile.map(async (file) => {
+              //     await axios.post('/api/v2/removeFile', { pic: file });
+              //   });
+              // }
+            });
+          } else {
+            this.setState({ loading: false }, () => {
+              NotificationManager.error(message || statusText, 'ERROR', 2000);
               setTimeout(() => {
                 this.setState({ disable: false });
               }, 2000);
             });
+          }
+        }).catch((error) => {
+          this.setState({ loading: false }, () => {
+            const {
+              data: { message },
+              statusText,
+            } = error.response;
+            NotificationManager.error(message || statusText, 'ERRRO', 2000);
+            setTimeout(() => {
+              this.setState({ disable: false });
+            }, 2000);
           });
-        } else {
-          NotificationManager.error('Please Choose an image !', 'ERROR', 2000);
-          setTimeout(() => {
-            this.setState({ disable: false });
-          }, 2000);
-        }
+        });
+        // } else {
+        //   NotificationManager.error('Please Choose an image !', 'ERROR', 2000);
+        //   setTimeout(() => {
+        //     this.setState({ disable: false });
+        //   }, 2000);
+        // }
       }
     });
   };
@@ -231,9 +231,9 @@ handleEditorChange = (e) => {
       },
     };
     return (
-      <Card className="gx-card" title="Edit Core">
+      <Card className="gx-card" title="Edit Service">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem
+          {/* <FormItem
             {...formItemLayout}
             label={<span>Icon</span>}
           >
@@ -261,6 +261,18 @@ handleEditorChange = (e) => {
                 />
               </Modal>
             </>
+          </FormItem> */}
+          <FormItem {...formItemLayout} label={<span><a href="https://deothemes.com/envato/casumi/html/icons.html" target="_blank">Icons</a></span>}>
+            {getFieldDecorator('icon', {
+              initialValue: icon,
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input the icon!',
+                  whitespace: true,
+                },
+              ],
+            })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label={<span>Title</span>}>
             {getFieldDecorator('title', {
@@ -288,16 +300,16 @@ handleEditorChange = (e) => {
 
           <FormItem {...tailFormItemLayout}>
             {!disable
-            ? (
-              <Button type="primary" htmlType="submit">
+              ? (
+                <Button type="primary" htmlType="submit">
               Save
                 </Button>
-            )
-            : (
-              <Button type="primary" disabled htmlType="submit">
+              )
+              : (
+                <Button type="primary" disabled htmlType="submit">
          Save
                 </Button>
-            ) }
+              ) }
           </FormItem>
         </Form>
         <NotificationContainer />

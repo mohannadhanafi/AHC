@@ -47,17 +47,17 @@ class Registration extends Component {
       const { data } = result;
       const { icon, count, title } = data;
       const fileList = [];
-      if (icon !== '') {
-        await axios
-          .get(`/api/v2/getFile/${icon}`)
-          .then(result => fileList.push({
-            uid: uuid(),
-            name: 'image.png',
-            status: 'done',
-            url: `/api/v2/getFile/${icon}`,
-          }))
-          .catch((error) => {});
-      }
+      // if (icon !== '') {
+      //   await axios
+      //     .get(`/api/v2/getFile/${icon}`)
+      //     .then(result => fileList.push({
+      //       uid: uuid(),
+      //       name: 'image.png',
+      //       status: 'done',
+      //       url: `/api/v2/getFile/${icon}`,
+      //     }))
+      //     .catch((error) => {});
+      // }
       this.setState({
         icon, count, title, fileList,
       });
@@ -75,43 +75,43 @@ class Registration extends Component {
           },
         } = this.props;
         const { removedFile, fileList, fileName } = this.state;
-        if (fileName !== '') {
-          values.icon = fileName;
-        }
-        if (fileList.length) {
-          axios
-            .post(`/api/v2/statistics/${id}`, values)
-            .then((result) => {
-              const {
-                data: { message },
-              } = result;
-              NotificationManager.success(message, 'SUCCESS', 2000);
-              setTimeout(() => {
-                this.props.history.push('/admin/statistics/view');
-                this.setState({ disable: false });
-              }, 3000);
-              if (removedFile.length) {
-                removedFile.map(async (file) => {
-                  await axios.post('/api/v2/removeFile', { pic: file });
-                });
-              }
-            })
-            .catch(async (error) => {
-              const {
-                data: { message },
-                statusText,
-              } = error.response;
-              NotificationManager.error(message || statusText, 'ERROR', 2000);
-              setTimeout(() => {
-                this.setState({ disable: false });
-              }, 2000);
-            });
-        } else {
-          NotificationManager.error('Please Choose an image !', 'ERROR', 2000);
-          setTimeout(() => {
-            this.setState({ disable: false });
-          }, 2000);
-        }
+        // if (fileName !== '') {
+        //   values.icon = fileName;
+        // }
+        // if (fileList.length) {
+        axios
+          .post(`/api/v2/statistics/${id}`, values)
+          .then((result) => {
+            const {
+              data: { message },
+            } = result;
+            NotificationManager.success(message, 'SUCCESS', 2000);
+            setTimeout(() => {
+              this.props.history.push('/admin/statistics/view');
+              this.setState({ disable: false });
+            }, 3000);
+            // if (removedFile.length) {
+            //   removedFile.map(async (file) => {
+            //     await axios.post('/api/v2/removeFile', { pic: file });
+            //   });
+            // }
+          })
+          .catch(async (error) => {
+            const {
+              data: { message },
+              statusText,
+            } = error.response;
+            NotificationManager.error(message || statusText, 'ERROR', 2000);
+            setTimeout(() => {
+              this.setState({ disable: false });
+            }, 2000);
+          });
+        // } else {
+        //   NotificationManager.error('Please Choose an image !', 'ERROR', 2000);
+        //   setTimeout(() => {
+        //     this.setState({ disable: false });
+        //   }, 2000);
+        // }
       }
     });
   };
@@ -196,7 +196,7 @@ class Registration extends Component {
     return (
       <Card className="gx-card" title="Statistic Details">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem
+          {/* <FormItem
             {...formItemLayout}
             label={<span>Icon</span>}
           >
@@ -224,6 +224,18 @@ class Registration extends Component {
                 />
               </Modal>
             </>
+          </FormItem> */}
+          <FormItem {...formItemLayout} label={<span><a href="https://deothemes.com/envato/casumi/html/icons.html" target="_blank">Icons</a></span>}>
+            {getFieldDecorator('icon', {
+              initialValue: icon,
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input the icon!',
+                  whitespace: true,
+                },
+              ],
+            })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label={<span>Title</span>}>
             {getFieldDecorator('title', {
