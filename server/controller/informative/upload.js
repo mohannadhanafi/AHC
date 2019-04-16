@@ -17,7 +17,7 @@ exports.post = (request, response) => {
 exports.postIcon = (request, respone) => {
   const { file } = request.files;
   const { data } = file;
-  fs.writeFile('client/home/img/favicon.ico', data, (err) => {
+  fs.writeFile('client/Home/build/favicon.ico', data, (err) => {
     fs.writeFile('client/admin/build/favicon.ico', data, (err) => {
       respone.send('favicon.ico');
     });

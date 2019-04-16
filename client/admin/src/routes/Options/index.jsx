@@ -11,8 +11,8 @@ const Table = ({ match }) => (
     <Route path={`${match.url}/footer`} component={asyncComponent(() => import('./Footer'))} />
     <Route path={`${match.url}/hours`} component={asyncComponent(() => import('./Hours'))} />
     <Route path={`${match.url}/contact`} component={asyncComponent(() => import('./Contact'))} />
-    {/* <Route path={`${match.url}/icon`} component={asyncComponent(() => import('./Icon'))} />
-    <Route path={`${match.url}/map`} component={asyncComponent(() => import('./Map'))} /> */}
+    <Route path={`${match.url}/icon`} component={asyncComponent(() => import('./Icon'))} />
+    {/* <Route path={`${match.url}/map`} component={asyncComponent(() => import('./Map'))} /> */}
   </Switch>
 );
 

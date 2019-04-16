@@ -301,13 +301,13 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.Contact" />
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item key="options/icon">
+                <Menu.Item key="options/icon">
                   <Link to="/admin/options/icon">
                     <i className="icon icon-button" />
                     <IntlMessages id="sidebar.icon" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="options/map">
+                {/* <Menu.Item key="options/map">
                   <Link to="/admin/options/map">
                     <i className="icon icon-button" />
                     <IntlMessages id="sidebar.map" />
