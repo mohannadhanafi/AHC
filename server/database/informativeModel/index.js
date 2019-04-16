@@ -43,6 +43,11 @@ comments.belongsTo(posts, {
   foreignKey: 'post_id',
   targetKey: 'id',
 });
+// comments.belongsTo(users, {
+//   onDelete: 'CASCADE',
+//   foreignKey: 'user_id',
+//   targetKey: 'id',
+// });
 posts.belongsTo(users, {
   onDelete: 'CASCADE',
   foreignKey: 'auther_id',

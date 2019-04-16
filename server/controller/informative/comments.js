@@ -55,21 +55,23 @@ exports.get = async (request, response) => {
 };
 
 exports.post = async (request, response) => {
+  console.log(request.body)
   try {
     const {
-      seo, body, name, email,
+      // seo,
+       body, name, email,
     } = request.body;
-    const postId = await posts.findOne({ where: { seo }, raw: true, attributes: ['id'] });
-    if (postId) {
-      const { id } = postId;
-      const newComment = {
-        body, name, email, post_id: id,
-      };
-      await comments.create(newComment);
+    // const postId = await posts.findOne({ where: { seo }, raw: true, attributes: ['id'] });
+    // if (postId) {
+    //   const { id } = postId;
+      // const newComment = {
+      //   body, name, email, post_id
+      // };
+      await comments.create(request.body);
       response.status(200).send({ message: 'Your comment has been added, just wait for the approve' });
-    } else {
-      response.status(400).send('Post not exist');
-    }
+    // } else {
+    //   response.status(400).send('Post not exist');
+    // }
   } catch (error) {
     response.status(500).send('Server Error');
   }

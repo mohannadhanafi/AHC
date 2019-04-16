@@ -361,6 +361,12 @@ class SidebarContent extends Component {
                   <IntlMessages id="sidebar.aboutMenu" />
                 </Link>
               </Menu.Item>
+              <Menu.Item key="comments">
+                <Link to="/admin/comments/all">
+                  <i className="icon icon-chat" />
+                  <IntlMessages id="sidebar.comments" />
+                </Link>
+              </Menu.Item>
               {/* <Menu.Item key="about/items">
                   <Link to="/admin/about/items">
                     <i className="icon icon-plain-list-divider" />

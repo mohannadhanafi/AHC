@@ -1,31 +1,56 @@
 /* eslint-disable camelcase */
 const validator = require('validator');
-const { posts } = require('../../database/informativeModel');
-const { users, comments } = require('../../database/informativeModel');
+const {
+  posts,
+  users,
+  comments
+} = require('../../database/informativeModel');
+
 
 exports.getBySeo = async (req, res) => {
   try {
-    const { seo } = req.params;
-
-    const postResult = await posts.findOne({ where: { seo }, raw: true });
+    const {
+      seo
+    } = req.params;
+    const postResult = await posts.findOne({
+      where: {
+        seo
+      },
+      include: [{
+        model: users,
+        attributes: ['name', 'pic', 'bio']
+      }]
+    });
     if (postResult) {
-      const { id } = postResult;
+      const {
+        id
+      } = postResult;
       const commentsResult = await comments.findAll({
-        where: { post_id: id, approve: '1' },
-        order: [['id', 'DESC']],
+        where: {
+          post_id: id,
+          approve: '1'
+        },
+        order: [
+          ['id', 'DESC']
+        ],
       });
-      res.status(200).send({ postResult, commentsResult });
+      res.status(200).send({
+        postResult,
+        commentsResult
+      });
     }
   } catch (error) {
-    console.log(error);
-
-    res.status(500).send({ message: 'Internal Server Error' });
+    res.status(500).send({
+      message: 'Internal Server Error'
+    });
   }
 };
 exports.getAllPosts = async (req, res) => {
   try {
     const result = await posts.findAll({
-      order: [['id', 'DESC']],
+      order: [
+        ['id', 'DESC']
+      ],
     });
     res.status(200).send(result);
   } catch (error) {
@@ -33,29 +58,34 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 exports.getAll = async (req, res) => {
-  const { id, rule } = req;
+  const {
+    id,
+    rule
+  } = req;
   try {
     if (rule === 'admin') {
       const result = await posts.findAll({
-        order: [['id', 'DESC']],
-        include: [
-          {
-            model: users,
-            attributes: ['name', 'pic'],
-          },
+        order: [
+          ['id', 'DESC']
         ],
+        include: [{
+          model: users,
+          attributes: ['name', 'pic'],
+        }, ],
       });
       res.status(200).send(result);
     } else {
       const result = await posts.findAll({
-        order: [['id', 'DESC']],
-        where: { auther_id: id },
-        include: [
-          {
-            model: users,
-            attributes: ['name'],
-          },
+        order: [
+          ['id', 'DESC']
         ],
+        where: {
+          auther_id: id
+        },
+        include: [{
+          model: users,
+          attributes: ['name'],
+        }, ],
       });
       res.status(200).send(result);
     }
@@ -65,21 +95,33 @@ exports.getAll = async (req, res) => {
 };
 exports.changeState = async (requeset, response) => {
   try {
-    const { id, approve } = requeset.body;
+    const {
+      id,
+      approve
+    } = requeset.body;
     let changeStateResult;
     if (approve) {
-      changeStateResult = await posts.update(
-        { approve: !approve, hero: false },
-        { where: { id } },
-      );
+      changeStateResult = await posts.update({
+        approve: !approve,
+        hero: false
+      }, {
+        where: {
+          id
+        }
+      }, );
     } else {
-      changeStateResult = await posts.update(
-        { approve: !approve },
-        { where: { id } },
-      );
+      changeStateResult = await posts.update({
+        approve: !approve
+      }, {
+        where: {
+          id
+        }
+      }, );
     }
     if (changeStateResult) {
-      response.status(200).send({ message: 'Post has been updated ...' });
+      response.status(200).send({
+        message: 'Post has been updated ...'
+      });
     } else {
       response.status(500).send('Internal server error');
     }
@@ -88,9 +130,14 @@ exports.changeState = async (requeset, response) => {
   }
 };
 exports.delete = async (req, res) => {
-  const { rule, id: userId } = req;
+  const {
+    rule,
+    id: userId
+  } = req;
   try {
-    const { id } = req.body;
+    const {
+      id
+    } = req.body;
     if (rule === 'admin') {
       posts.destroy({
         where: {
@@ -101,7 +148,9 @@ exports.delete = async (req, res) => {
         message: 'Success, post is deleted',
       });
     } else {
-      const post = await posts.findByPk(id, { raw: true });
+      const post = await posts.findByPk(id, {
+        raw: true
+      });
       if (post.auther_id === userId) {
         posts.destroy({
           where: {
@@ -125,9 +174,14 @@ exports.delete = async (req, res) => {
 };
 
 exports.getPost = async (req, res) => {
-  const { rule, id: userId } = req;
+  const {
+    rule,
+    id: userId
+  } = req;
   try {
-    const { id } = req.params;
+    const {
+      id
+    } = req.params;
     const result = await posts.findAll({
       where: {
         id,
@@ -138,7 +192,9 @@ exports.getPost = async (req, res) => {
       if (rule === 'admin') {
         res.status(200).send(result);
       } else {
-        const post = await posts.findByPk(id, { raw: true });
+        const post = await posts.findByPk(id, {
+          raw: true
+        });
         if (post.auther_id === userId) {
           res.status(200).send(result);
         } else {
@@ -161,27 +217,45 @@ exports.getPost = async (req, res) => {
 exports.post = async (req, res) => {
   try {
     const data = req.body;
-    const { rule } = req;
-    const { id } = req;
     const {
-      title, blog_intro, header_media, description, seo,
+      rule
+    } = req;
+    const {
+      id
+    } = req;
+    const {
+      title,
+      blog_intro,
+      header_media,
+      description,
+      seo,
     } = data;
     if (
-      blog_intro
-      && blog_intro.trim()
-      && validator.isLength(blog_intro, { min: 0, max: 260 })
-      && blog_intro.trim()
-      && title
-      && title.trim()
-      && description
-      && description.trim()
-      && header_media
-      && header_media.length
-      && seo
-      && validator.isLength(seo, { min: 0, max: 50 })
+      blog_intro &&
+      blog_intro.trim() &&
+      validator.isLength(blog_intro, {
+        min: 0,
+        max: 260
+      }) &&
+      blog_intro.trim() &&
+      title &&
+      title.trim() &&
+      description &&
+      description.trim() &&
+      header_media &&
+      header_media.length &&
+      seo &&
+      validator.isLength(seo, {
+        min: 0,
+        max: 50
+      })
     ) {
       const auther_id = id;
-      const seoName = await posts.count({ where: { seo } });
+      const seoName = await posts.count({
+        where: {
+          seo
+        }
+      });
       if (seoName === 0) {
         posts
           .create({
@@ -195,7 +269,9 @@ exports.post = async (req, res) => {
           })
           .then(async () => {
             await users.findAll({
-              where: { rule: 'admin' },
+              where: {
+                rule: 'admin'
+              },
               raw: true,
             });
             res.status(200).send({
@@ -226,36 +302,64 @@ exports.post = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const { id: userId, rule } = req;
+    const {
+      id: userId,
+      rule
+    } = req;
     const {
       data,
     } = req.body;
 
-    const { id } = req.params;
     const {
-      post_intro, title, header_media, description, seo,
+      id
+    } = req.params;
+    const {
+      post_intro,
+      title,
+      header_media,
+      description,
+      seo,
     } = data;
     if (
-      !post_intro.trim()
-      || !validator.isLength(post_intro, { min: 0, max: 260 })
-      || !title.trim()
-      || !validator.isLength(title, { min: 0, max: 150 })
-      || !description.trim()
-      || !header_media.length
-      || !validator.isLength(seo, { min: 0, max: 50 })
+      !post_intro.trim() ||
+      !validator.isLength(post_intro, {
+        min: 0,
+        max: 260
+      }) ||
+      !title.trim() ||
+      !validator.isLength(title, {
+        min: 0,
+        max: 150
+      }) ||
+      !description.trim() ||
+      !header_media.length ||
+      !validator.isLength(seo, {
+        min: 0,
+        max: 50
+      })
     ) {
       res.status(401).send({
         message: 'Invalid inputs, please note the type of each input',
       });
     } else {
-      const postCheck = await posts.findOne({ where: { seo } });
+      const postCheck = await posts.findOne({
+        where: {
+          seo
+        }
+      });
       if (postCheck && postCheck.id !== parseInt(id, 10)) {
         res
           .status(400)
-          .send({ message: 'Sorry !, Post with this Seo Name is already exist' });
+          .send({
+            message: 'Sorry !, Post with this Seo Name is already exist'
+          });
       } else {
         posts.update({
-          post_intro, title, header_media, description, seo: seo.replace(/\s/g, '').toLowerCase(),
+          post_intro,
+          title,
+          header_media,
+          description,
+          seo: seo.replace(/\s/g, '').toLowerCase(),
         }, {
           where: {
             id,

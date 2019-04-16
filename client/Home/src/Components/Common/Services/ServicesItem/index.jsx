@@ -13,7 +13,7 @@ export default class index extends Component {
             <div className="row">
               {services.slice(0, 6).map(service => (
                 <div key={uuid()} className="col-lg-4">
-                  <Link to="/" className="service box-shadow hover-line hover-down">
+                  <Link to={`/service/${service.id}`} className="service box-shadow hover-line hover-down">
                     <i className={`service__icon ${service.icon}`} />
                     <h4 className="service__title">{service.title}</h4>
                     <p className="service__text">{service.desc}</p>

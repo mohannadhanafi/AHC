@@ -31,7 +31,7 @@ export default class index extends Component {
                   <div key={uuid()} className="col-lg-4">
                     <article className="entry entry-card">
                       <div className="entry__header">
-                        <Link to="/">
+                        <Link to={`/news/${item.seo}`}>
                           <img src={`/api/v2/getFile/${item.header_media[0]}`} className="entry__img" alt="" />
                         </Link>
                         <div className="entry__category">
@@ -42,11 +42,11 @@ export default class index extends Component {
                       </div>
                       <div className="entry__body">
                         <h4 className="entry__title">
-                          <Link to="/">{item.title}</Link>
+                          <Link to={`/news/${item.seo}`}>{item.title}</Link>
                         </h4>
                         <div className="entry__meta">
                           <span className="entry__meta-item entry__meta-author">
-                            <Link to="/" className="entry__meta-author-url">
+                            <Link to={`/news/${item.seo}`} className="entry__meta-author-url">
                               <img src={`/api/v2/getFile/${item.user.pic}`} className="entry__meta-author-img" alt="" />
                               <span className="entry__meta-author-name">{item.user.name}</span>
                             </Link>

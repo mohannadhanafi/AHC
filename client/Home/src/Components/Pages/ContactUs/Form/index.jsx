@@ -24,7 +24,6 @@ export default class index extends Component {
       position: 'top-end',
       showConfirmButton: false,
       timer: 3000,
-
     });
     const {
       email,
