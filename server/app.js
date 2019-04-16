@@ -24,16 +24,16 @@ app
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
   .use('/api/v2', controller)
-  .use(express.static(path.join(__dirname, '..', 'clients', 'Home', 'build')))
-  .use(express.static(path.join(__dirname, '..', 'clients', 'admin', 'build')))
+  .use(express.static(path.join(__dirname, '..', 'client', 'Home', 'build')))
+  .use(express.static(path.join(__dirname, '..', 'client', 'admin', 'build')))
   .get('/admin*', (req, res) => {
     res.sendFile(
-      path.join(__dirname, '..', 'clients', 'admin', 'build', 'index.html'),
+      path.join(__dirname, '..', 'client', 'admin', 'build', 'index.html'),
     );
   })
   .get('*', (req, res) => {
     res.sendFile(
-      path.join(__dirname, '..', 'clients', 'Home', 'build', 'index.html'),
+      path.join(__dirname, '..', 'client', 'Home', 'build', 'index.html'),
     );
   });
 
