@@ -1,11 +1,52 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 
-export default class index extends Component {
+class index extends Component {
   state = {
     logo: '',
+    nav: [
+      {
+        id: 1,
+        page: 'Home',
+        link: '/',
+        active: true,
+      },
+      {
+        id: 2,
+        page: 'Services',
+        link: '/services',
+        active: false,
+      },
+      {
+        id: 3,
+        page: 'Iinsurance',
+        link: '/insurance',
+        active: false,
+      },
+      {
+        id: 4,
+        page: 'About Us',
+        link: '/about',
+        active: false,
+      },
+      {
+        id: 5,
+        page: 'Contact Us',
+        link: '/contact',
+        active: false,
+      },
+    ],
+  }
+
+  componentWillMount() {
+    const path = this.props.location.pathname;
+    const { nav } = this.state;
+    nav.forEach((item) => {
+      if (item.link === path) item.active = true;
+      else item.active = false;
+    });
   }
 
   componentDidMount() {
@@ -16,8 +57,9 @@ export default class index extends Component {
     });
   }
 
+
   render() {
-    const { logo } = this.state;
+    const { logo, nav } = this.state;
     return (
       <header className="nav">
         <div className="nav__holder nav--sticky">
@@ -44,21 +86,30 @@ export default class index extends Component {
 
               <nav id="navbar-collapse" className="nav__wrap collapse navbar-collapse nav--align-right">
                 <ul className="nav__menu">
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/services">Services</Link>
-                  </li>
-                  <li>
-                    <Link to="/insurance">Insurance</Link>
-                  </li>
-                  <li>
-                    <Link to="/about">About Us</Link>
-                  </li>
-                  <li>
-                    <Link to="/contact">Contact Us</Link>
-                  </li>
+                  {nav.map(element => (
+                    element.active ? (
+                      <li className="active">
+                        <Link to={element.link}>{element.page}</Link>
+                      </li>
+                    ) : (
+                      <li>
+                        <Link
+                          to={element.link}
+                          onClick={() => {
+                            nav.forEach((item) => {
+                              if (item.id === element.id) item.active = true;
+                              else item.active = false;
+                            });
+                            this.setState(nav);
+                            return null;
+                          }}
+                        >
+                          {element.page}
+
+                        </Link>
+                      </li>
+                    )
+                  ))}
                 </ul>
 
 
@@ -101,3 +152,4 @@ export default class index extends Component {
     );
   }
 }
+export default withRouter(index);

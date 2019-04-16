@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './style.css';
 
 export default class index extends Component {
@@ -38,6 +39,14 @@ export default class index extends Component {
       ],
     }
 
+    componentDidMount() {
+      axios.get('/api/v2/core').then((result) => {
+        const { data } = result;
+        this.setState({ items: data });
+      });
+    }
+
+
     render() {
       const { items } = this.state;
       return (
@@ -50,7 +59,7 @@ export default class index extends Component {
                     <i className={`service__icon ${item.icon}`} />
                     <h4 className="service__title">{item.title}</h4>
                     <Link to="/" className="btn btn--lg btn--color service--cta">
-                      <span>{item.CTA}</span>
+                      <span>Read More</span>
                     </Link>
                     {/* <p className="service__text">We also provide tangible results and measurable long-term value business.</p> */}
                   </Link>

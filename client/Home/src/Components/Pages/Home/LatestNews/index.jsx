@@ -20,7 +20,7 @@ export default class index extends Component {
     render() {
       const { title, news } = this.state;
       return (
-        <section className="section-wrap pt-0 pb-0">
+        <section className="section-wrap  pb-0">
           <div className="container">
             <div className="title-row text-center">
               <h2 className="section-title">{title}</h2>

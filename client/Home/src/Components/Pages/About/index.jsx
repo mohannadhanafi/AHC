@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PageTitle from '../../Common/PageTitle';
 import Team from './Team';
 import Promo from '../../Common/Promo';
@@ -7,12 +8,17 @@ import CallToAction from '../../Common/CallToAction';
 
 export default class index extends Component {
   state = {
-    title: 'We’re Casumi Business Consulting Agency',
-    coverImage: 'https://deothemes.com/envato/casumi/html/img/page_title/about_us.jpg',
+    title: '',
+    coverImage: '',
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    axios.get('/api/v2/about').then((result) => {
+      const { data } = result;
+      const { title, image } = data;
+      this.setState({ title, coverImage: image });
+    });
   }
 
   render() {

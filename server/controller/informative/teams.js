@@ -6,7 +6,7 @@ exports.post = async (request, response) => {
   try {
     const data = request.body;
     const {
-      name, title, image, twitter, facebook, youtube, instagram,
+      name, title, image, twitter, facebook, youtube, instagram, bio,
     } = data;
     if (name.trim() && title.trim() && image.trim()) {
       if (image && !image.trim()) {
@@ -22,7 +22,7 @@ exports.post = async (request, response) => {
           .status(400)
           .send({ message: 'Wrong in fields! please fill all the fileds with the right data' });
       }
-      await team.create({ name, title, image });
+      await team.create({ name, title, image, bio });
       response.status(200).send({ message: 'Added Successfuly, Redirect ...' });
     } else {
       response.status(400).send({ message: 'Please fill all the fields !' });
@@ -34,7 +34,9 @@ exports.post = async (request, response) => {
 
 exports.get = async (req, res) => {
   try {
-    const result = await team.findAll();
+    const result = await team.findAll({
+      order: [['id', 'DESC']]
+    });
     res.status(200).send(result);
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error' });

@@ -24,6 +24,14 @@ export default class index extends Component {
       });
     }
 
+    componentWillMount() {
+      axios('/api/v2/plan/getAll').then((result) => {
+        const { data } = result;
+        this.setState({ plan: data });
+      });
+    }
+
+
     render() {
       const {
         title, description, plan, video, image,
@@ -44,8 +52,8 @@ export default class index extends Component {
                 <h2 className="plan__title">{title}</h2>
                 <p className="plan__text lead">{description}</p>
                 <ul className="plan-ul">
-                {plan.map(item => (
-                    <li>{item}</li>
+                {plan.slice(0, 3).map(item => (
+                    <li>{item.plan}</li>
                 ))}
                 </ul>
                 <Link to="/" className="btn btn--lg btn--color">

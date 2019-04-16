@@ -225,12 +225,12 @@ componentDidMount = async () => {
               rules: [{ max: 100, message: 'Only 100 Letter is allowed !' }],
             })(<Input />)}
           </FormItem>
-          <FormItem {...formItemLayout} label={<span>Office</span>}>
+          {/* <FormItem {...formItemLayout} label={<span>Office</span>}>
             {getFieldDecorator('office', {
               initialValue: office,
               rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
             })(<Input />)}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...tailFormItemLayout}>
             {!disable
               ? (

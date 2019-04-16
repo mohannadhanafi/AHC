@@ -44,6 +44,22 @@ var DEOTHEMES = DEOTHEMES || {};
     },
 
     slickCarousel() {
+      $('.slick-custom-arrows').each(function (idx, item) {
+        const carouselId = `carousel-${idx}`;
+        this.id = carouselId;
+
+        $(this).slick({
+          slide: `#${carouselId} .slick-slide`,
+          appendArrows: `#${carouselId} .slick-custom-nav`,
+          arrows: true,
+          nextArrow: `#${carouselId} .slick-custom-nav__next`,
+          prevArrow: `#${carouselId} .slick-custom-nav__prev`,
+          slidesToShow: 1,
+          fade: true,
+          adaptiveHeight: true,
+          cssEase: 'linear',
+        });
+      });
       $('.slick-service-boxes').slick({
         arrows: false,
         dots: true,

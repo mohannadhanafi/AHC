@@ -1,0 +1,10 @@
+.testimonials .slick-prev {
+
+}
+.testimonials .slick-next {
+
+}
+.testimonials .slick-next, .testimonials .slick-prev {
+/* z-index: 99;
+position: absolute; */
+}

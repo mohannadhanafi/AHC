@@ -295,13 +295,13 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.hours" />
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item key="options/contact">
+                <Menu.Item key="options/contact">
                   <Link to="/admin/options/contact">
                     <i className="icon icon-button" />
                     <IntlMessages id="sidebar.Contact" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="options/icon">
+                {/* <Menu.Item key="options/icon">
                   <Link to="/admin/options/icon">
                     <i className="icon icon-button" />
                     <IntlMessages id="sidebar.icon" />
@@ -314,6 +314,36 @@ class SidebarContent extends Component {
                   </Link>
                 </Menu.Item> */}
               </SubMenu>
+              <SubMenu
+                key="teams"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-team" />
+                    <IntlMessages id="sidebar.teams" />
+                  </span>
+)}
+              >
+                <Menu.Item key="teams/view">
+                  <Link to="/admin/teams/view">
+                    <i className="icon icon-plain-list-divider" />
+                    <IntlMessages id="sidebar.teams.view" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="teams/add">
+                  <Link to="/admin/teams/add">
+                    <i className="icon icon-add" />
+                    <IntlMessages id="sidebar.teams.add" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="teams/settings">
+                  <Link to="/admin/teams/settings">
+                    <i className="icon icon-setting" />
+                    <IntlMessages id="sidebar.settings" />
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
               {/* <SubMenu
                 key="aboutMenu"
                 className={this.getNavStyleSubMenuClass(navStyle)}
@@ -324,20 +354,21 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.aboutMenu" />
                   </span>
 )}
-              >
-                <Menu.Item key="about/main">
-                  <Link to="/admin/about/edit">
-                    <i className="icon icon-edit" />
-                    <IntlMessages id="sidebar.aboutMain" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="about/items">
+              > */}
+              <Menu.Item key="about">
+                <Link to="/admin/about">
+                  <i className="icon icon-widgets" />
+                  <IntlMessages id="sidebar.aboutMenu" />
+                </Link>
+              </Menu.Item>
+              {/* <Menu.Item key="about/items">
                   <Link to="/admin/about/items">
                     <i className="icon icon-plain-list-divider" />
                     <IntlMessages id="sidebar.aboutItem" />
                   </Link>
-                </Menu.Item>
-              </SubMenu>
+                </Menu.Item> */}
+              {/* </SubMenu> */}
+              {/*
               <SubMenu
                 key="services"
                 className={this.getNavStyleSubMenuClass(navStyle)}
@@ -399,36 +430,6 @@ class SidebarContent extends Component {
                   <IntlMessages id="sidebar.whyUs" />
                 </Link>
               </Menu.Item>
-              <SubMenu
-                key="teams"
-                className={this.getNavStyleSubMenuClass(navStyle)}
-                title={(
-                  <span>
-                    {' '}
-                    <i className="icon icon-team" />
-                    <IntlMessages id="sidebar.teams" />
-                  </span>
-)}
-              >
-                <Menu.Item key="teams/view">
-                  <Link to="/admin/teams/view">
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.teams.view" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="teams/add">
-                  <Link to="/admin/teams/add">
-                    <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.teams.add" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="teams/settings">
-                  <Link to="/admin/teams/settings">
-                    <i className="icon icon-setting" />
-                    <IntlMessages id="sidebar.settings" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
 
 
                */}

@@ -15,12 +15,12 @@ const App = ({ match }) => (
       <Route path={`${match.url}/blogs`} component={asyncComponent(() => import('./Blogs'))} />
       <Route path={`${match.url}/plan`} component={asyncComponent(() => import('./Plan'))} />
       <Route path={`${match.url}/options`} component={asyncComponent(() => import('./Options'))} />
+      <Route path={`${match.url}/teams`} component={asyncComponent(() => import('./Teams'))} />
+      <Route path={`${match.url}/about`} component={asyncComponent(() => import('./About'))} />
       {/* <Route path={`${match.url}/services`} component={asyncComponent(() => import('./services'))} />
       <Route path={`${match.url}/features`} component={asyncComponent(() => import('./Features'))} />
       <Route path={`${match.url}/partners`} component={asyncComponent(() => import('./Partners'))} />
-      <Route path={`${match.url}/teams`} component={asyncComponent(() => import('./Teams'))} />
       <Route path={`${match.url}/categories`} component={asyncComponent(() => import('./Categories'))} />
-      <Route path={`${match.url}/about`} component={asyncComponent(() => import('./About'))} />
       <Route path={`${match.url}/whyUs`} component={asyncComponent(() => import('./WhyUs'))} />
       <Route path={`${match.url}/comments/:status`} component={asyncComponent(() => import('./Comments'))} /> */}
 

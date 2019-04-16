@@ -1416,14 +1416,14 @@ table thead tr th {
 .hero {
 	padding: 0; }
 	.hero__img {
-		/* background-size: cover;
+		background-size: cover;
 		background-position: center center;
 		background-repeat: no-repeat;
-		min-height: 725px;
-		width: 450px;   */
-		width: 480px;
+		height: 725px;
+		/* width: 450px;   */
+		/* width: 480px;
 		left: -480px;
-		height: 480px;
+		height: 480px; */
 	}
 		@media only screen and (max-width: 991px) {
 			.hero__img {
@@ -1803,8 +1803,10 @@ table thead tr th {
 .team {
 	margin-bottom: 32px; }
 	.team__img {
+		height: 320px;
 		width: 100%; }
 	.team__body {
+		height: 240px;
 		background-color: #fff;
 		padding: 40px; }
 	.team__name {

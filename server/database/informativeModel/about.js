@@ -12,11 +12,9 @@ const about = connection.define('about', {
   },
   desc: {
     type: Sequelize.TEXT,
-    allowNull: false,
   },
   body: {
     type: Sequelize.TEXT,
-    allowNull: false,
   },
   sub_title: {
     type: Sequelize.TEXT,

@@ -76,7 +76,9 @@ class Registration extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { teamtitle, teamsub, teamdesc,disable } = this.state;
+    const {
+      teamtitle, teamsub, teamdesc, disable,
+    } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -130,23 +132,23 @@ class Registration extends Component {
               ],
             })(<TextArea />)}
           </FormItem>
-          <FormItem {...formItemLayout} label={<span>Description</span>}>
+          {/* <FormItem {...formItemLayout} label={<span>Description</span>}>
             {getFieldDecorator('teamdesc', {
               initialValue: teamdesc,
             })(<TextArea />)}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...tailFormItemLayout}>
-          {!disable
-            ? (
+            {!disable
+              ? (
                 <Button type="primary" htmlType="submit">
               Submit
                 </Button>
-            )
-            : (
+              )
+              : (
                 <Button type="primary" disabled htmlType="submit">
          Submit
                 </Button>
-            ) }
+              ) }
           </FormItem>
         </Form>
         <NotificationContainer />

@@ -22,6 +22,7 @@ const statistics = require('./statistics');
 const contact = require('./contact');
 const comments = require('./comments');
 const hours = require('./hours');
+const plan = require('./plan');
 
 const router = express.Router();
 router
@@ -54,7 +55,12 @@ router
   .post('/comments/create', comments.post)
   .get('/contact/getAll', contact.get)
   .get('/hours/getAll', hours.get)
+  .get('/plan/getAll', plan.getAll)
   .use(Auth.checkToken)
+  .post('/plan/create', plan.post)
+  .post('/plan/:id', plan.update)
+  .get('/plan/:id', plan.getOne)
+  .delete('/plan/:id', plan.delete)
   .post('/hours', hours.update)
   .get('/posts/getAll', posts.getAll)
   .post('/about', about.update)

@@ -34,11 +34,10 @@ exports.update = async (req, res) => {
     const {
       data,
     } = req.body;
-    const { title, desc } = data;
+    const { title } = data;
     if (
       !title.trim()
-            || !desc.trim()
-            || !validatior.isLength(title, { min: 1, max: 30 })
+            || !validatior.isLength(title, { min: 1, max: 150 })
     ) {
       res.status(400).send({
         message: 'Invalid inputs, please note the type of each input',
@@ -48,6 +47,7 @@ exports.update = async (req, res) => {
       res.status(200).send({ message: 'Updated is done' });
     }
   } catch (error) {
+    console.log(error)
     res.status(500).send({ message: 'Internal Server Error' });
   }
 };

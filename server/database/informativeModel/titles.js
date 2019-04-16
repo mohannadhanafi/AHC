@@ -10,6 +10,10 @@ const titles = connection.define('titles', {
   plantitle: Sequelize.TEXT,
   plandesc: Sequelize.TEXT,
   planimage: Sequelize.TEXT,
+  teamtitle: Sequelize.TEXT,
+  teamsub: Sequelize.TEXT,
+  servicesimage: Sequelize.TEXT,
+  servicestitile: Sequelize.TEXT,
   createdAt: {
     allowNull: false,
     defaultValue: Sequelize.NOW,

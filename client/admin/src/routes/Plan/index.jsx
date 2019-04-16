@@ -9,7 +9,7 @@ const Table = ({ match }) => (
     <Route path={`${match.url}/viewplan`} component={asyncComponent(() => import('./View'))} />
     <Route path={`${match.url}/addplan`} component={asyncComponent(() => import('./Add'))} />
     <Route path={`${match.url}/settings`} component={asyncComponent(() => import('./Settings'))} />
-    {/* <Route path={`${match.url}/:id`} component={asyncComponent(() => import('./EditService'))} /> */}
+    <Route path={`${match.url}/:id`} component={asyncComponent(() => import('./Edit'))} />
   </Switch>
 );
 

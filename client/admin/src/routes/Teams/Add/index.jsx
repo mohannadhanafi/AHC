@@ -226,17 +226,20 @@ class Registration extends Component {
           <FormItem {...formItemLayout} label={<span>instagram</span>}>
             {getFieldDecorator('instagram')(<Input />)}
           </FormItem>
+          <FormItem {...formItemLayout} label={<span>Bio</span>}>
+            {getFieldDecorator('bio')(<TextArea rows={6} />)}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
             {!disable
               ? (
-              <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit">
               Submit
-              </Button>
+                </Button>
               )
               : (
-              <Button type="primary" disabled htmlType="submit">
+                <Button type="primary" disabled htmlType="submit">
          Submit
-              </Button>
+                </Button>
               ) }
           </FormItem>
         </Form>

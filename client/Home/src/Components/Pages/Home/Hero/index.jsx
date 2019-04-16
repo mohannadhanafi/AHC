@@ -1,13 +1,23 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-multiple-empty-lines */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import uuid from 'uuid';
+import Slider from 'react-slick';
 import axios from 'axios';
+import './style.css';
 
 export default class index extends Component {
     state= {
       hero: [],
+      settings: {
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplaySpeed: 4000,
+        arrows: false,
+      },
     }
 
     componentWillMount() {
@@ -19,26 +29,25 @@ export default class index extends Component {
 
 
     render() {
-      const { hero } = this.state;
+      const { hero, settings } = this.state;
       return (
         <section className="hero">
-          <div className="slick-custom-arrows">
+          <Slider {...settings}>
             {hero.map(item => (
-              <div className="hero__item slick-slide" key={uuid()}>
+              <Fragment key={uuid()}>
                 <div className="row no-gutters">
                   <div className="col-lg-4 order-lg-1 order-2">
-                    <div className="hero__img" style={{ backgroundImage: `url(/api/v2/getFile/${item.image})` }}>
-                      <img src="img/hero/hero_slide_1.jpg" alt="" className="d-none" />
-                    </div>
-                    <div className="slick-custom-nav">
-                      <button className="slick-custom-nav__prev slick-prev slick-arrow" type="button" aria-label="prev">Prev ></button>
-                      <button className="slick-custom-nav__next slick-next slick-arrow" type="button" aria-label="next">Next ></button>
-                    </div>
+                    <div
+                      className="hero__img"
+                      style={{
+                        backgroundImage: `url(/api/v2/getFile/${item.image})`,
+                      }}
+                    />
                   </div>
                   <div className="col-lg-8 order-1 order-lg-2">
                     <div className="hero__text-holder">
-                      <h3 className="hero__subtitle">{item.title}</h3>
-                      <h1 className="hero__title hero__title--boxed">{item.description}
+                      <h3>{item.title}</h3>
+                      <h1>{item.description}
                         <span className="hero__dot">.</span>
                       </h1>
                       <Link to="/contact" className="btn btn--lg btn--color">
@@ -47,9 +56,9 @@ export default class index extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Fragment>
             ))}
-          </div>
+          </Slider>
         </section>
       );
     }

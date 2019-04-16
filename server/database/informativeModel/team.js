@@ -9,6 +9,7 @@ const team = connection.define('team', {
   youtube: Sequelize.TEXT,
   instagram: Sequelize.TEXT,
   title: Sequelize.TEXT,
+  bio: Sequelize.TEXT,
   createdAt: {
     allowNull: false,
     defaultValue: Sequelize.NOW,

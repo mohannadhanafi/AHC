@@ -1,51 +1,46 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Team from './TeamItem';
 
 export default class index extends Component {
     state = {
-      title: 'World class teams',
-      description: 'The combination of exceptional talent and exciting people creates a competitive but informal environment – and a great platform for you to develop.',
-      team: [
-        {
-          img: 'https://deothemes.com/envato/casumi/html/img/team/team_1.jpg',
-          name: 'Kelly Green',
-          bio: 'We also provide tangible results and measurable long-term value business.',
-        },
-        {
-            img: 'https://deothemes.com/envato/casumi/html/img/team/team_2.jpg',
-            name: 'Joeby Ragpa',
-            bio: 'We also provide tangible results and measurable long-term value business.',
-        },
-        {
-            img: 'https://deothemes.com/envato/casumi/html/img/team/team_3.jpg',
-            name: 'Alexander Samokhin',
-            bio: 'We also provide tangible results and measurable long-term value business.',
-        },
-        {
-            img: 'https://deothemes.com/envato/casumi/html/img/team/team_4.jpg',
-            name: 'Martha Smith',
-            bio: 'We also provide tangible results and measurable long-term value business.',
-        }
-      ],
+      title: '',
+      description: '',
+      team: [],
+    }
+
+    componentWillMount() {
+      axios.get('/api/v2/getTitle').then((result) => {
+        const { data } = result;
+        const { teamtitle, teamsub } = data[0];
+        this.setState({ title: teamtitle, description: teamsub });
+      });
+    }
+
+    componentDidMount() {
+      axios.get('/api/v2/team/getAll').then((result) => {
+        const { data } = result;
+        this.setState({ team: data });
+      });
     }
 
     render() {
       const { title, description, team } = this.state;
       return (
-        <>          
-        <section class="section-wrap bg-light">
-        <div class="container">        
-            <div class="row title-row">
-            <div class="col-lg-4">
-                <h2 class="section-title">{title}</h2>
+        <>
+          <section className="section-wrap bg-light">
+            <div className="container">
+              <div className="row title-row">
+                <div className="col-lg-4">
+                  <h2 className="section-title">{title}</h2>
+                </div>
+                <div className="col-lg-7 offset-lg-1">
+                  <p className="lead mb-0">{description}</p>
+                </div>
+              </div>
+              <Team team={team} />
             </div>
-            <div class="col-lg-7 offset-lg-1">
-                <p class="lead mb-0">{description}</p>
-            </div>
-            </div> 
-            <Team team={team}/>
-        </div>
-        </section>
+          </section>
         </>
       );
     }

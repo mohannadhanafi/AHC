@@ -1,0 +1,17 @@
+/* .slick-prev, .slick-next {
+    position: absolute;
+    left: 428px;
+    top: 689px;
+}
+.slick-next {
+    right: unset;
+}
+.slick-prev {
+    left: 356px !important;
+    z-index: 9;
+}
+@media (max-width: 991px) {
+    .slick-prev, .slick-next {
+        top: 964px
+    }
+} */

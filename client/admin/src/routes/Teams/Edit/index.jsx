@@ -156,6 +156,7 @@ class Registration extends Component {
         facebook,
         twitter,
         youtube,
+        bio,
       } = data[0];
       const fileList = [];
       await axios
@@ -175,6 +176,7 @@ class Registration extends Component {
         facebook,
         twitter,
         youtube,
+        bio,
       });
     }).catch((error) => {
       const {
@@ -200,7 +202,8 @@ class Registration extends Component {
       facebook,
       twitter,
       youtube,
-      disable
+      disable,
+      bio,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -287,18 +290,23 @@ class Registration extends Component {
               initialValue: instagram,
             })(<Input />)}
           </FormItem>
+          <FormItem {...formItemLayout} label={<span>Bio</span>}>
+            {getFieldDecorator('bio', {
+              initialValue: bio,
+            })(<TextArea rows={6} />)}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
-          {!disable
-            ? (
+            {!disable
+              ? (
                 <Button type="primary" htmlType="submit">
               Save
                 </Button>
-            )
-            : (
+              )
+              : (
                 <Button type="primary" disabled htmlType="submit">
          Save
                 </Button>
-            ) }
+              ) }
           </FormItem>
         </Form>
         <NotificationContainer />

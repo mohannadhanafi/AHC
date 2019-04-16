@@ -4,7 +4,7 @@ const { contact } = require('../../database/informativeModel');
 exports.post = async (request, response) => {
   try {
     const {
-      name, email, subject, message,
+      name, email, mobile, text,
     } = request.body;
 
     if (
@@ -12,10 +12,10 @@ exports.post = async (request, response) => {
       && name.trim()
       && email
       && email.trim()
-      && subject
-      && subject.trim()
-      && message
-      && message.trim()
+      && mobile
+      && mobile.trim()
+      && text
+      && text.trim()
     ) {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -29,8 +29,8 @@ exports.post = async (request, response) => {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
         replyTo: email,
-        subject,
-        text: message,
+        subject: name,
+        text,
       };
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
