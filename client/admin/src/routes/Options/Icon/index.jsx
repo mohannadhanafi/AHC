@@ -66,10 +66,10 @@ componentDidMount = async () => {
     this.props.form.validateFieldsAndScroll((err, values) => {
       const { fileList, fileName } = this.state;
       if (!err) {
+        this.setState({ disable: true });
         if (fileName !== '') {
           values.favicon = fileName;
         }
-        this.setState({ disable: true });
         if (fileList.length) {
           axios.post('/api/v2/option', values).then((result) => {
             const {
@@ -141,7 +141,9 @@ componentDidMount = async () => {
   };
 
   render() {
-    const { fileList, previewVisible, pic ,disable} = this.state;
+    const {
+      fileList, previewVisible, pic, disable,
+    } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },

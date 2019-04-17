@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import Hero from './Hero';
 import Services from '../../Common/Services';
 import Promo from '../../Common/Promo';
@@ -28,7 +27,6 @@ export default class index extends Component {
         <Statistcs />
         <LatestNews />
         <CallToAction />
-
       </>
     );
   }
