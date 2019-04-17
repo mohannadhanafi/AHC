@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 app
-  .set('port', process.env.PORT || 5001)
+  .set('port', process.env.PORT || 3000)
   .set('mailer', transporter)
   .disable('x-powered-by')
   .use(fileUpload())
