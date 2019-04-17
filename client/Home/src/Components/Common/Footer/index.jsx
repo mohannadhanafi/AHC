@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 import './style.css';
 
 export default class index extends Component {
@@ -14,12 +16,45 @@ export default class index extends Component {
     facebook: '',
     twitter: '',
     google: '',
+    monday_start: '',
+    monday_end: '',
   };
 
   componentWillMount() {
     axios('/api/v2/hours/getAll').then((result) => {
       const { data } = result;
-      const { monday_start, monday_end } = data[0];
+      const {
+        monday_start,
+        monday_end,
+        tuesday_start,
+        tuesday_end,
+        wednesday_start,
+        wednesday_end,
+        thursday_start,
+        thursday_end,
+        friday_start,
+        friday_end,
+        saturday_start,
+        saturday_end,
+        sunday_start,
+        sunday_end,
+      } = data[0];
+      this.setState({
+        monday_start,
+        monday_end,
+        tuesday_start,
+        tuesday_end,
+        wednesday_start,
+        wednesday_end,
+        thursday_start,
+        thursday_end,
+        friday_start,
+        friday_end,
+        saturday_start,
+        saturday_end,
+        sunday_start,
+        sunday_end,
+      });
     });
   }
 
@@ -27,17 +62,55 @@ export default class index extends Component {
     axios('/api/v2/getoptions').then((result) => {
       const { data } = result;
       const {
-        logo, address, copyrights, email, mobile, facebook, twitter, google, footer_logo,
+        logo,
+        address,
+        copyrights,
+        email,
+        mobile,
+        facebook,
+        twitter,
+        google,
+        footer_logo,
       } = data[0];
       this.setState({
-        logo, address, copyrights, email, mobile, facebook, twitter, google, footer_logo,
+        logo,
+        address,
+        copyrights,
+        email,
+        mobile,
+        facebook,
+        twitter,
+        google,
+        footer_logo,
       });
     });
   }
 
   render() {
     const {
-      logo, address, copyrights, email, mobile, facebook, twitter, google, footer_logo,
+      logo,
+      address,
+      copyrights,
+      email,
+      mobile,
+      facebook,
+      twitter,
+      google,
+      footer_logo,
+      monday_start,
+      monday_end,
+      tuesday_start,
+      tuesday_end,
+      wednesday_start,
+      wednesday_end,
+      thursday_start,
+      thursday_end,
+      friday_start,
+      friday_end,
+      saturday_start,
+      saturday_end,
+      sunday_start,
+      sunday_end,
     } = this.state;
     return (
       <footer className="footer">
@@ -99,42 +172,59 @@ export default class index extends Component {
                 <div className="widget widget_nav_menu">
                   <h5 className="widget-title">Opening Hours</h5>
                   <ul>
-                    <div className="row">
-                      <div className="col-sm-4">
-                        <li>
-                          <a href="#">Monday: </a>
-                        </li>
+                    {monday_start && monday_end && (
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li>
+                            <a href="#">Monday: </a>
+                          </li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li>
+                            <a href="#">
+                              {`${moment(monday_start).format(
+                                'HH A',
+                              )} - ${moment(monday_end).format('HH A')}`}
+                            </a>
+                          </li>
+                        </div>
                       </div>
-                      <div className="col-sm-8">
-                        <li>
-                          <a href="#">08 AM - 06 PM</a>
-                        </li>
+                    )}
+                    {tuesday_start && tuesday_end && (
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li>Tuesday:</li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li>
+                            <a href="#">
+                              {`${moment(tuesday_start).format(
+                                'HH A',
+                              )} - ${moment(tuesday_end).format('HH A')}`}
+                            </a>
+                          </li>
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-4">
-                        <li>
-                          <a href="#">Tuesday: </a>
-                        </li>
+                    )}
+                    {wednesday_start && wednesday_end && (
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <li>
+                            <a href="#">Wednesday: </a>
+                          </li>
+                        </div>
+                        <div className="col-sm-8">
+                          <li>
+                            <a href="#">
+                              {`${moment(wednesday_start).format(
+                                'HH A',
+                              )} - ${moment(wednesday_end).format('HH A')}`}
+                            </a>
+                          </li>
+                        </div>
                       </div>
-                      <div className="col-sm-8">
-                        <li>
-                          <a href="#">08 AM - 06 PM</a>
-                        </li>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-4">
-                        <li>
-                          <a href="#">Wednesday: </a>
-                        </li>
-                      </div>
-                      <div className="col-sm-8">
-                        <li>
-                          <a href="#">08 AM - 06 PM</a>
-                        </li>
-                      </div>
-                    </div>
+                    )}
+                    {thursday_start && thursday_end && (
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
@@ -143,10 +233,15 @@ export default class index extends Component {
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#">08 AM - 06 PM</a>
+                          <a href="#"> {`${moment(thursday_start).format(
+                            'HH A',
+                          )} - ${moment(thursday_end).format('HH A')}`}
+                          </a>
                         </li>
                       </div>
                     </div>
+                    )}
+                    {friday_start && friday_end && (
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
@@ -155,10 +250,15 @@ export default class index extends Component {
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#">08 AM - 06 PM</a>
+                          <a href="#"> {`${moment(friday_start).format(
+                            'HH A',
+                          )} - ${moment(friday_end).format('HH A')}`}
+                          </a>
                         </li>
                       </div>
                     </div>
+                    )}
+                    {saturday_start && saturday_end && (
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
@@ -167,10 +267,15 @@ export default class index extends Component {
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#">08 AM - 06 PM</a>
+                          <a href="#"> {`${moment(saturday_start).format(
+                            'HH A',
+                          )} - ${moment(saturday_end).format('HH A')}`}
+                          </a>
                         </li>
                       </div>
                     </div>
+                    )}
+                    {sunday_start && sunday_end && (
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
@@ -179,10 +284,14 @@ export default class index extends Component {
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#">08 AM - 06 PM</a>
+                          <a href="#"> {`${moment(sunday_start).format(
+                            'HH A',
+                          )} - ${moment(sunday_end).format('HH A')}`}
+                          </a>
                         </li>
                       </div>
                     </div>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -192,21 +301,19 @@ export default class index extends Component {
                   <h5 className="widget-title">Company</h5>
                   <ul>
                     <li>
-                      <address>
-                        {address || null}
-                      </address>
+                      <address>{address || null}</address>
                     </li>
                     {mobile && (
-                    <li>
-                      <span>Phone: </span>
-                      <a href={mobile}>{mobile}</a>
-                    </li>
+                      <li>
+                        <span>Phone: </span>
+                        <a href={mobile}>{mobile}</a>
+                      </li>
                     )}
                     {email && (
-                    <li>
-                      <span>Email: </span>
-                      <a href={email}>{email}</a>
-                    </li>
+                      <li>
+                        <span>Email: </span>
+                        <a href={email}>{email}</a>
+                      </li>
                     )}
                   </ul>
                 </div>
@@ -240,11 +347,9 @@ export default class index extends Component {
                 </div>
               </div>
               {copyrights && (
-              <div className="col-lg-6 text-right text-md-center">
-                <span className="copyright">
-                  &copy; {copyrights}
-                </span>
-              </div>
+                <div className="col-lg-6 text-right text-md-center">
+                  <span className="copyright">&copy; {copyrights}</span>
+                </div>
               )}
             </div>
           </div>
