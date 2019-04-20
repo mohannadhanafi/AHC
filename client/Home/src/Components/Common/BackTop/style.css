@@ -1,0 +1,24 @@
+aside {
+    z-index: 99999999999999;
+    border-radius: 50%;
+    border: none !important;
+    height: 34px !important;
+    width: 34px !important;
+    cursor: pointer;
+    right: 20px !important;
+    background-color: #F7F9FA !important;
+    box-shadow: 0px 1px 4px 0px rgba(154, 161, 171, 0.4) !important;
+    /* display: flex; */
+    /* text-align: center; */
+    /* justify-content: center; */
+    text-align: center !important;
+}
+
+aside svg {
+    height: 20px;
+}
+
+aside:hover {
+    background-color: #F53B30 !important;
+    bottom: 24px !important;
+}
