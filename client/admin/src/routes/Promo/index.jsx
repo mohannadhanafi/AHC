@@ -139,8 +139,8 @@ class Registration extends Component {
                   whitespace: true,
                 },
                 {
-                  max: 20,
-                  message: 'Max is 20 letter',
+                  max: 100,
+                  message: 'Max is 100 letter',
                 },
               ],
             })(<Input />)}

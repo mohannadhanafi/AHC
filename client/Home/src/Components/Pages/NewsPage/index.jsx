@@ -68,6 +68,7 @@ export default class index extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const {
       match: {
         params: { seo },

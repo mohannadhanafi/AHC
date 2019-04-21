@@ -13,6 +13,10 @@ export default class index extends Component {
     slider: true,
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     const { slider } = this.state;
     return (

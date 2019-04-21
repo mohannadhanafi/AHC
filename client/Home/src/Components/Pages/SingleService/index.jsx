@@ -10,6 +10,7 @@ export default class index extends Component {
     }
 
     componentDidMount() {
+      window.scrollTo(0, 0);
       const { match: { params: { id } } } = this.props;
       axios.get(`/api/v2/core/${id}`).then((result) => {
         const { data } = result;
