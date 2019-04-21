@@ -32,11 +32,11 @@ exports.get = async (req, res) => {
 exports.post = async (req, res) => {
   try {
     const data = req.body;
-    const count = await core.count({ where: {} });
-    if (count >= 3) {
-      return res.status(400).send({ message: ' you can only add three core items !' });
-    }
-    await core.create(data);
+    // const count = await core.count({ where: {} });
+    // if (count >= 3) {
+    //   return res.status(400).send({ message: ' you can only add three core items !' });
+    // }
+    // await core.create(data);
     return res.status(200).send({ message: 'service has been added' });
   } catch (error) {
     res.status(500).send('Server Error');
