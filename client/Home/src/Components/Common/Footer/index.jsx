@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import './style.css';
+import facebookIcon from '../../../SVG/facebook.svg';
+import twitterIcon from '../../../SVG/twitter.svg';
+import googleIcon from '../../../SVG/google.svg';
 
 export default class index extends Component {
   state = {
@@ -154,6 +157,7 @@ export default class index extends Component {
                       target="_blank"
                     >
                       <i className="ui-facebook" />
+                      {/* <img src={facebookIcon} alt="" /> */}
                     </a>
                     <a
                       href={google || null}

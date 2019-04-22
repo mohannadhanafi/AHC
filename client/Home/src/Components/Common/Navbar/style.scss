@@ -10,3 +10,21 @@
 .logo {
     cursor: pointer;
 }
+
+.search--icon {
+    height: 15px;
+}
+.close--icon {
+    position: absolute;
+    width: 22px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    top: 60%;
+    margin-top: -18px;
+    right: 82px;
+    font-size: 24px;
+    color: #636A75;
+    cursor: pointer;
+    height: 15px;
+}
