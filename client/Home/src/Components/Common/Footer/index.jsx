@@ -120,21 +120,21 @@ export default class index extends Component {
               <div className="col-lg-3 col-md-6">
                 <div className="widget widget-about-us">
                   {footer_logo ? (
-                    <Link to="/" className="logo-container flex-child">
+                    <a href="/" className="logo-container flex-child">
                       <img
                         className="logo"
                         src={`/api/v2/getFile/${footer_logo}`}
                         alt="logo"
                       />
-                    </Link>
+                    </a>
                   ) : (
-                    <Link to="/" className="logo-container flex-child">
+                    <a href="/" className="logo-container flex-child">
                       <img
                         className="logo"
                         src={`/api/v2/getFile/${logo}`}
                         alt="logo"
                       />
-                    </Link>
+                    </a>
                   )}
                   <div className="socials mt-32">
                     <a
@@ -176,12 +176,12 @@ export default class index extends Component {
                       <div className="row">
                         <div className="col-sm-4">
                           <li>
-                            <a href="#">Monday: </a>
+                            <a>Monday: </a>
                           </li>
                         </div>
                         <div className="col-sm-8">
                           <li>
-                            <a href="#">
+                            <a>
                               {`${moment(monday_start).format(
                                 'HH A',
                               )} - ${moment(monday_end).format('HH A')}`}
@@ -197,7 +197,7 @@ export default class index extends Component {
                         </div>
                         <div className="col-sm-8">
                           <li>
-                            <a href="#">
+                            <a>
                               {`${moment(tuesday_start).format(
                                 'HH A',
                               )} - ${moment(tuesday_end).format('HH A')}`}
@@ -210,12 +210,12 @@ export default class index extends Component {
                       <div className="row">
                         <div className="col-sm-4">
                           <li>
-                            <a href="#">Wednesday: </a>
+                            <a>Wednesday: </a>
                           </li>
                         </div>
                         <div className="col-sm-8">
                           <li>
-                            <a href="#">
+                            <a>
                               {`${moment(wednesday_start).format(
                                 'HH A',
                               )} - ${moment(wednesday_end).format('HH A')}`}
@@ -228,12 +228,12 @@ export default class index extends Component {
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
-                          <a href="#">Thursday: </a>
+                          <a>Thursday: </a>
                         </li>
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#"> {`${moment(thursday_start).format(
+                          <a> {`${moment(thursday_start).format(
                             'HH A',
                           )} - ${moment(thursday_end).format('HH A')}`}
                           </a>
@@ -245,12 +245,12 @@ export default class index extends Component {
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
-                          <a href="#">Friday: </a>
+                          <a>Friday: </a>
                         </li>
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#"> {`${moment(friday_start).format(
+                          <a> {`${moment(friday_start).format(
                             'HH A',
                           )} - ${moment(friday_end).format('HH A')}`}
                           </a>
@@ -262,12 +262,12 @@ export default class index extends Component {
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
-                          <a href="#">Saturday: </a>
+                          <a>Saturday: </a>
                         </li>
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#"> {`${moment(saturday_start).format(
+                          <a> {`${moment(saturday_start).format(
                             'HH A',
                           )} - ${moment(saturday_end).format('HH A')}`}
                           </a>
@@ -279,12 +279,12 @@ export default class index extends Component {
                     <div className="row">
                       <div className="col-sm-4">
                         <li>
-                          <a href="#">Sunday: </a>
+                          <a>Sunday: </a>
                         </li>
                       </div>
                       <div className="col-sm-8">
                         <li>
-                          <a href="#"> {`${moment(sunday_start).format(
+                          <a> {`${moment(sunday_start).format(
                             'HH A',
                           )} - ${moment(sunday_end).format('HH A')}`}
                           </a>

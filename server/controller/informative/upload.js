@@ -39,5 +39,5 @@ exports.get = (request, response) => {
 
 exports.getFav = (request, response) => {
   const { name } = request.params;
-  response.sendFile(path.join(__dirname, '..', '..', '..', 'client', 'home', 'img', name));
+  response.sendFile(path.join(__dirname, '..', '..', '..', 'clients', 'admin', 'build', name));
 };

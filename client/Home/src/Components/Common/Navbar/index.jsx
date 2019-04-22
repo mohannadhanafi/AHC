@@ -57,7 +57,6 @@ class index extends Component {
     });
   }
 
-
   render() {
     const { logo, nav } = this.state;
     return (
@@ -72,9 +71,9 @@ class index extends Component {
               </form>
 
               <div className="nav__header">
-                <Link to="/" className="logo-container">
+                <a href="/" className="logo-container">
                   <img className="logo" src={`/api/v2/getFile/${logo}`} alt="logo" />
-                </Link>
+                </a>
 
                 <button type="button" className="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                   <span className="sr-only">Toggle navigation</span>

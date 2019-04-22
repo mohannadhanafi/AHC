@@ -1,3 +1,4 @@
+@import '../sass//base/_variables.scss';
 /*-------------------------------------------------------*/
 /* Table of Content
 
@@ -360,7 +361,7 @@ address {
 	.btn--md.btn--button {
 		height: 46px; }
 	.btn--color {
-		background-color: #F53B30; }
+		background-color: #F53B30 }
 		.btn--color:hover {
 			opacity: .92; }
 	.btn--alt-color {
@@ -1586,22 +1587,22 @@ table thead tr th {
 		@media only screen and (min-width: 992px) {
 			.testimonial__img-holder {
 				height: 360px;
-				width: 360px;
+				width: 60px;
 				top: 72px;
 				left: -288px;
 				position: absolute; } }
 		@media (min-width: 1200px) {
 			.testimonial__img-holder {
-				width: 480px;
-				height: 480px;
-				left: -408px; } }
+				width: 430px;
+				height: 370px;
+				left: -370px; } }
 	.testimonial__info {
 		background-color: #16133E;
 		height: 630px;
 		padding: 50px; }
 		@media only screen and (min-width: 992px) {
 			.testimonial__info {
-				padding: 124px 50px 124px 220px; } }
+				padding: 60px 30px 150px 120px; } }
 	@media only screen and (min-width: 992px) {
 		.testimonial__info-container {
 			max-width: 700px; } }
@@ -2699,7 +2700,7 @@ figcaption {
 -------------------------------------------------------*/
 .logo {
 	line-height: 1;
-	max-height: 72px; }
+	max-height: 40px; }
 
 /* Nav Flexbox
 -------------------------------------------------------*/

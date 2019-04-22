@@ -276,16 +276,16 @@ class Registration extends Component {
               ],
             })(<Input />)}
           </FormItem>
-          {/* <FormItem {...formItemLayout} label={<span>role</span>}>
+          <FormItem {...formItemLayout} label={<span>role</span>}>
             {getFieldDecorator('rule', {
               initialValue: rule || null,
             })(
               <Select defaultValue="admin">
                 <Option value="admin">admin</Option>
-                <Option value="user">Auther</Option>
+                <Option value="Data Entry">Data Entry</Option>
               </Select>,
             )}
-          </FormItem> */}
+          </FormItem>
           <FormItem {...formItemLayout} label="bio">
             {getFieldDecorator('bio', {
               initialValue: bio,

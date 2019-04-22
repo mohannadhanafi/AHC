@@ -15,7 +15,7 @@ exports.post = async (request, response) => {
   try {
     const { body } = request;
     const {
-      email, password, name, pic,
+      email, password, name, pic, rule,
     } = body;
 
     if (
@@ -27,6 +27,8 @@ exports.post = async (request, response) => {
       && password.trim()
       && name.trim()
       && pic.trim()
+      && rule
+      && rule.trim()
     ) {
       const result = await users.count({ where: { email } });
       if (result === 0) {
@@ -39,6 +41,7 @@ exports.post = async (request, response) => {
             email,
             password: hash,
             pic,
+            rule,
           };
           await users.create(newUser);
           response
