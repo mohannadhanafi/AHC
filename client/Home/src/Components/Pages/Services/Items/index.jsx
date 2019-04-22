@@ -25,7 +25,8 @@ export default class index extends Component {
               {items.map(item => (
                 <div className="col-lg-4">
                   <Link to={`/service/${item.id}`} className="service box-shadow hover-line hover-down spec--service">
-                    <i className={`service__icon ${item.icon}`} />
+                    {/* <i className={`service__icon ${item.icon}`} /> */}
+                    <img className="service__icon" src={`/api/v2/getFile/${item.icon}`} alt="icon" />
                     <h4 className="service__title">{item.title}</h4>
                     <Link to={`/service/${item.id}`} className="btn btn--lg btn--color service--cta">
                       <span>Read More</span>

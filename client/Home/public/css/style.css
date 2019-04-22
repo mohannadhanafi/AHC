@@ -1530,10 +1530,11 @@ table thead tr th {
 	display: block;
 	background-color: #fff; }
 	.service__icon {
-		font-size: 4rem;
+		height: 64px;
+		/* font-size: 4rem;
 		line-height: 1;
 		color: #F53B30;
-		display: inline-block;
+		display: inline-block; */
 		margin-bottom: 32px; }
 	.service__title {
 		font-size: 1.25rem;
@@ -1626,7 +1627,7 @@ table thead tr th {
 		display: inline-block;
 		position: relative;
 		color: #fff; }
-		.testimonial__text:before {
+		/* .testimonial__text:before {
 			content: '\e802';
 			font-size: 1.2rem;
 			font-family: 'ui-icons';
@@ -1638,7 +1639,7 @@ table thead tr th {
 			@media only screen and (min-width: 992px) {
 				.testimonial__text:before {
 					top: 3px;
-					left: -48px; } }
+					left: -48px; } } */
 
 /*-------------------------------------------------------*/
 /* Promo Section
