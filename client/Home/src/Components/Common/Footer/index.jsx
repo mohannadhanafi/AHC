@@ -306,13 +306,13 @@ export default class index extends Component {
                     {mobile && (
                       <li>
                         <span>Phone: </span>
-                        <a href={mobile}>{mobile}</a>
+                        <a>{mobile}</a>
                       </li>
                     )}
                     {email && (
                       <li>
                         <span>Email: </span>
-                        <a href={email}>{email}</a>
+                        <a href={`mailto:${email}`}>{email}</a>
                       </li>
                     )}
                   </ul>

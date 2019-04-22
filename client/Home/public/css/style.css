@@ -1619,12 +1619,16 @@ table thead tr th {
 		color: #8B8F95;
 		font-size: 0.9375rem; }
 	.testimonial__text {
+		overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    line-height: 28px;
+    height: 196px;
 		font-size: 1.5rem;
 		font-weight: 300;
 		font-family: "Merriweather", serif;
-		line-height: 1.5;
 		margin-bottom: 14px;
-		display: inline-block;
 		position: relative;
 		color: #fff; }
 		/* .testimonial__text:before {
@@ -2612,7 +2616,7 @@ figcaption {
 			font-weight: 600;
 			color: #16133E;
 			font-size: 1rem;
-			padding: 0 17px;
+			padding: 0 10px;
 			line-height: 72px;
 			display: block;
 			position: relative; }
