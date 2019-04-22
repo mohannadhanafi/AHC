@@ -45,8 +45,8 @@ export default class index extends Component {
               {statistcs.slice(0, 4).map(statistc => (
                 <div className="col-lg-3 col-sm-6" key={uuid()}>
                   <div className="statistic">
-                    <i className={`statistic__icon ${statistc.icon}`} />
-                    {/* <img className="statistic__icon" src={`/api/v2/getFile/${statistc.icon}`} alt="" /> */}
+                    {/* <i className={`statistic__icon ${statistc.icon}`} /> */}
+                    <img className="statistic__icon" src={`/api/v2/getFile/${statistc.icon}`} alt="icon" />
                     <span className="statistic__number">{statistc.count}</span>
                     <h5 className="statistic__title">{statistc.title}</h5>
                   </div>

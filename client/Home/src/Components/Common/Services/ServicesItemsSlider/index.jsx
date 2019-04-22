@@ -45,7 +45,8 @@ export default class index extends Component {
               {services.slice(0, 5).map(service => (
                 <div key={uuid()} className="slick-slide slick-slider-col slick-service-boxes__item">
                   <Link to={`/service/${service.id}`} className="service box-shadow hover-line hover-down">
-                    <i className={`service__icon ${service.icon}`} />
+                    {/* <i className={`service__icon ${service.icon}`} /> */}
+                    <img src={`/api/v2/getFile/${service.icon}`} alt="icon" />
                     <h4 className="service__title">{service.title}</h4>
                     <p className="service__text">{service.desc}</p>
                   </Link>

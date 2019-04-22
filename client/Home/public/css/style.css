@@ -616,6 +616,8 @@ input[type="radio"] {
 	float: right; }
 
 .slick-slide img {
+	height: 64px;
+    margin-bottom: 15px;
 	display: block; }
 
 .slick-slide.slick-loading img {
@@ -1783,10 +1785,11 @@ table thead tr th {
 			.statistic-row > div:last-child .statistic {
 				border-right: 0; } }
 	.statistic__icon {
+height: 64px;
 		color: #F53B30;
 		display: block;
-		font-size: 4.5rem;
-		line-height: 1;
+		/* font-size: 4.5rem;
+		line-height: 1; */
 		margin-bottom: 10px; }
 	.statistic__number {
 		font-family: "Merriweather", serif;
@@ -1818,6 +1821,12 @@ table thead tr th {
 		display: inline-block;
 		margin-bottom: 14px; }
 	.team__text {
+		overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-height: 21px;
+    height: 63px;
 		margin-top: 20px;
 		margin-bottom: 20px; }
 

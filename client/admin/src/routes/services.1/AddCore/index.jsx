@@ -52,43 +52,43 @@ class Registration extends Component {
         const {
           content, fileList, removedFile,
         } = this.state;
-        // const files = [];
-        // fileList.map((value) => {
-        //   files.push(value.response.fullName);
-        //   return files;
-        // });
-        // if (files.length !== 0) {
-        //   values.icon = files[0];
-        values.body = content;
-        axios.post('/api/v2/core', values).then((result) => {
-          const { data: { message } } = result;
-          NotificationManager.success(message, 'SUCCESS', 2000);
-          setTimeout(() => {
-            this.props.history.push('/admin/core/viewcore');
-            this.setState({ disable: false });
-          }, 3000);
-          // if (removedFile.length) {
-          //   removedFile.map(async (file) => {
-          //     await axios.post('/api/v2/removeFile', { pic: file });
-          //   });
-          // }
-        }).catch(async (error) => {
-          const { data: { message }, statusText } = error.response;
-          NotificationManager.error(message || statusText, 'ERROR', 2000);
+        const files = [];
+        fileList.map((value) => {
+          files.push(value.response.fullName);
+          return files;
+        });
+        if (files.length !== 0) {
+          values.icon = files[0];
+          values.body = content;
+          axios.post('/api/v2/core', values).then((result) => {
+            const { data: { message } } = result;
+            NotificationManager.success(message, 'SUCCESS', 2000);
+            setTimeout(() => {
+              this.props.history.push('/admin/core/viewcore');
+              this.setState({ disable: false });
+            }, 3000);
+            if (removedFile.length) {
+              removedFile.map(async (file) => {
+                await axios.post('/api/v2/removeFile', { pic: file });
+              });
+            }
+          }).catch(async (error) => {
+            const { data: { message }, statusText } = error.response;
+            NotificationManager.error(message || statusText, 'ERROR', 2000);
+            setTimeout(() => {
+              this.setState({ disable: false });
+            }, 2000);
+          });
+        } else {
+          NotificationManager.error(
+            'Please Choose image or video !',
+            'ERROR',
+            2000,
+          );
           setTimeout(() => {
             this.setState({ disable: false });
           }, 2000);
-        });
-        // } else {
-        //   NotificationManager.error(
-        //     'Please Choose image or video !',
-        //     'ERROR',
-        //     2000,
-        //   );
-        //   setTimeout(() => {
-        //     this.setState({ disable: false });
-        //   }, 2000);
-        // }
+        }
       }
     });
   };
@@ -173,7 +173,7 @@ class Registration extends Component {
     return (
       <Card className="gx-card" title="Add Service">
         <Form onSubmit={this.handleSubmit}>
-          {/* <FormItem {...formItemLayout} label={<span>Icon</span>}>
+          <FormItem {...formItemLayout} label={<span>Icon</span>}>
             <>
               <Upload
                 action="/api/v2/uploadFile"
@@ -198,8 +198,8 @@ class Registration extends Component {
                 />
               </Modal>
             </>
-          </FormItem> */}
-          <FormItem {...formItemLayout} label={<span><a href="https://deothemes.com/envato/casumi/html/icons.html" target="_blank">Icons</a></span>}>
+          </FormItem>
+          {/* <FormItem {...formItemLayout} label={<span><a href="https://deothemes.com/envato/casumi/html/icons.html" target="_blank">Icons</a></span>}>
             {getFieldDecorator('icon', {
               rules: [
                 {
@@ -209,7 +209,7 @@ class Registration extends Component {
                 },
               ],
             })(<Input />)}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...formItemLayout} label={<span>Title</span>}>
             {getFieldDecorator('title', {
               rules: [
