@@ -32,7 +32,7 @@ export default class index extends Component {
     componentDidMount() {
       setTimeout(() => {
         this.setState({ loading: false });
-      }, 1500);
+      }, 3000);
     }
 
     render() {

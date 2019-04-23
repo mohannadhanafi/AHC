@@ -14,7 +14,7 @@ export default class index extends Component {
     componentWillMount() {
       setTimeout(() => {
         this.setState({ loading: false });
-      }, 1500);
+      }, 3000);
     }
 
     componentDidMount() {
