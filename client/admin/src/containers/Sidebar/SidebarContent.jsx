@@ -331,6 +331,12 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.ContactUsPage" />
                   </Link>
                 </Menu.Item>
+                <Menu.Item key="contact/footer">
+                  <Link to="/admin/contact/footer">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.footer" />
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="contact/add">
                   <Link to="/admin/contact/add">
                     <i className="icon icon-button" />

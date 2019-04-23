@@ -56,10 +56,6 @@ class Registration extends Component {
     const { data } = res;
     const {
       logo: pic,
-      copyrights,
-      email,
-      address,
-      mobile,
       ctatitle,
       ctasub,
       footer_logo,
@@ -104,11 +100,7 @@ class Registration extends Component {
       .catch((error) => {});
     this.setState({
       pic,
-      copyrights,
       coloured,
-      email,
-      address,
-      mobile,
       ctatitle,
       ctasub,
       white,
@@ -254,11 +246,6 @@ class Registration extends Component {
       white,
       previewVisible,
       pic,
-      email,
-      address,
-      copyrights,
-      disable,
-      mobile,
       ctatitle,
       ctasub,
       coloured,
@@ -266,6 +253,7 @@ class Registration extends Component {
       faviconList,
       faviconListName,
       color,
+      disable,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -377,31 +365,6 @@ class Registration extends Component {
             </Modal>
           </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>address</span>}>
-            {getFieldDecorator('address', { initialValue: address })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="E-mail">
-            {getFieldDecorator('email', {
-              initialValue: email,
-              rules: [
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Mobile">
-            {getFieldDecorator('mobile', {
-              initialValue: mobile,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
-            {getFieldDecorator('copyrights', {
-              initialValue: copyrights,
-              rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-            })(<Input />)}
-          </FormItem>
           <FormItem {...formItemLayout} label={<span>CTA Title</span>}>
             {getFieldDecorator('ctatitle', {
               initialValue: ctatitle,

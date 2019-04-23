@@ -23,7 +23,7 @@ const contact = require('./contact');
 const comments = require('./comments');
 const hours = require('./hours');
 const plan = require('./plan');
-const contactitems = require('./Contactitems');
+const contactitems = require('./contactItems');
 
 const router = express.Router();
 router
