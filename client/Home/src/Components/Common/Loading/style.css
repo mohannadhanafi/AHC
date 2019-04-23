@@ -1,3 +1,7 @@
+:root {
+	--main-color: #507ceb;
+}
+
 .loader-mask {
 	position: fixed;
 	top: 0;
@@ -16,7 +20,7 @@
 	height: 5em;
 	margin: -25px 0 0 -25px;
 	text-indent: -9999em;
-	border-top: 0.5em solid #4C86E7;
+	border-top: 0.5em solid var(--main-color);
 	border-right: 0.5em solid rgba(245, 245, 245, 0.5);
 	border-bottom: 0.5em solid rgba(245, 245, 245, 0.5);
 	border-left: 0.5em solid rgba(245, 245, 245, 0.5);
