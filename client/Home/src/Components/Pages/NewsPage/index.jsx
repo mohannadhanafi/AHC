@@ -8,6 +8,7 @@ import Body from './Body';
 import Author from './Author';
 import Comments from './Comments';
 import NextPrev from './NextPrev';
+import Loading from '../../Common/Loading';
 
 export default class index extends Component {
   state = {
@@ -21,6 +22,7 @@ export default class index extends Component {
     name: '',
     email: '',
     body: '',
+    loading: true,
   };
 
   onClick = (e) => {
@@ -67,6 +69,12 @@ export default class index extends Component {
     this.setState({ [name]: value });
   };
 
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 1500);
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
     const {
@@ -108,33 +116,36 @@ export default class index extends Component {
       name,
       email,
       body,
+      loading,
     } = this.state;
     return (
-      <>
-        <Header title={title} date={date} user={user} />
-        <Featured background={background} />
-        <section className="section-wrap pt-24 pb-72">
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-lg-8 blog__content mb-32">
-                <article className="entry single-post__entry">
-                  <Body description={description} />
-                </article>
-                <Author user={user} />
+      loading ? <Loading /> : (
+        <>
+          <Header title={title} date={date} user={user} />
+          <Featured background={background} />
+          <section className="section-wrap pt-24 pb-72">
+            <div className="container">
+              <div className="row justify-content-center">
+                <div className="col-lg-8 blog__content mb-32">
+                  <article className="entry single-post__entry">
+                    <Body description={description} />
+                  </article>
+                  <Author user={user} />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-        <Comments
-          comments={commentsResult}
-          onClick={this.onClick}
-          onChange={this.onChange}
-          name={name}
-          email={email}
-          body={body}
-        />
-        {/* <NextPrev /> */}
-      </>
+          </section>
+          <Comments
+            comments={commentsResult}
+            onClick={this.onClick}
+            onChange={this.onChange}
+            name={name}
+            email={email}
+            body={body}
+          />
+          {/* <NextPrev /> */}
+        </>
+      )
     );
   }
 }

@@ -5,11 +5,19 @@ import Team from './Team';
 import Promo from '../../Common/Promo';
 import Statistcs from '../../Common/Statistics';
 import CallToAction from '../../Common/CallToAction';
+import Loading from '../../Common/Loading';
 
 export default class index extends Component {
   state = {
     title: '',
     coverImage: '',
+    loading: true,
+  }
+
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 1500);
   }
 
   componentDidMount() {
@@ -22,15 +30,17 @@ export default class index extends Component {
   }
 
   render() {
-    const { title, coverImage } = this.state;
+    const { title, coverImage, loading } = this.state;
     return (
-      <>
-        <PageTitle cover={coverImage} title={title} />
-        <Promo />
-        <Team />
-        <Statistcs />
-        <CallToAction />
-      </>
+      loading ? <Loading /> : (
+        <>
+          <PageTitle cover={coverImage} title={title} />
+          <Promo />
+          <Team />
+          <Statistcs />
+          <CallToAction />
+        </>
+      )
     );
   }
 }

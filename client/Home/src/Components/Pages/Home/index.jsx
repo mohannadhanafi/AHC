@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Hero from './Hero';
 import Services from '../../Common/Services';
 import Promo from '../../Common/Promo';
@@ -11,6 +11,7 @@ import Statistcs from '../../Common/Statistics';
 export default class index extends Component {
   state = {
     slider: true,
+    loading: true,
   }
 
   componentDidMount() {
@@ -32,6 +33,7 @@ export default class index extends Component {
         <LatestNews />
         <CallToAction />
       </>
+    // )
     );
   }
 }
