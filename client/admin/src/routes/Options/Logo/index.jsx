@@ -24,6 +24,8 @@ import {
   NotificationManager,
 } from 'react-notifications';
 import TextArea from 'antd/lib/input/TextArea';
+import ColorPicker from 'rc-color-picker';
+import 'rc-color-picker/assets/index.css';
 
 const FormItem = Form.Item;
 
@@ -46,6 +48,7 @@ class Registration extends Component {
     white: [],
     faviconListName: '',
     faviconList: [],
+    color: '',
   };
 
   componentDidMount = async () => {
@@ -61,6 +64,7 @@ class Registration extends Component {
       ctasub,
       footer_logo,
       favicon,
+      color,
     } = data[0];
     const coloured = [];
     const white = [];
@@ -109,6 +113,7 @@ class Registration extends Component {
       ctasub,
       white,
       faviconList,
+      color,
     });
   };
 
@@ -116,10 +121,9 @@ class Registration extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       const {
-        coloured, colouredName, whiteName, faviconListName,
+        coloured, colouredName, whiteName, faviconListName, color,
       } = this.state;
       this.setState({ disable: true });
-
       if (!err) {
         if (colouredName !== '') {
           values.logo = colouredName;
@@ -129,6 +133,9 @@ class Registration extends Component {
         }
         if (faviconListName !== '') {
           values.favicon = faviconListName;
+        }
+        if (color) {
+          values.color = color;
         }
         if (coloured.length) {
           axios
@@ -237,6 +244,10 @@ class Registration extends Component {
     }
   };
 
+  changeColour = ({ color }) => {
+    this.setState({ color });
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
@@ -254,6 +265,7 @@ class Registration extends Component {
       colouredName,
       faviconList,
       faviconListName,
+      color,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -401,6 +413,20 @@ class Registration extends Component {
               initialValue: ctasub,
               rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
             })(<TextArea rows={8} />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Choose Colour">
+            {getFieldDecorator('colour', {})(
+              <ColorPicker color={color} onChange={this.changeColour}>
+                <Input
+                  className="colour-picker"
+                  style={{
+                    cursor: 'pointer !important',
+                    backgroundColor: color,
+                    width: '50px',
+                  }}
+                  />
+              </ColorPicker>,
+            )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
             {!disable ? (

@@ -22,6 +22,7 @@ const comments = require('./comments');
 const contact = require('./contact');
 const hours = require('./hours');
 const plan = require('./plan');
+const contactitems = require('./Contactitems');
 
 aboutItem.belongsTo(about, {
   onDelete: 'CASCADE',
@@ -83,4 +84,5 @@ module.exports = {
   contact,
   hours,
   plan,
+  contactitems,
 };

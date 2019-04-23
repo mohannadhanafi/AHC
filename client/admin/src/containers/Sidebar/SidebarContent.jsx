@@ -314,6 +314,36 @@ class SidebarContent extends Component {
                   </Link>
                 </Menu.Item>
               </SubMenu>
+              <SubMenu
+                key="contact"
+                className={this.getNavStyleSubMenuClass(navStyle)}
+                title={(
+                  <span>
+                    {' '}
+                    <i className="icon icon-widgets" />
+                    <IntlMessages id="sidebar.Contact" />
+                  </span>
+)}
+              >
+                <Menu.Item key="contact/page">
+                  <Link to="/admin/contact/page">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.ContactUsPage" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="contact/add">
+                  <Link to="/admin/contact/add">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.AddItem" />
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="contact/view">
+                  <Link to="/admin/contact/view">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.viewItem" />
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
               {role === 'admin' ? (
                 <SubMenu
                   key="options"
@@ -348,12 +378,6 @@ class SidebarContent extends Component {
                     <Link to="/admin/options/hours">
                       <i className="icon icon-button" />
                       <IntlMessages id="sidebar.hours" />
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="options/contact">
-                    <Link to="/admin/options/contact">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.Contact" />
                     </Link>
                   </Menu.Item>
                   {/* <Menu.Item key="options/icon">

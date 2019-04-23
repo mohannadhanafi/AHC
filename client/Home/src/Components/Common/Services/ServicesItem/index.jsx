@@ -6,12 +6,12 @@ export default class index extends Component {
     state = {}
 
     render() {
-      const { services } = this.props;
+      const { contacts } = this.props;
       return (
         <div className="section-wrap offset-top-100 pt-0">
           <div className="container">
             <div className="row">
-              {services.slice(0, 6).map(service => (
+              {contacts.slice(0, 6).map(service => (
                 <div key={uuid()} className="col-lg-4">
                   <Link to={`/service/${service.id}`} className="service box-shadow hover-line hover-down">
                     {/* <i className={`service__icon ${service.icon}`} /> */}

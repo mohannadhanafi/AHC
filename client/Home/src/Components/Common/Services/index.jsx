@@ -28,7 +28,7 @@ export default class index extends Component {
   }
 
   render() {
-    const { slider } = this.props;
+    const { slider, contacts } = this.props;
     const { title, services } = this.state;
     return (
       <>
@@ -37,7 +37,7 @@ export default class index extends Component {
           slider ? (
             <ServicesItemsSlider services={services} />
           ) : (
-            <ServicesItems services={services} />
+            <ServicesItems contacts={contacts} />
           )
         ) : null}
       </>

@@ -69,6 +69,7 @@ const options = connection.define('options', {
   longitude: Sequelize.DECIMAL,
   ctatitle: Sequelize.TEXT,
   ctasub: Sequelize.TEXT,
+  color: Sequelize.TEXT,
   createdAt: {
     allowNull: false,
     defaultValue: new Date(),

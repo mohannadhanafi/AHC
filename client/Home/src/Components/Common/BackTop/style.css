@@ -1,3 +1,6 @@
+:root {
+	--main-color: #507ceb;
+}
 aside {
     z-index: 99999999999999;
     border-radius: 50%;
@@ -19,6 +22,6 @@ aside svg {
 }
 
 aside:hover {
-    background-color: #F53B30 !important;
+    background-color: var(--main-color) !important;
     bottom: 24px !important;
 }

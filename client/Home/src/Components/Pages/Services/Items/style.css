@@ -1,8 +1,11 @@
+:root {
+	--main-color: #507ceb;
+}
 .services--page .spec--service {
     transition: all ease-in-out 0.5s;
 }
 .services--page .spec--service:hover{
-    border: 1px solid #F53B30;
+    border: 1px solid var(--main-color);
     border-top: none;
 }
 .services--page .spec--service a {

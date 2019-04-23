@@ -23,6 +23,7 @@ const contact = require('./contact');
 const comments = require('./comments');
 const hours = require('./hours');
 const plan = require('./plan');
+const contactitems = require('./Contactitems');
 
 const router = express.Router();
 router
@@ -41,6 +42,7 @@ router
   .get('/serviceId/:seo', services.getBySeo)
   .get('/team/getAll', team.get)
   .get('/core', core.get)
+  .get('/contactitems', contactitems.get)
   .get('/about', about.get)
   .get('/about/getItems', about.getItems)
   .get('/about/item/:id', about.getItem)
@@ -68,6 +70,10 @@ router
   .post('/core', core.post)
   .delete('/core/delete', core.delete)
   .post('/core/updateCore', core.updateCore)
+  .get('/contactitems/:id', contactitems.getcontactitems)
+  .post('/contactitems', contactitems.post)
+  .delete('/contactitems/delete', contactitems.delete)
+  .post('/contactitems/updatecontactitems', contactitems.updatecontactitems)
   .post('/option', options.update)
   .get('/getname', getName.get)
   .get('/profile', users.getProfile)

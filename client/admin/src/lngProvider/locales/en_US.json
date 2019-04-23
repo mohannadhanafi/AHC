@@ -380,5 +380,8 @@
   "sidebar.plan": "Plan",
   "sidebar.viewplan": "View Plan",
   "sidebar.addPlan": "Add Plan",
-  "sidebar.hours": "Openning Hours"
+  "sidebar.hours": "Openning Hours",
+  "sidebar.ContactUsPage": "Edit Page",
+  "sidebar.AddItem": "Add Item",
+  "sidebar.viewItem": "View Items"
 }

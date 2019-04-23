@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Components/Pages/Home';
 import About from './Components/Pages/About';
@@ -14,6 +15,14 @@ import './App.css';
 
 class App extends Component {
   state = {}
+
+  componentDidMount() {
+    axios.get('/api/v2/getoptions').then((result) => {
+      const { data } = result;
+      const { color } = data[0];
+      document.documentElement.style.setProperty('--main-color', color);
+    });
+  }
 
   render() {
     return (

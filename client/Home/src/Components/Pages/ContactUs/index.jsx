@@ -10,6 +10,14 @@ export default class index extends Component {
     title: '',
     sub_title: '',
     quote: '',
+    contacts: [],
+  }
+
+  componentWillMount() {
+    axios.get('/api/v2/contactitems').then((result) => {
+      const { data } = result;
+      this.setState({ contacts: data });
+    });
   }
 
   componentDidMount() {
@@ -21,6 +29,7 @@ export default class index extends Component {
   }
 
   render() {
+    const { contacts } = this.state;
     return (
       <div className="content-wrapper oh">
         <Hero
@@ -28,6 +37,7 @@ export default class index extends Component {
         />
         <Services
           slider={false}
+          contacts={contacts}
         />
         <Form data={this.state} />
         {/* <div id="google-map" className="gmap" data-address="V Tytana St, Manila, Philippines" /> */}

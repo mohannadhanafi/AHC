@@ -86,7 +86,7 @@ componentDidMount = async () => {
             if (result.status === 200) {
               NotificationManager.success(message, 'SUCCESS', 2000);
               setTimeout(() => {
-                this.props.history.push('/admin/options/contact');
+                this.props.history.push('/admin/contact/page');
                 this.setState({ disable: false });
               }, 3000);
             } else {
