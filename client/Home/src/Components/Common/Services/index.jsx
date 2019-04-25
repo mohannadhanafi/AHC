@@ -1,24 +1,19 @@
 /* eslint-disable no-nested-ternary */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import getTitles from '../../../Redux/actions/titles';
 import Title from './Title';
 import ServicesItemsSlider from './ServicesItemsSlider';
 import ServicesItems from './ServicesItem';
 
-export default class index extends Component {
+class index extends Component {
   state = {
-    title: '',
     services: [],
   }
 
-  componentWillMount() {
-    window.scrollTo(0, 0);
-    axios('/api/v2/getTitle').then((titles) => {
-      const { data } = titles;
-      const { coreTitle } = data[0];
-      this.setState({ title: coreTitle });
-    });
-  }
 
   componentDidMount() {
     axios('/api/v2/core').then((result) => {
@@ -28,11 +23,11 @@ export default class index extends Component {
   }
 
   render() {
-    const { slider, contacts } = this.props;
-    const { title, services } = this.state;
+    const { slider, contacts, titles } = this.props;
+    const { services } = this.state;
     return (
       <>
-        <Title title={title} />
+        <Title title={titles.length && titles[0].coreTitle} />
         {services.length ? (
           slider ? (
             <ServicesItemsSlider services={services} />
@@ -44,3 +39,6 @@ export default class index extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ titles }) => titles;
+export default connect(mapStateToProps, { getTitles })(index);

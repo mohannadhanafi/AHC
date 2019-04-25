@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import getTitles from '../../../../Redux/actions/titles';
 import Loading from '../../../Common/Loading';
 
-export default class index extends Component {
+class index extends Component {
     state = {
-      backgoround: 'https://deothemes.com/envato/casumi/html/img/page_title/services.jpg',
-      title: '',
       loading: true,
     }
 
@@ -15,26 +14,24 @@ export default class index extends Component {
       }, 3000);
     }
 
-    componentDidMount() {
-      axios.get('/api/v2/getTitle').then((result) => {
-        const { data } = result;
-        const { servicestitile, servicesimage } = data[0];
-        this.setState({ title: servicestitile, backgoround: servicesimage });
-      });
-    }
-
     render() {
-      const { backgoround, title, loading } = this.state;
+      const { loading } = this.state;
+      const { titles } = this.props;
       return (
         loading ? <Loading /> : (
-          <section className="page-title bg-img bg-overlay" style={{ backgroundImage: `url(/api/v2/getFile/${backgoround})` }}>
+          titles.length && (
+          <section className="page-title bg-img bg-overlay" style={{ backgroundImage: `url(/api/v2/getFile/${titles[0].servicesimage})` }}>
             <div className="container">
               <div className="page-title__holder">
-                <h1 className="page-title__title">{title}</h1>
+                <h1 className="page-title__title">{titles[0].servicestitile}</h1>
               </div>
             </div>
           </section>
+          )
         )
       );
     }
 }
+
+const mapStateToProps = ({ titles }) => titles;
+export default connect(mapStateToProps, { getTitles })(index);

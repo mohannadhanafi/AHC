@@ -1,14 +1,18 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-multiple-empty-lines */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import uuid from 'uuid';
 import Slider from 'react-slick';
 import axios from 'axios';
+import getTitles from '../../../../Redux/actions/titles';
 import './style.css';
 import Loading from '../../../Common/Loading';
 
-export default class index extends Component {
+class index extends Component {
     state= {
       hero: [],
       settings: {
@@ -23,6 +27,8 @@ export default class index extends Component {
     }
 
     componentWillMount() {
+      const { getTitles } = this.props;
+      getTitles();
       axios('/api/v2/hero/getAll').then((result) => {
         const { data } = result;
         this.setState(() => ({ hero: data }));
@@ -72,3 +78,7 @@ export default class index extends Component {
       );
     }
 }
+
+const mapStateToProps = ({ titles }) => titles;
+
+export default connect(mapStateToProps, { getTitles })(index);

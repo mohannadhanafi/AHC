@@ -21,7 +21,7 @@ class SidebarLogo extends Component {
   componentDidMount = async () => {
     const result = await axios.get('/api/v2/getoptions');
     const { data } = result;
-    const { logo } = data[0];    
+    const { logo } = data[0];
     this.setState({ logo });
   }
 

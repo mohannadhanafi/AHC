@@ -63,7 +63,7 @@ exports.getAll = async (req, res) => {
     rule
   } = req;
   try {
-    if (rule === 'admin') {
+    // if (rule === 'admin') {
       const result = await posts.findAll({
         order: [
           ['id', 'DESC']
@@ -74,21 +74,21 @@ exports.getAll = async (req, res) => {
         }, ],
       });
       res.status(200).send(result);
-    } else {
-      const result = await posts.findAll({
-        order: [
-          ['id', 'DESC']
-        ],
-        where: {
-          auther_id: id
-        },
-        include: [{
-          model: users,
-          attributes: ['name'],
-        }, ],
-      });
-      res.status(200).send(result);
-    }
+    // } else {
+    //   const result = await posts.findAll({
+    //     order: [
+    //       ['id', 'DESC']
+    //     ],
+    //     where: {
+    //       auther_id: id
+    //     },
+    //     include: [{
+    //       model: users,
+    //       attributes: ['name'],
+    //     }, ],
+    //   });
+      // res.status(200).send(result);
+    // }
   } catch (error) {
     res.status(500).send('Internal Server Error');
   }

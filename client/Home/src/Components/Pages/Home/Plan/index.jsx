@@ -5,23 +5,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import getTitles from '../../../../Redux/actions/titles';
 import './style.css';
 
-export default class index extends Component {
+class index extends Component {
     state = {
-      title: '',
-      description: '',
       plan: ['$30 enrollment fee', '$30 per month', '$30 copay to any emergency visit or non-specialized physician visit.'],
       video: 'mov_bbb',
       image: '',
-    }
-
-    componentDidMount() {
-      axios('/api/v2/getTitle').then((result) => {
-        const { data } = result;
-        const { plantitle, plandesc, planimage } = data[0];
-        this.setState({ title: plantitle, description: plandesc, image: planimage });
-      });
     }
 
     componentWillMount() {
@@ -34,8 +26,9 @@ export default class index extends Component {
 
     render() {
       const {
-        title, description, plan, video, image,
+        plan, video, image,
       } = this.state;
+      const { titles } = this.props;
       return (
         <section className="plan">
           <div className="container">
@@ -49,8 +42,8 @@ export default class index extends Component {
                 </video>
               </div>
               <div className="col-lg-5 offset-lg-1 mb-md-72">
-                <h2 className="plan__title">{title}</h2>
-                <p className="plan__text lead">{description}</p>
+                <h2 className="plan__title">{titles.length && titles[0].plantitle}</h2>
+                <p className="plan__text lead">{titles.length && titles[0].plandesc}</p>
                 <ul className="plan-ul">
                 {plan.slice(0, 3).map(item => (
                     <li>{item.plan}</li>
@@ -66,3 +59,6 @@ export default class index extends Component {
       );
     }
 }
+
+const mapStateToProps = ({ titles }) => titles;
+export default connect(mapStateToProps, { getTitles })(index);

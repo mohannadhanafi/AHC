@@ -1,20 +1,14 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import getTitles from '../../../../Redux/actions/titles';
 import Team from './TeamItem';
 
-export default class index extends Component {
+class index extends Component {
     state = {
-      title: '',
-      description: '',
       team: [],
-    }
-
-    componentWillMount() {
-      axios.get('/api/v2/getTitle').then((result) => {
-        const { data } = result;
-        const { teamtitle, teamsub } = data[0];
-        this.setState({ title: teamtitle, description: teamsub });
-      });
     }
 
     componentDidMount() {
@@ -25,17 +19,18 @@ export default class index extends Component {
     }
 
     render() {
-      const { title, description, team } = this.state;
+      const { team } = this.state;
+      const { titles } = this.props;
       return (
         <>
           <section className="section-wrap bg-light">
             <div className="container">
               <div className="row title-row">
                 <div className="col-lg-4">
-                  <h2 className="section-title">{title}</h2>
+                  <h2 className="section-title">{titles.length && titles[0].teamtitle}</h2>
                 </div>
                 <div className="col-lg-7 offset-lg-1">
-                  <p className="lead mb-0">{description}</p>
+                  <p className="lead mb-0">{titles.length && titles[0].teamsub}</p>
                 </div>
               </div>
               <Team team={team} />
@@ -45,3 +40,6 @@ export default class index extends Component {
       );
     }
 }
+
+const mapStateToProps = ({ titles }) => titles;
+export default connect(mapStateToProps, { getTitles })(index);

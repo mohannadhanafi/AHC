@@ -1,43 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import uuid from 'uuid';
-import $ from 'jquery';
 
 export default class index extends Component {
   state = {}
 
-  componentDidMount() {
-    // $(document).ready(() => {
-    //   (function ($) {
-    //     $('.slick-service-boxes').slick({
-    //       arrows: false,
-    //       dots: true,
-    //       slidesToShow: 3,
-    //       infinite: false,
-
-    //       responsive: [
-    //         {
-    //           breakpoint: 992,
-    //           settings: {
-    //             slidesToShow: 2,
-    //           },
-    //         },
-    //         {
-    //           breakpoint: 768,
-    //           settings: {
-    //             slidesToShow: 1,
-    //           },
-    //         },
-    //       ],
-    //     });
-    //   }(window.jQuery));
-    // });
-  }
-
   render() {
     const { team } = this.props;
-    console.log(team);
     return (
       <div className="row">
         {team.length && (

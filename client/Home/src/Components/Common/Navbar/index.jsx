@@ -1,7 +1,10 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import './style.scss';
+import getOptions from '../../../Redux/actions/options';
 
 class index extends Component {
   state = {
@@ -50,15 +53,13 @@ class index extends Component {
   }
 
   componentDidMount() {
-    axios('/api/v2/getoptions').then((result) => {
-      const { data } = result;
-      const { logo } = data[0];
-      this.setState({ logo });
-    });
+    const { getOptions } = this.props;
+    getOptions();
   }
 
   render() {
-    const { logo, nav } = this.state;
+    const { nav } = this.state;
+    const { options } = this.props;
     return (
       <header className="nav">
         <div className="nav__holder nav--sticky">
@@ -71,9 +72,11 @@ class index extends Component {
               </form>
 
               <div className="nav__header">
+                {options.length && (
                 <a href="/" className="logo-container">
-                  <img className="logo" src={`/api/v2/getFile/${logo}`} alt="logo" />
+                  <img className="logo" src={`/api/v2/getFile/${options[0].logo}`} alt="logo" />
                 </a>
+                )}
 
                 <button type="button" className="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                   <span className="sr-only">Toggle navigation</span>
@@ -151,4 +154,6 @@ class index extends Component {
     );
   }
 }
-export default withRouter(index);
+
+const mapStateToProps = ({ options }) => options;
+export default connect(mapStateToProps, { getOptions })(withRouter(index));

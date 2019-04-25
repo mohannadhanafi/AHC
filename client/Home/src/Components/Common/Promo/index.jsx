@@ -1,11 +1,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-trailing-spaces */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import getTitles from '../../../Redux/actions/titles';
 
-export default class index extends Component {
+class index extends Component {
     state = {
       title: 'We bring the right people together',
       description: `As you may already know, there are an infinite number of things you can test on your site to help you increase sales. 
@@ -14,26 +17,19 @@ export default class index extends Component {
       second_image: 'https://deothemes.com/envato/casumi/html/img/promo/promo_img_2.jpg',
     }
 
-    componentDidMount() {
-      axios('/api/v2/getTitle').then((result) => {
-        const { data } = result;
-        const { promotitle, promodesc } = data[0];
-        this.setState({ title: promotitle, description: promodesc });
-      });
-    }
-
     render() {
       const {
-        title, description, first_image, second_image, 
+        first_image, second_image, 
       } = this.state;
+      const { titles } = this.props;
       return (
         <section className="section-wrap promo section-wrap--pt-180">
           <div className="container">
             <div className="row">
               <div className="col-lg-4 mb-md-72">
-                <h2 className="promo__title">{title}</h2>
+                <h2 className="promo__title">{titles.length && titles[0].promotitle}</h2>
                 <p className="promo__text lead">
-                  {description}
+                  {titles.length && titles[0].promodesc}
                 </p>
                 <Link to="/contact" className="btn btn--lg btn--color">
                   <span>Contact Us</span>
@@ -49,3 +45,6 @@ export default class index extends Component {
       );
     }
 }
+
+const mapStateToProps = ({ titles }) => titles;
+export default connect(mapStateToProps, { getTitles })(index);

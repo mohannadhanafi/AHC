@@ -1,6 +1,8 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Home from './Components/Pages/Home';
 import About from './Components/Pages/About';
 import Contact from './Components/Pages/ContactUs';
@@ -12,19 +14,18 @@ import Header from './Components/Common/Navbar';
 import BackTop from './Components/Common/BackTop';
 import Footer from './Components/Common/Footer';
 import './App.css';
+import getOptions from './Redux/actions/options';
 
 class App extends Component {
   state = {}
 
-  componentDidMount() {
-    axios.get('/api/v2/getoptions').then((result) => {
-      const { data } = result;
-      const { color } = data[0];
-      document.documentElement.style.setProperty('--main-color', color);
-    });
-  }
 
   render() {
+    const { options } = this.props;
+    if (options.length) {
+      const { color } = options[0];
+      document.documentElement.style.setProperty('--main-color', color);
+    }
     return (
       <div className="App">
         <Router>
@@ -46,4 +47,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ options }) => options;
+
+export default connect(mapStateToProps, { getOptions })(App);

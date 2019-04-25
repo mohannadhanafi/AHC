@@ -4,24 +4,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import './style.css';
-// import facebookIcon from '../../../SVG/facebook.svg';
-// import twitterIcon from '../../../SVG/twitter.svg';
-// import googleIcon from '../../../SVG/google.svg';
+import getOptions from '../../../Redux/actions/options';
 
-export default class index extends Component {
-  state = {
-    logo: '',
-    address: '',
-    copyrights: '',
-    email: '',
-    mobile: '',
-    facebook: '',
-    twitter: '',
-    google: '',
-    monday_start: '',
-    monday_end: '',
-  };
+class index extends Component {
+  state = {};
 
   componentWillMount() {
     axios('/api/v2/hours/getAll').then((result) => {
@@ -61,44 +49,10 @@ export default class index extends Component {
     });
   }
 
-  componentDidMount() {
-    axios('/api/v2/getoptions').then((result) => {
-      const { data } = result;
-      const {
-        logo,
-        address,
-        copyrights,
-        email,
-        mobile,
-        facebook,
-        twitter,
-        google,
-        footer_logo,
-      } = data[0];
-      this.setState({
-        logo,
-        address,
-        copyrights,
-        email,
-        mobile,
-        facebook,
-        twitter,
-        google,
-        footer_logo,
-      });
-    });
-  }
 
   render() {
     const {
-      logo,
-      address,
       copyrights,
-      email,
-      mobile,
-      facebook,
-      twitter,
-      google,
       footer_logo,
       monday_start,
       monday_end,
@@ -115,61 +69,64 @@ export default class index extends Component {
       sunday_start,
       sunday_end,
     } = this.state;
+    const { options } = this.props;
     return (
       <footer className="footer">
         <div className="container">
           <div className="footer__widgets">
             <div className="row">
               <div className="col-lg-3 col-md-6">
-                <div className="widget widget-about-us">
-                  {footer_logo ? (
-                    <a href="/" className="logo-container flex-child">
-                      <img
-                        className="logo"
-                        src={`/api/v2/getFile/${footer_logo}`}
-                        alt="logo"
-                      />
-                    </a>
-                  ) : (
-                    <a href="/" className="logo-container flex-child">
-                      <img
-                        className="logo"
-                        src={`/api/v2/getFile/${logo}`}
-                        alt="logo"
-                      />
-                    </a>
-                  )}
-                  <div className="socials mt-32">
-                    <a
-                      href={twitter || null}
-                      className="social social-twitter"
-                      aria-label="twitter"
-                      title="twitter"
-                      target="_blank"
-                    >
-                      <i className="ui-twitter" />
-                    </a>
-                    <a
-                      href={facebook || null}
-                      className="social social-facebook"
-                      aria-label="facebook"
-                      title="facebook"
-                      target="_blank"
-                    >
-                      <i className="ui-facebook" />
-                      {/* <img src={facebookIcon} alt="" /> */}
-                    </a>
-                    <a
-                      href={google || null}
-                      className="social social-google-plus"
-                      aria-label="google plus"
-                      title="google plus"
-                      target="_blank"
-                    >
-                      <i className="ui-google" />
-                    </a>
+                {options.length ? (
+                  <div className="widget widget-about-us">
+                    {footer_logo ? (
+                      <a href="/" className="logo-container flex-child">
+                        <img
+                          className="logo"
+                          src={`/api/v2/getFile/${options[0].footer_logo}`}
+                          alt="logo"
+                        />
+                      </a>
+                    ) : (
+                      <a href="/" className="logo-container flex-child">
+                        <img
+                          className="logo"
+                          src={`/api/v2/getFile/${options[0].logo}`}
+                          alt="logo"
+                        />
+                      </a>
+                    )}
+                    <div className="socials mt-32">
+                      <a
+                        href={options[0].twitter || null}
+                        className="social social-twitter"
+                        aria-label="twitter"
+                        title="twitter"
+                        target="_blank"
+                      >
+                        <i className="ui-twitter" />
+                      </a>
+                      <a
+                        href={options[0].facebook || null}
+                        className="social social-facebook"
+                        aria-label="facebook"
+                        title="facebook"
+                        target="_blank"
+                      >
+                        <i className="ui-facebook" />
+                        {/* <img src={facebookIcon} alt="" /> */}
+                      </a>
+                      <a
+                        href={options[0].google || null}
+                        className="social social-google-plus"
+                        aria-label="google plus"
+                        title="google plus"
+                        target="_blank"
+                      >
+                        <i className="ui-google" />
+                      </a>
+                    </div>
                   </div>
-                </div>
+                ) : null}
               </div>
 
               <div className="col-lg-4 offset-lg-2 col-md-6">
@@ -299,29 +256,30 @@ export default class index extends Component {
                   </ul>
                 </div>
               </div>
-
-              <div className="col-lg-3 col-md-6">
-                <div className="widget widget-address">
-                  <h5 className="widget-title">Company</h5>
-                  <ul>
-                    <li>
-                      <address>{address || null}</address>
-                    </li>
-                    {mobile && (
+              {options.length ? (
+                <div className="col-lg-3 col-md-6">
+                  <div className="widget widget-address">
+                    <h5 className="widget-title">Company</h5>
+                    <ul>
+                      <li>
+                        <address>{options[0].address || null}</address>
+                      </li>
+                      {options[0].mobile && (
                       <li>
                         <span>Phone: </span>
-                        <a>{mobile}</a>
+                        <a>{options[0].mobile}</a>
                       </li>
-                    )}
-                    {email && (
+                      )}
+                      {options[0].email && (
                       <li>
                         <span>Email: </span>
-                        <a href={`mailto:${email}`}>{email}</a>
+                        <a href={`mailto:${options[0].email}`}>{options[0].email}</a>
                       </li>
-                    )}
-                  </ul>
+                      )}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -362,3 +320,6 @@ export default class index extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ options }) => options;
+export default connect(mapStateToProps, { getOptions })(index);
