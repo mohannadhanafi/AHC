@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Input,
+  Button, Form, Input,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -144,7 +144,7 @@ class Registration extends Component {
       },
     };
     return (
-      <Card className="gx-card" title="Footer">
+      <>
         <Form onSubmit={this.handleSubmit}>
 
           <FormItem {...formItemLayout} label={<span>address</span>}>
@@ -210,7 +210,7 @@ class Registration extends Component {
           </FormItem>
         </Form>
         <NotificationContainer />
-      </Card>
+      </>
     );
   }
 }
