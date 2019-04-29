@@ -37,6 +37,8 @@ class Registration extends Component {
   };
 
   componentDidMount = async () => {
+    console.log(this.props);
+    
     const res = await axios.get('/api/v2/getoptions');
     const { data } = res;
     const {

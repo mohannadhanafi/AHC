@@ -20,6 +20,9 @@ import {
   getNotifications,
   setNotifications,
 } from 'appRedux/actions/Notifications';
+import {
+  getOpations,
+} from 'appRedux/actions/opations';
 import Cookies from 'js-cookie';
 
 import {
@@ -185,7 +188,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ settings, auth, notifications }) => {
+const mapStateToProps = ({
+  settings, auth, notifications, opations,
+}) => {
   const { locale, navStyle, layoutType } = settings;
   const { authUser, url, role } = auth;
   const { notificationsNumber } = notifications;
@@ -196,6 +201,7 @@ const mapStateToProps = ({ settings, auth, notifications }) => {
     authUser,
     url,
     role,
+    opations,
     notificationsNumber,
   };
 };
@@ -209,5 +215,6 @@ export default connect(
     onLayoutTypeChange,
     getNotifications,
     setNotifications,
+    getOpations,
   },
 )(App);
