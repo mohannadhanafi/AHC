@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Card } from 'antd';
+import { Tabs, Card, Button } from 'antd';
 import Logo from '../Logo';
 import Social from '../Social';
 import Footer from '../Footer';
@@ -14,55 +14,60 @@ const { TabPane } = Tabs;
 class index extends Component {
     state = {}
 
-    render() {
-      const { role } = this.props;
-      console.log(role);
-      return (
-        <Card className="gx-card">
-          <Tabs defaultActiveKey="1">
+goToHome = () => {
+  this.props.history.push('/admin/main');
+}
 
-            <TabPane tab="General Settings" key="1" style={{ color: 'red' }}>
-              <General />
-            </TabPane>
+render() {
+  const { role } = this.props;
+  return (
+    <Card className="gx-card">
+      <Button style={{ float: 'right' }}>Save</Button>
+      <Button style={{ float: 'right' }} onClick={this.goToHome}>Cancel</Button>
+      <Tabs defaultActiveKey="1" style={{ marginTop: '50px' }}>
 
-            {role === 'admin' ? (
-              <TabPane tab="Contact Us" key="2">
-                <ContactUs />
-              </TabPane>
-            ) : null}
+        <TabPane tab="General Settings" key="1" style={{ color: 'red' }}>
+          <General />
+        </TabPane>
 
-            {role === 'admin' ? (
-              <TabPane tab="Social Media" key="3">
-                <Social />
-              </TabPane>
-            ) : null}
+        {role === 'admin' ? (
+          <TabPane tab="Contact Us" key="2">
+            <ContactUs />
+          </TabPane>
+        ) : null}
 
-            {role === 'admin' ? (
-              <TabPane tab="Style" key="4">
-                <Logo />
-              </TabPane>
-            ) : null}
+        {role === 'admin' ? (
+          <TabPane tab="Social Media" key="3">
+            <Social />
+          </TabPane>
+        ) : null}
 
-            <TabPane tab="Additional Codes" key="5">
-              <Additional />
-            </TabPane>
+        {role === 'admin' ? (
+          <TabPane tab="Style" key="4">
+            <Logo />
+          </TabPane>
+        ) : null}
 
-            {role === 'admin' ? (
-              <TabPane tab="Footer" key="6">
-                <Footer />
-              </TabPane>
-            ) : null}
+        <TabPane tab="Additional Codes" key="5">
+          <Additional />
+        </TabPane>
 
-            {role === 'admin' ? (
-              <TabPane tab="Hours" key="7">
-                <OpenningHours />
-              </TabPane>
-            ) : null}
+        {role === 'admin' ? (
+          <TabPane tab="Footer" key="6">
+            <Footer />
+          </TabPane>
+        ) : null}
 
-          </Tabs>
-        </Card>
-      );
-    }
+        {role === 'admin' ? (
+          <TabPane tab="Hours" key="7">
+            <OpenningHours />
+          </TabPane>
+        ) : null}
+
+      </Tabs>
+    </Card>
+  );
+}
 }
 
 const mapStateToProps = ({ auth }) => {
