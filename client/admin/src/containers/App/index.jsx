@@ -82,6 +82,8 @@ class App extends Component {
   state = {};
 
   componentWillMount() {
+    this.props.getOpations();
+
     // this.props.getNotifications();
     if (this.props.url === '/admin') {
       this.props.setInitUrl(this.props.history.location.pathname);

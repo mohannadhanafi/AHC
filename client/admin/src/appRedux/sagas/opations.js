@@ -6,7 +6,7 @@ import axios from 'axios';
 import { setOpations, getOpations } from '../actions/opations';
 
 const OpationsAPI = async () => await axios
-  .get('/api/v2/getoptions', { withCredentials: true })
+  .get('/api/v2/getoptions')
   .then(OpationsResult => OpationsResult)
   .catch(error => error);
 

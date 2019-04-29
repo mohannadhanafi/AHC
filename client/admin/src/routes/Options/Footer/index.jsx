@@ -38,7 +38,7 @@ class Registration extends Component {
 
   componentDidMount = async () => {
     console.log(this.props);
-    
+
     const res = await axios.get('/api/v2/getoptions');
     const { data } = res;
     const {
@@ -132,7 +132,8 @@ class Registration extends Component {
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
-
+          { console.log(this.props)
+}
           <FormItem {...formItemLayout} label={<span>Address</span>}>
             {getFieldDecorator('footer_address', { initialValue: footer_address })(<Input />)}
           </FormItem>
