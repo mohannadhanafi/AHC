@@ -284,7 +284,7 @@ class Registration extends Component {
       </div>
     );
     return (
-      <Card className="gx-card" title="Main">
+      <>
         <Form onSubmit={this.handleSubmit}>
           <FormItem {...formItemLayout} label="Coloured Logo">
             <Upload
@@ -404,7 +404,7 @@ class Registration extends Component {
           </FormItem>
         </Form>
         <NotificationContainer />
-      </Card>
+      </>
     );
   }
 }

@@ -163,7 +163,7 @@ componentDidMount = async () => {
       },
     };
     return (
-      <Card className="gx-card" title="Social Media">
+      <>
         <Form onSubmit={this.handleSubmit}>
 
           <FormItem {...formItemLayout} label={<span>Facebook</span>}>
@@ -217,7 +217,7 @@ Save
           </FormItem>
         </Form>
         <NotificationContainer />
-      </Card>
+      </>
     );
   }
 }

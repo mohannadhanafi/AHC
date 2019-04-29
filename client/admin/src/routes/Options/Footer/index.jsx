@@ -128,7 +128,7 @@ class Registration extends Component {
       },
     };
     return (
-      <Card className="gx-card" title="Footer">
+      <>
         <Form onSubmit={this.handleSubmit}>
 
           <FormItem {...formItemLayout} label={<span>Address</span>}>
@@ -174,7 +174,7 @@ class Registration extends Component {
           </FormItem>
         </Form>
         <NotificationContainer />
-      </Card>
+      </>
     );
   }
 }
