@@ -22,6 +22,7 @@ import {
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { connect } from 'react-redux/es';
 
 const FormItem = Form.Item;
 
@@ -34,14 +35,7 @@ class Registration extends Component {
     previewImage: '',
     categories: [],
     fileName: '',
-    facebook: '',
-    twitter: '',
-    whats: '',
-    google: '',
-    logo: '',
-    linkedin: '',
-    googleplay: '',
-    appstore: '',
+
     disable: false,
   };
 
@@ -137,9 +131,8 @@ componentDidMount = async () => {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const {
-      facebook, twitter, whats, google, youtube, instagram, disable, linkedin, googleplay, appstore,
-    } = this.state;
+    const { options } = this.props;
+    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -164,63 +157,75 @@ componentDidMount = async () => {
     };
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        {
 
-          <FormItem {...formItemLayout} label={<span>Facebook</span>}>
-            {getFieldDecorator('facebook', { initialValue: facebook })(<Input />)}
-          </FormItem>
+          options.length ? (
+            <Form onSubmit={this.handleSubmit}>
+              { console.log(options)
+}
+              <FormItem {...formItemLayout} label={<span>Facebook</span>}>
+                {getFieldDecorator('facebook', { initialValue: options[0].facebook })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Twitter</span>}>
-            {getFieldDecorator('twitter', { initialValue: twitter })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Twitter</span>}>
+                {getFieldDecorator('twitter', { initialValue: options[0].twitter })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Youtube</span>}>
-            {getFieldDecorator('youtube', { initialValue: youtube })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Youtube</span>}>
+                {getFieldDecorator('youtube', { initialValue: options[0].youtube })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Google</span>}>
-            {getFieldDecorator('google', { initialValue: google })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Google</span>}>
+                {getFieldDecorator('google', { initialValue: options[0].google })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Instagram</span>}>
-            {getFieldDecorator('instagram', { initialValue: instagram })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Instagram</span>}>
+                {getFieldDecorator('instagram', { initialValue: options[0].instagram })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Whatsapp</span>}>
-            {getFieldDecorator('whats', { initialValue: whats })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Whatsapp</span>}>
+                {getFieldDecorator('whats', { initialValue: options[0].whats })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Linked In</span>}>
-            {getFieldDecorator('linkedin', { initialValue: linkedin })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Linked In</span>}>
+                {getFieldDecorator('linkedin', { initialValue: options[0].linkedin })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Google Play</span>}>
-            {getFieldDecorator('googleplay', { initialValue: googleplay })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>Google Play</span>}>
+                {getFieldDecorator('googleplay', { initialValue: options[0].googleplay })(<Input />)}
+              </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>App Store</span>}>
-            {getFieldDecorator('appstore', { initialValue: appstore })(<Input />)}
-          </FormItem>
+              <FormItem {...formItemLayout} label={<span>App Store</span>}>
+                {getFieldDecorator('appstore', { initialValue: options[0].appstore })(<Input />)}
+              </FormItem>
 
-          <FormItem {...tailFormItemLayout}>
-            {!disable
-              ? (
-                <Button type="primary" htmlType="submit">
-              Save
-                </Button>
-              )
-              : (
-                <Button type="primary" disabled htmlType="submit">
+              <FormItem {...tailFormItemLayout}>
+                {!disable
+                  ? (
+                    <Button type="primary" htmlType="submit">
+        Save
+                    </Button>
+                  )
+                  : (
+                    <Button type="primary" disabled htmlType="submit">
 Save
-                </Button>
-              ) }
-          </FormItem>
-        </Form>
+                    </Button>
+                  ) }
+              </FormItem>
+            </Form>
+          ) : null}
+
         <NotificationContainer />
       </>
     );
   }
 }
-
 const RegistrationForm = Form.create()(Registration);
-export default RegistrationForm;
+const mapStateToProps = ({ opations }) => {
+  const { opations: options } = opations;
+  return {
+    options,
+  };
+};
+
+export default connect(mapStateToProps, null)(RegistrationForm);

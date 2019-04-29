@@ -19,6 +19,7 @@ import {
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
+import { connect } from 'react-redux/es';
 import {
   NotificationContainer,
   NotificationManager,
@@ -29,33 +30,8 @@ const FormItem = Form.Item;
 class Registration extends Component {
   state = {
     disable: false,
-    copyrighrs: '',
-    footer_mobile: '',
-    footer_email: '',
-    footer_address: '',
-    footer_phone: '',
   };
 
-  componentDidMount = async () => {
-    console.log(this.props);
-
-    const res = await axios.get('/api/v2/getoptions');
-    const { data } = res;
-    const {
-      copyrights,
-      footer_email,
-      footer_address,
-      footer_mobile,
-      footer_phone,
-    } = data[0];
-    this.setState({
-      copyrights,
-      footer_email,
-      footer_address,
-      footer_mobile,
-      footer_phone,
-    });
-  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -99,14 +75,9 @@ class Registration extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const {
-      footer_email,
-      footer_address,
-      copyrights,
-      disable,
-      footer_mobile,
-      footer_phone,
-    } = this.state;
+    const { options } = this.props;
+
+    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -130,50 +101,56 @@ class Registration extends Component {
       },
     };
     return (
+
       <>
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem {...formItemLayout} label={<span>Address</span>}>
-            {getFieldDecorator('footer_address', { initialValue: footer_address })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="E-mail">
-            {getFieldDecorator('footer_email', {
-              initialValue: footer_email,
-              rules: [
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Mobile">
-            {getFieldDecorator('footer_mobile', {
-              initialValue: footer_mobile,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Phone">
-            {getFieldDecorator('footer_phone', {
-              initialValue: footer_phone,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
-            {getFieldDecorator('copyrights', {
-              initialValue: copyrights,
-              rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...tailFormItemLayout}>
-            {!disable ? (
-              <Button type="primary" htmlType="submit">
-                Save
-              </Button>
-            ) : (
-              <Button type="primary" disabled htmlType="submit">
-                Save
-              </Button>
-            )}
-          </FormItem>
-        </Form>
+        {
+  options.length ? (
+    <Form onSubmit={this.handleSubmit}>
+      <FormItem {...formItemLayout} label={<span>Address</span>}>
+        {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="E-mail">
+        {getFieldDecorator('footer_email', {
+          initialValue: options[0].footer_email,
+          rules: [
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+          ],
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="Mobile">
+        {getFieldDecorator('footer_mobile', {
+          initialValue: options[0].footer_mobile,
+        })(<Input type="number" />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="Phone">
+        {getFieldDecorator('footer_phone', {
+          initialValue: options[0].footer_phone,
+        })(<Input type="number" />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
+        {getFieldDecorator('copyrights', {
+          initialValue: options[0].copyrights,
+          rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...tailFormItemLayout}>
+        {!disable ? (
+          <Button type="primary" htmlType="submit">
+          Save
+          </Button>
+        ) : (
+          <Button type="primary" disabled htmlType="submit">
+          Save
+          </Button>
+        )}
+      </FormItem>
+    </Form>
+  ) : (null)
+}
+
         <NotificationContainer />
       </>
     );
@@ -181,4 +158,11 @@ class Registration extends Component {
 }
 
 const RegistrationForm = Form.create()(Registration);
-export default RegistrationForm;
+const mapStateToProps = ({ opations }) => {
+  const { opations: options } = opations;
+  return {
+    options,
+  };
+};
+
+export default connect(mapStateToProps, null)(RegistrationForm);

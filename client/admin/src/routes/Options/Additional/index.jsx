@@ -24,28 +24,16 @@ import {
   NotificationManager,
 } from 'react-notifications';
 import TextArea from 'antd/lib/input/TextArea';
+import { connect } from 'react-redux/es';
 
 const FormItem = Form.Item;
 
 class Registration extends Component {
   state = {
     disable: false,
-    header: '',
-    footer: '',
+
   };
 
-  componentDidMount = async () => {
-    const res = await axios.get('/api/v2/getoptions');
-    const { data } = res;
-    const {
-      header,
-      footer,
-    } = data[0];
-    this.setState({
-      header,
-      footer,
-    });
-  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -89,11 +77,9 @@ class Registration extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const {
-      header,
-      footer,
-      disable,
-    } = this.state;
+    const { options } = this.props;
+
+    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -118,34 +104,38 @@ class Registration extends Component {
     };
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        {
+  options.length ? (
+    <Form onSubmit={this.handleSubmit}>
 
-          <FormItem {...formItemLayout} label={<span>Header</span>}>
-            {getFieldDecorator('header', {
-              initialValue: header,
-              rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
-            })(<TextArea rows={4} />)}
-          </FormItem>
+      <FormItem {...formItemLayout} label={<span>Header</span>}>
+        {getFieldDecorator('header', {
+          initialValue: options[0].header,
+          rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
+        })(<TextArea rows={4} />)}
+      </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Footer</span>}>
-            {getFieldDecorator('footer', {
-              initialValue: footer,
-              rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
-            })(<TextArea rows={4} />)}
-          </FormItem>
+      <FormItem {...formItemLayout} label={<span>Footer</span>}>
+        {getFieldDecorator('footer', {
+          initialValue: options[0].footer,
+          rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
+        })(<TextArea rows={4} />)}
+      </FormItem>
 
-          <FormItem {...tailFormItemLayout}>
-            {!disable ? (
-              <Button type="primary" htmlType="submit">
-                Save
-              </Button>
-            ) : (
-              <Button type="primary" disabled htmlType="submit">
-                Save
-              </Button>
-            )}
-          </FormItem>
-        </Form>
+      <FormItem {...tailFormItemLayout}>
+        {!disable ? (
+          <Button type="primary" htmlType="submit">
+          Save
+          </Button>
+        ) : (
+          <Button type="primary" disabled htmlType="submit">
+          Save
+          </Button>
+        )}
+      </FormItem>
+    </Form>
+  ) : null
+             }
         <NotificationContainer />
       </>
     );
@@ -153,4 +143,11 @@ class Registration extends Component {
 }
 
 const RegistrationForm = Form.create()(Registration);
-export default RegistrationForm;
+const mapStateToProps = ({ opations }) => {
+  const { opations: options } = opations;
+  return {
+    options,
+  };
+};
+
+export default connect(mapStateToProps, null)(RegistrationForm);

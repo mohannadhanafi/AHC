@@ -23,49 +23,16 @@ import {
   NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
+import { connect } from 'react-redux/es';
 
 const FormItem = Form.Item;
 
 class Registration extends Component {
   state = {
     disable: false,
-    copyrighrs: '',
-    mobile: '',
-    email: '',
-    address: '',
-    latitude: '',
-    longitude: '',
-    phone: '',
-    tel: '',
-    fax: '',
+
   };
 
-  componentDidMount = async () => {
-    const res = await axios.get('/api/v2/getoptions');
-    const { data } = res;
-    const {
-      copyrights,
-      email,
-      address,
-      mobile,
-      phone,
-      tel,
-      fax,
-      latitude,
-      longitude,
-    } = data[0];
-    this.setState({
-      copyrights,
-      email,
-      address,
-      mobile,
-      phone,
-      tel,
-      fax,
-      latitude,
-      longitude,
-    });
-  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -109,18 +76,8 @@ class Registration extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const {
-      email,
-      address,
-      copyrights,
-      disable,
-      mobile,
-      phone,
-      tel,
-      fax,
-      latitude,
-      longitude,
-    } = this.state;
+    const { options } = this.props;
+    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -145,70 +102,74 @@ class Registration extends Component {
     };
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        {
+  options.length ? (
+    <Form onSubmit={this.handleSubmit}>
 
-          <FormItem {...formItemLayout} label={<span>address</span>}>
-            {getFieldDecorator('address', { initialValue: address })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Mobile">
-            {getFieldDecorator('mobile', {
-              initialValue: mobile,
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Phone">
-            {getFieldDecorator('phone', {
-              initialValue: phone,
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Tel">
-            {getFieldDecorator('tel', {
-              initialValue: tel,
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Fax">
-            {getFieldDecorator('fax', {
-              initialValue: fax,
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="E-mail">
-            {getFieldDecorator('email', {
-              initialValue: email,
-              rules: [
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
-            {getFieldDecorator('copyrights', {
-              initialValue: copyrights,
-              rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Latitude</span>}>
-            {getFieldDecorator('latitude', {
-              initialValue: latitude,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Longitude</span>}>
-            {getFieldDecorator('longitude', {
-              initialValue: longitude,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...tailFormItemLayout}>
-            {!disable ? (
-              <Button type="primary" htmlType="submit">
-                Save
-              </Button>
-            ) : (
-              <Button type="primary" disabled htmlType="submit">
-                Save
-              </Button>
-            )}
-          </FormItem>
-        </Form>
+      <FormItem {...formItemLayout} label={<span>address</span>}>
+        {getFieldDecorator('address', { initialValue: options[0].address })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="Mobile">
+        {getFieldDecorator('mobile', {
+          initialValue: options[0].mobile,
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="Phone">
+        {getFieldDecorator('phone', {
+          initialValue: options[0].phone,
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="Tel">
+        {getFieldDecorator('tel', {
+          initialValue: options[0].tel,
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="Fax">
+        {getFieldDecorator('fax', {
+          initialValue: options[0].fax,
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label="E-mail">
+        {getFieldDecorator('email', {
+          initialValue: options[0].email,
+          rules: [
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+          ],
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
+        {getFieldDecorator('copyrights', {
+          initialValue: options[0].copyrights,
+          rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
+        })(<Input />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label={<span>Latitude</span>}>
+        {getFieldDecorator('latitude', {
+          initialValue: options[0].latitude,
+        })(<Input type="number" />)}
+      </FormItem>
+      <FormItem {...formItemLayout} label={<span>Longitude</span>}>
+        {getFieldDecorator('longitude', {
+          initialValue: options[0].longitude,
+        })(<Input type="number" />)}
+      </FormItem>
+      <FormItem {...tailFormItemLayout}>
+        {!disable ? (
+          <Button type="primary" htmlType="submit">
+          Save
+          </Button>
+        ) : (
+          <Button type="primary" disabled htmlType="submit">
+          Save
+          </Button>
+        )}
+      </FormItem>
+    </Form>
+  ) : null}
+
         <NotificationContainer />
       </>
     );
@@ -216,4 +177,11 @@ class Registration extends Component {
 }
 
 const RegistrationForm = Form.create()(Registration);
-export default RegistrationForm;
+const mapStateToProps = ({ opations }) => {
+  const { opations: options } = opations;
+  return {
+    options,
+  };
+};
+
+export default connect(mapStateToProps, null)(RegistrationForm);

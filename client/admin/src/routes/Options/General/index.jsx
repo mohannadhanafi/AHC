@@ -23,6 +23,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
+import { connect } from 'react-redux/es';
 
 const FormItem = Form.Item;
 
@@ -34,20 +35,6 @@ class Registration extends Component {
     active: false,
   };
 
-  componentDidMount = async () => {
-    const res = await axios.get('/api/v2/getoptions');
-    const { data } = res;
-    const {
-      copyrights,
-      name,
-      active,
-    } = data[0];
-    this.setState({
-      copyrights,
-      name,
-      active,
-    });
-  };
 
   onChangeCheck = () => {
     this.setState({ active: !this.state.active });
@@ -95,11 +82,10 @@ class Registration extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const {
-      name,
-      copyrights,
-      disable,
-    } = this.state;
+
+    const { options } = this.props;
+
+    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -124,48 +110,52 @@ class Registration extends Component {
     };
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        {
+  options.length ? (
+    <Form onSubmit={this.handleSubmit}>
 
-          <FormItem {...formItemLayout} label={<span>Website Name</span>}>
-            {getFieldDecorator('name', {
-              initialValue: name,
-              rules: [{ max: 30, message: 'Only 30 Letter is allowed !' }],
-            })(<Input />)}
-          </FormItem>
+      <FormItem {...formItemLayout} label={<span>Website Name</span>}>
+        {getFieldDecorator('name', {
+          initialValue: options[0].name,
+          rules: [{ max: 30, message: 'Only 30 Letter is allowed !' }],
+        })(<Input />)}
+      </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
-            {getFieldDecorator('copyrights', {
-              initialValue: copyrights,
-              rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-            })(<Input />)}
-          </FormItem>
+      <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
+        {getFieldDecorator('copyrights', {
+          initialValue: options[0].copyrights,
+          rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
+        })(<Input />)}
+      </FormItem>
 
-          <FormItem
-            {...formItemLayout}
-            label={<span>Active</span>}
-                  >
-            {getFieldDecorator('active')(
-              <Checkbox
-                checked={this.state.active}
-                onChange={this.onChangeCheck}
-                      >
-                        Disable the webiste
-              </Checkbox>,
-            )}
-          </FormItem>
+      <FormItem
+        {...formItemLayout}
+        label={<span>Active</span>}
+            >
+        {getFieldDecorator('active')(
+          <Checkbox
+            checked={this.state.active}
+            onChange={this.onChangeCheck}
+                >
+                  Disable the webiste
+          </Checkbox>,
+        )}
+      </FormItem>
 
-          <FormItem {...tailFormItemLayout}>
-            {!disable ? (
-              <Button type="primary" htmlType="submit">
-                Save
-              </Button>
-            ) : (
-              <Button type="primary" disabled htmlType="submit">
-                Save
-              </Button>
-            )}
-          </FormItem>
-        </Form>
+      <FormItem {...tailFormItemLayout}>
+        {!disable ? (
+          <Button type="primary" htmlType="submit">
+          Save
+          </Button>
+        ) : (
+          <Button type="primary" disabled htmlType="submit">
+          Save
+          </Button>
+        )}
+      </FormItem>
+    </Form>
+  ) : null}
+
         <NotificationContainer />
       </>
     );
@@ -173,4 +163,11 @@ class Registration extends Component {
 }
 
 const RegistrationForm = Form.create()(Registration);
-export default RegistrationForm;
+const mapStateToProps = ({ opations }) => {
+  const { opations: options } = opations;
+  return {
+    options,
+  };
+};
+
+export default connect(mapStateToProps, null)(RegistrationForm);
