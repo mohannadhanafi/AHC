@@ -162,12 +162,6 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.testimonials.add" />
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item key="testimonials/settings">
-                  <Link to="/admin/testimonials/settings">
-                    <i className="icon icon-setting" />
-                    <IntlMessages id="sidebar.settings" />
-                  </Link>
-                </Menu.Item> */}
               </SubMenu>
               <SubMenu
                 key="statistics"
@@ -344,128 +338,36 @@ class SidebarContent extends Component {
                   </Link>
                 </Menu.Item>
               </SubMenu>
-              {role === 'admin' ? (
-                <SubMenu
-                  key="settings"
-                  className={this.getNavStyleSubMenuClass(navStyle)}
-                  title={(
-                    <span>
-                      {' '}
-                      <i className="icon icon-setting" />
-                      <IntlMessages id="sidebar.settings" />
-                    </span>
-)}
-                >
-                  <Menu.Item key="settings/contact">
-                    <Link to="/admin/settings/contact">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.Contact" />
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="settings/newsletter">
-                    <Link to="/admin/settings/newsletter">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.newsletter" />
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="settings/settings">
-                    <Link to="/admin/settings/settings">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.settings" />
-                    </Link>
-                  </Menu.Item>
-                  {/* <Menu.Item key="options/main">
-                    <Link to="/admin/options/main">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.main" />
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="options/social">
-                    <Link to="/admin/options/social">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.social" />
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="options/hours">
-                    <Link to="/admin/options/hours">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.hours" />
-                    </Link>
-                  </Menu.Item> */}
-                </SubMenu>
-              ) : null }
-              {/* <Menu.Item key="about/items">
-                  <Link to="/admin/about/items">
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.aboutItem" />
-                  </Link>
-                </Menu.Item> */}
-              {/* </SubMenu> */}
-              {/*
               <SubMenu
-                key="services"
+                key="settings"
                 className={this.getNavStyleSubMenuClass(navStyle)}
                 title={(
                   <span>
                     {' '}
-                    <i className="icon icon-extensions" />
-                    <IntlMessages id="sidebar.services" />
+                    <i className="icon icon-setting" />
+                    <IntlMessages id="sidebar.settings" />
                   </span>
 )}
               >
-                <Menu.Item key="services/viewServices">
-                  <Link to="/admin/services/viewServices">
-                    <i className="icon icon-plain-list-divider" />
-                    <IntlMessages id="sidebar.viewServices" />
+                <Menu.Item key="settings/contact">
+                  <Link to="/admin/settings/contact">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.Contact" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="services/addService">
-                  <Link to="/admin/services/addService">
-                    <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.addService" />
+                <Menu.Item key="settings/newsletter">
+                  <Link to="/admin/settings/newsletter">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.newsletter" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="services/settings">
-                  <Link to="/admin/services/settings">
-                    <i className="icon icon-setting" />
+                <Menu.Item key="settings/settings">
+                  <Link to="/admin/settings/settings">
+                    <i className="icon icon-button" />
                     <IntlMessages id="sidebar.settings" />
                   </Link>
                 </Menu.Item>
               </SubMenu>
-              <SubMenu
-                key="portfolio"
-                className={this.getNavStyleSubMenuClass(navStyle)}
-                title={(
-                  <span>
-                    {' '}
-                    <i className="icon icon-image" />
-                    <IntlMessages id="sidebar.portfolio" />
-                  </span>
-)}
-              >
-                <Menu.Item key="services/portfolio">
-                  <Link to="/admin/services/portfolio">
-                    <i className="icon icon-chat" />
-                    <IntlMessages id="sidebar.viewportfolio" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="services/portfolio/add">
-                  <Link to="/admin/services/portfolio/add">
-                    <i className="icon icon-add" />
-                    <IntlMessages id="sidebar.addportfolio" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
-
-              <Menu.Item key="whyUs">
-                <Link to="/admin/whyUs">
-                  <i className="icon icon-widgets" />
-                  <IntlMessages id="sidebar.whyUs" />
-                </Link>
-              </Menu.Item>
-
-
-               */}
             </Menu>
           </CustomScrollbars>
         </div>
