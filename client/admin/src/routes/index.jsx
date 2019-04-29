@@ -14,7 +14,7 @@ const App = ({ match }) => (
       <Route path={`${match.url}/promo`} component={asyncComponent(() => import('./Promo'))} />
       <Route path={`${match.url}/blogs`} component={asyncComponent(() => import('./Blogs'))} />
       <Route path={`${match.url}/plan`} component={asyncComponent(() => import('./Plan'))} />
-      <Route path={`${match.url}/options`} component={asyncComponent(() => import('./Options'))} />
+      <Route path={`${match.url}/settings`} component={asyncComponent(() => import('./Options'))} />
       <Route path={`${match.url}/teams`} component={asyncComponent(() => import('./Teams'))} />
       <Route path={`${match.url}/about`} component={asyncComponent(() => import('./About'))} />
       <Route path={`${match.url}/contact`} component={asyncComponent(() => import('./Contact'))} />

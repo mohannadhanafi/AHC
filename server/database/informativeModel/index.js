@@ -23,6 +23,8 @@ const contact = require('./contact');
 const hours = require('./hours');
 const plan = require('./plan');
 const contactitems = require('./contactItems');
+const contactus = require('./contactus');
+const newsletters = require('./newsletters');
 
 aboutItem.belongsTo(about, {
   onDelete: 'CASCADE',
@@ -85,4 +87,6 @@ module.exports = {
   hours,
   plan,
   contactitems,
+  contactus,
+  newsletters,
 };

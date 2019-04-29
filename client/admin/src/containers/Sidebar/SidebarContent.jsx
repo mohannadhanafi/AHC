@@ -331,12 +331,6 @@ class SidebarContent extends Component {
                     <IntlMessages id="sidebar.ContactUsPage" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="contact/footer">
-                  <Link to="/admin/contact/footer">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.footer" />
-                  </Link>
-                </Menu.Item>
                 <Menu.Item key="contact/add">
                   <Link to="/admin/contact/add">
                     <i className="icon icon-button" />
@@ -352,17 +346,35 @@ class SidebarContent extends Component {
               </SubMenu>
               {role === 'admin' ? (
                 <SubMenu
-                  key="options"
+                  key="settings"
                   className={this.getNavStyleSubMenuClass(navStyle)}
                   title={(
                     <span>
                       {' '}
                       <i className="icon icon-setting" />
-                      <IntlMessages id="sidebar.options" />
+                      <IntlMessages id="sidebar.settings" />
                     </span>
 )}
                 >
-                  <Menu.Item key="options/main">
+                  <Menu.Item key="settings/contact">
+                    <Link to="/admin/settings/contact">
+                      <i className="icon icon-button" />
+                      <IntlMessages id="sidebar.Contact" />
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="settings/newsletter">
+                    <Link to="/admin/settings/newsletter">
+                      <i className="icon icon-button" />
+                      <IntlMessages id="sidebar.newsletter" />
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="settings/settings">
+                    <Link to="/admin/settings/settings">
+                      <i className="icon icon-button" />
+                      <IntlMessages id="sidebar.settings" />
+                    </Link>
+                  </Menu.Item>
+                  {/* <Menu.Item key="options/main">
                     <Link to="/admin/options/main">
                       <i className="icon icon-button" />
                       <IntlMessages id="sidebar.main" />
@@ -374,30 +386,12 @@ class SidebarContent extends Component {
                       <IntlMessages id="sidebar.social" />
                     </Link>
                   </Menu.Item>
-                  {/* <Menu.Item key="options/footer">
-                    <Link to="/admin/options/footer">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.footer" />
-                    </Link>
-                  </Menu.Item> */}
                   <Menu.Item key="options/hours">
                     <Link to="/admin/options/hours">
                       <i className="icon icon-button" />
                       <IntlMessages id="sidebar.hours" />
                     </Link>
-                  </Menu.Item>
-                  {/* <Menu.Item key="options/icon">
-                    <Link to="/admin/options/icon">
-                      <i className="icon icon-button" />
-                      <IntlMessages id="sidebar.icon" />
-                    </Link>
                   </Menu.Item> */}
-                  {/* <Menu.Item key="options/map">
-                  <Link to="/admin/options/map">
-                    <i className="icon icon-button" />
-                    <IntlMessages id="sidebar.map" />
-                  </Link>
-                </Menu.Item> */}
                 </SubMenu>
               ) : null }
               {/* <Menu.Item key="about/items">

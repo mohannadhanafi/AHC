@@ -33,6 +33,11 @@ class Registration extends Component {
     mobile: '',
     email: '',
     address: '',
+    latitude: '',
+    longitude: '',
+    phone: '',
+    tel: '',
+    fax: '',
   };
 
   componentDidMount = async () => {
@@ -43,12 +48,22 @@ class Registration extends Component {
       email,
       address,
       mobile,
+      phone,
+      tel,
+      fax,
+      latitude,
+      longitude,
     } = data[0];
     this.setState({
       copyrights,
       email,
       address,
       mobile,
+      phone,
+      tel,
+      fax,
+      latitude,
+      longitude,
     });
   };
 
@@ -67,7 +82,6 @@ class Registration extends Component {
             if (result.status === 200) {
               NotificationManager.success(message, 'SUCCESS', 2000);
               setTimeout(() => {
-                this.props.history.push('/admin/options/footer');
                 this.setState({ disable: false });
               }, 3000);
             } else {
@@ -101,6 +115,11 @@ class Registration extends Component {
       copyrights,
       disable,
       mobile,
+      phone,
+      tel,
+      fax,
+      latitude,
+      longitude,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -131,6 +150,26 @@ class Registration extends Component {
           <FormItem {...formItemLayout} label={<span>address</span>}>
             {getFieldDecorator('address', { initialValue: address })(<Input />)}
           </FormItem>
+          <FormItem {...formItemLayout} label="Mobile">
+            {getFieldDecorator('mobile', {
+              initialValue: mobile,
+            })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Phone">
+            {getFieldDecorator('phone', {
+              initialValue: phone,
+            })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Tel">
+            {getFieldDecorator('tel', {
+              initialValue: tel,
+            })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Fax">
+            {getFieldDecorator('fax', {
+              initialValue: fax,
+            })(<Input />)}
+          </FormItem>
           <FormItem {...formItemLayout} label="E-mail">
             {getFieldDecorator('email', {
               initialValue: email,
@@ -142,16 +181,21 @@ class Registration extends Component {
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="Mobile">
-            {getFieldDecorator('mobile', {
-              initialValue: mobile,
-            })(<Input type="number" />)}
-          </FormItem>
           <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
             {getFieldDecorator('copyrights', {
               initialValue: copyrights,
               rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
             })(<Input />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label={<span>Latitude</span>}>
+            {getFieldDecorator('latitude', {
+              initialValue: latitude,
+            })(<Input type="number" />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label={<span>Longitude</span>}>
+            {getFieldDecorator('longitude', {
+              initialValue: longitude,
+            })(<Input type="number" />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
             {!disable ? (

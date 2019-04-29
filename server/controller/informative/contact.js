@@ -1,12 +1,11 @@
 const nodemailer = require('nodemailer');
-const { contact } = require('../../database/informativeModel');
+const { contact, contactus } = require('../../database/informativeModel');
 
 exports.post = async (request, response) => {
   try {
     const {
       name, email, mobile, text,
     } = request.body;
-
     if (
       name
       && name.trim()
@@ -23,7 +22,6 @@ exports.post = async (request, response) => {
           user: process.env.EMAIL,
           pass: process.env.EMAIL_PASSWORD,
         },
-
       });
       const mailOptions = {
         from: process.env.EMAIL,
@@ -36,7 +34,9 @@ exports.post = async (request, response) => {
         if (error) {
           response.status(500).send({ message: 'Internal Server Error' });
         } else {
-          response.status(200).send({ message: 'Your Email has been Send' });
+          contactus.create({name, email, mobile, message: text}).then(() => {
+            response.status(200).send({ message: 'Your Email has been Send' });
+          });
         }
       });
     } else {

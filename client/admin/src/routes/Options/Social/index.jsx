@@ -39,6 +39,9 @@ class Registration extends Component {
     whats: '',
     google: '',
     logo: '',
+    linkedin: '',
+    googleplay: '',
+    appstore: '',
     disable: false,
   };
 
@@ -48,10 +51,10 @@ componentDidMount = async () => {
   const res = await axios.get('/api/v2/getoptions');
   const { data } = res;
   const {
-    facebook, twitter, whats, google, logo, email, address, youtube, instagram,
+    facebook, twitter, whats, google, logo, email, address, youtube, instagram, linkedin, googleplay, appstore,
   } = data[0];
   this.setState({
-    facebook, twitter, logo, whats, google, email, address, youtube, instagram,
+    facebook, twitter, logo, whats, google, email, address, youtube, instagram, linkedin, googleplay, appstore,
   });
 }
 
@@ -68,7 +71,6 @@ componentDidMount = async () => {
           if (result.status === 200) {
             NotificationManager.success(message, 'SUCCESS', 2000);
             setTimeout(() => {
-              this.props.history.push('/admin/options/social');
               this.setState({ disable: false });
             }, 3000);
           } else {
@@ -136,7 +138,7 @@ componentDidMount = async () => {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      facebook, twitter, whats, google, youtube, instagram, disable,
+      facebook, twitter, whats, google, youtube, instagram, disable, linkedin, googleplay, appstore,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -163,16 +165,43 @@ componentDidMount = async () => {
     return (
       <Card className="gx-card" title="Social Media">
         <Form onSubmit={this.handleSubmit}>
+
           <FormItem {...formItemLayout} label={<span>Facebook</span>}>
             {getFieldDecorator('facebook', { initialValue: facebook })(<Input />)}
           </FormItem>
+
           <FormItem {...formItemLayout} label={<span>Twitter</span>}>
             {getFieldDecorator('twitter', { initialValue: twitter })(<Input />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label={<span>Youtube</span>}>
+            {getFieldDecorator('youtube', { initialValue: youtube })(<Input />)}
           </FormItem>
 
           <FormItem {...formItemLayout} label={<span>Google</span>}>
             {getFieldDecorator('google', { initialValue: google })(<Input />)}
           </FormItem>
+
+          <FormItem {...formItemLayout} label={<span>Instagram</span>}>
+            {getFieldDecorator('instagram', { initialValue: instagram })(<Input />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label={<span>Whatsapp</span>}>
+            {getFieldDecorator('whats', { initialValue: whats })(<Input />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label={<span>Linked In</span>}>
+            {getFieldDecorator('linkedin', { initialValue: linkedin })(<Input />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label={<span>Google Play</span>}>
+            {getFieldDecorator('googleplay', { initialValue: googleplay })(<Input />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label={<span>App Store</span>}>
+            {getFieldDecorator('appstore', { initialValue: appstore })(<Input />)}
+          </FormItem>
+
           <FormItem {...tailFormItemLayout}>
             {!disable
               ? (

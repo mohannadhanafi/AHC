@@ -24,6 +24,8 @@ const comments = require('./comments');
 const hours = require('./hours');
 const plan = require('./plan');
 const contactitems = require('./contactItems');
+const contactus = require('./contactus');
+const newsletters = require('./newsletters');
 
 const router = express.Router();
 router
@@ -64,6 +66,8 @@ router
   .get('/contactitems/:id', contactitems.getcontactitems)
   .get('/clients/getAll', clients.getAll)
   .use(Auth.checkToken)
+  .get('/contactus', contactus.get)
+  .get('/newsletters', newsletters.get)
   .post('/plan/create', plan.post)
   .post('/plan/:id', plan.update)
   .get('/plan/:id', plan.getOne)

@@ -70,6 +70,23 @@ const options = connection.define('options', {
   ctatitle: Sequelize.TEXT,
   ctasub: Sequelize.TEXT,
   color: Sequelize.TEXT,
+  phone : Sequelize.TEXT,
+  tel: Sequelize.TEXT,
+  fax: Sequelize.TEXT,
+  linkedin: Sequelize.TEXT,
+  googleplay: Sequelize.TEXT,
+  appstore: Sequelize.TEXT,
+  footer_mobile: Sequelize.TEXT,
+footer_email: Sequelize.TEXT,
+footer_address: Sequelize.TEXT,
+footer_phone: Sequelize.TEXT,
+name: Sequelize.TEXT,
+header: Sequelize.TEXT,
+footer: Sequelize.TEXT,
+active: {
+  type: Sequelize.BOOLEAN,
+  defaultValue: false
+},
   createdAt: {
     allowNull: false,
     defaultValue: new Date(),

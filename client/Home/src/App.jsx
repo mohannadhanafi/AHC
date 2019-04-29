@@ -13,8 +13,9 @@ import SingleService from './Components/Pages/SingleService';
 import Header from './Components/Common/Navbar';
 import BackTop from './Components/Common/BackTop';
 import Footer from './Components/Common/Footer';
-import './App.css';
 import getOptions from './Redux/actions/options';
+import Disable from './Components/Common/Disable';
+import './App.css';
 
 class App extends Component {
   state = {}
@@ -27,22 +28,24 @@ class App extends Component {
       document.documentElement.style.setProperty('--main-color', color);
     }
     return (
-      <div className="App">
-        <Router>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/services" component={Services} />
-            <Route exact path="/news/:seo" component={NewsPage} />
-            <Route exact path="/service/:id" component={SingleService} />
-            <Route path="/*" component={Error404} />
-          </Switch>
-          <BackTop />
-          <Footer />
-        </Router>
-      </div>
+      options.length && options[0].active ? (<Disable />) : (
+        <div className="App">
+          <Router>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/contact" component={Contact} />
+              <Route exact path="/services" component={Services} />
+              <Route exact path="/news/:seo" component={NewsPage} />
+              <Route exact path="/service/:id" component={SingleService} />
+              <Route path="/*" component={Error404} />
+            </Switch>
+            <BackTop />
+            <Footer />
+          </Router>
+        </div>
+      )
     );
   }
 }

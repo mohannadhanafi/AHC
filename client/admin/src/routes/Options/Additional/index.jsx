@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Input,
+  Button, Card, Form, Input, Checkbox,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -23,35 +23,27 @@ import {
   NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
+import TextArea from 'antd/lib/input/TextArea';
 
 const FormItem = Form.Item;
 
 class Registration extends Component {
   state = {
     disable: false,
-    copyrighrs: '',
-    footer_mobile: '',
-    footer_email: '',
-    footer_address: '',
-    footer_phone: '',
+    header: '',
+    footer: '',
   };
 
   componentDidMount = async () => {
     const res = await axios.get('/api/v2/getoptions');
     const { data } = res;
     const {
-      copyrights,
-      footer_email,
-      footer_address,
-      footer_mobile,
-      footer_phone,
+      header,
+      footer,
     } = data[0];
     this.setState({
-      copyrights,
-      footer_email,
-      footer_address,
-      footer_mobile,
-      footer_phone,
+      header,
+      footer,
     });
   };
 
@@ -98,12 +90,9 @@ class Registration extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const {
-      footer_email,
-      footer_address,
-      copyrights,
+      header,
+      footer,
       disable,
-      footer_mobile,
-      footer_phone,
     } = this.state;
     const formItemLayout = {
       labelCol: {
@@ -131,36 +120,20 @@ class Registration extends Component {
       <Card className="gx-card" title="Footer">
         <Form onSubmit={this.handleSubmit}>
 
-          <FormItem {...formItemLayout} label={<span>Address</span>}>
-            {getFieldDecorator('footer_address', { initialValue: footer_address })(<Input />)}
+          <FormItem {...formItemLayout} label={<span>Header</span>}>
+            {getFieldDecorator('header', {
+              initialValue: header,
+              rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
+            })(<TextArea rows={4} />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="E-mail">
-            {getFieldDecorator('footer_email', {
-              initialValue: footer_email,
-              rules: [
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-              ],
-            })(<Input />)}
+
+          <FormItem {...formItemLayout} label={<span>Footer</span>}>
+            {getFieldDecorator('footer', {
+              initialValue: footer,
+              rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
+            })(<TextArea rows={4} />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="Mobile">
-            {getFieldDecorator('footer_mobile', {
-              initialValue: footer_mobile,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Phone">
-            {getFieldDecorator('footer_phone', {
-              initialValue: footer_phone,
-            })(<Input type="number" />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
-            {getFieldDecorator('copyrights', {
-              initialValue: copyrights,
-              rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-            })(<Input />)}
-          </FormItem>
+
           <FormItem {...tailFormItemLayout}>
             {!disable ? (
               <Button type="primary" htmlType="submit">
