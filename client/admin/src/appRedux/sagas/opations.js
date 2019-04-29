@@ -14,10 +14,9 @@ function* opationsWorker() {
   const OpationsResult = yield call(OpationsAPI);
   if (OpationsResult.status === 200) {
     const { data } = OpationsResult;
-    yield put(getOpations(data));
+    yield put(setOpations(data));
   }
 }
-
 
 export function* getOpationsData() {
   yield takeEvery(GET_OPATIONS, opationsWorker);

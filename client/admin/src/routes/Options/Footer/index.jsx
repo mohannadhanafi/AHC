@@ -132,8 +132,6 @@ class Registration extends Component {
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
-          { console.log(this.props)
-}
           <FormItem {...formItemLayout} label={<span>Address</span>}>
             {getFieldDecorator('footer_address', { initialValue: footer_address })(<Input />)}
           </FormItem>

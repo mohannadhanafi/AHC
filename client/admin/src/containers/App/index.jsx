@@ -83,8 +83,6 @@ class App extends Component {
 
   componentWillMount() {
     this.props.getOpations();
-
-    // this.props.getNotifications();
     if (this.props.url === '/admin') {
       this.props.setInitUrl(this.props.history.location.pathname);
     }
@@ -144,6 +142,7 @@ class App extends Component {
       url,
       role,
       notificationsNumber,
+      options,
     } = this.props;
     if (location.pathname === '/admin') {
       if (authUser === null) {
@@ -196,6 +195,7 @@ const mapStateToProps = ({
   const { locale, navStyle, layoutType } = settings;
   const { authUser, url, role } = auth;
   const { notificationsNumber } = notifications;
+  const { opations: options } = opations;
   return {
     locale,
     navStyle,
@@ -203,7 +203,7 @@ const mapStateToProps = ({
     authUser,
     url,
     role,
-    opations,
+    options,
     notificationsNumber,
   };
 };
