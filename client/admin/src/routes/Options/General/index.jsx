@@ -102,7 +102,6 @@ class Registration extends Component {
     const { getFieldDecorator } = this.props.form;
 
     const { options } = this.props;
-    console.log(options);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },

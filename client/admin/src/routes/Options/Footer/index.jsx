@@ -35,7 +35,6 @@ class Registration extends Component {
 
  onChange =() => {
    this.props.form.validateFieldsAndScroll((err, values) => {
-     console.log(values);
      this.props.setForm(values);
    });
  }
