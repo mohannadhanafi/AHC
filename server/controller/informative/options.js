@@ -27,6 +27,11 @@ exports.update = async (req, res) => {
       instagram,
       latitude,
       longitude,
+      phone,
+      tel,
+      fax,
+      footer_mobile,
+      footer_phone
     } = newData;
 
     if (
@@ -95,6 +100,11 @@ exports.update = async (req, res) => {
         }))
         || (latitude && !validator.isNumeric(latitude))
         || (longitude && !validator.isNumeric(longitude))
+        ||(phone && !validator.isNumeric(phone))
+        ||(tel && !validator.isNumeric(tel))
+        ||(fax && !validator.isNumeric(fax))
+        ||(footer_mobile && !validator.isNumeric(footer_mobile))
+        ||(footer_phone && !validator.isNumeric(footer_phone))
     ) {
       res.status(400).send({
         message: 'Invalid inputs, please note the type of each input',

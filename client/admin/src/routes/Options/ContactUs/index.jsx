@@ -110,17 +110,17 @@ class Registration extends Component {
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('phone', {
           initialValue: options[0].phone,
-        })(<Input />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Tel">
         {getFieldDecorator('tel', {
           initialValue: options[0].tel,
-        })(<Input />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Fax">
         {getFieldDecorator('fax', {
           initialValue: options[0].fax,
-        })(<Input />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label="E-mail">
         {getFieldDecorator('email', {

@@ -344,8 +344,8 @@ class SidebarContent extends Component {
                 title={(
                   <span>
                     {' '}
-                    <i className="icon icon-setting" />
-                    <IntlMessages id="sidebar.settings" />
+                    <i className="icon icon-extra-components" />
+                    <IntlMessages id="sidebar.options" />
                   </span>
 )}
               >
@@ -363,7 +363,7 @@ class SidebarContent extends Component {
                 </Menu.Item>
                 <Menu.Item key="settings/settings">
                   <Link to="/admin/settings/settings">
-                    <i className="icon icon-button" />
+                    <i className="icon icon-setting" />
                     <IntlMessages id="sidebar.settings" />
                   </Link>
                 </Menu.Item>
