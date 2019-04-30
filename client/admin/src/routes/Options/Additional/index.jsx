@@ -112,20 +112,20 @@ class Registration extends Component {
       <>
         {
   options.length ? (
-    <Form onSubmit={this.handleSubmit}>
+    <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
 
       <FormItem {...formItemLayout} label={<span>Header</span>}>
         {getFieldDecorator('header', {
           initialValue: options[0].header,
           rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
-        })(<TextArea onChange={this.onChange} rows={4} />)}
+        })(<TextArea rows={4} />)}
       </FormItem>
 
       <FormItem {...formItemLayout} label={<span>Footer</span>} style={{ float: 'unset' }}>
         {getFieldDecorator('footer', {
           initialValue: options[0].footer,
           rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
-        })(<TextArea onChange={this.onChange} rows={4} />)}
+        })(<TextArea rows={4} />)}
       </FormItem>
     </Form>
   ) : null

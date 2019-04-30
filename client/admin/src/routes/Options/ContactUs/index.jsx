@@ -97,30 +97,30 @@ class Registration extends Component {
       <>
         {
   options.length ? (
-    <Form onSubmit={this.handleSubmit}>
+    <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
 
       <FormItem {...formItemLayout} label={<span>address</span>}>
-        {getFieldDecorator('address', { initialValue: options[0].address })(<Input onChange={this.onChange} />)}
+        {getFieldDecorator('address', { initialValue: options[0].address })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Mobile">
         {getFieldDecorator('mobile', {
           initialValue: options[0].mobile,
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('phone', {
           initialValue: options[0].phone,
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Tel">
         {getFieldDecorator('tel', {
           initialValue: options[0].tel,
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Fax">
         {getFieldDecorator('fax', {
           initialValue: options[0].fax,
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="E-mail">
         {getFieldDecorator('email', {
@@ -131,17 +131,17 @@ class Registration extends Component {
               message: 'The input is not valid E-mail!',
             },
           ],
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label={<span>Latitude</span>}>
         {getFieldDecorator('latitude', {
           initialValue: options[0].latitude,
-        })(<Input onChange={this.onChange} type="number" />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label={<span>Longitude</span>} style={{ float: 'unset' }}>
         {getFieldDecorator('longitude', {
           initialValue: options[0].longitude,
-        })(<Input onChange={this.onChange} type="number" />)}
+        })(<Input type="number" />)}
       </FormItem>
     </Form>
   ) : null}

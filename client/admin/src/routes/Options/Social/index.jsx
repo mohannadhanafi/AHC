@@ -130,41 +130,41 @@ componentDidMount = async () => {
     return (
       <>
         {options.length ? (
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
             <FormItem {...formItemLayout} label={<span>Facebook</span>}>
-              {getFieldDecorator('facebook', { initialValue: options[0].facebook })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('facebook', { initialValue: options[0].facebook })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Twitter</span>}>
-              {getFieldDecorator('twitter', { initialValue: options[0].twitter })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('twitter', { initialValue: options[0].twitter })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Youtube</span>}>
-              {getFieldDecorator('youtube', { initialValue: options[0].youtube })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('youtube', { initialValue: options[0].youtube })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Google</span>}>
-              {getFieldDecorator('google', { initialValue: options[0].google })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('google', { initialValue: options[0].google })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Instagram</span>}>
-              {getFieldDecorator('instagram', { initialValue: options[0].instagram })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('instagram', { initialValue: options[0].instagram })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Whatsapp</span>}>
-              {getFieldDecorator('whats', { initialValue: options[0].whats })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('whats', { initialValue: options[0].whats })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Linked In</span>}>
-              {getFieldDecorator('linkedin', { initialValue: options[0].linkedin })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('linkedin', { initialValue: options[0].linkedin })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>Google Play</span>}>
-              {getFieldDecorator('googleplay', { initialValue: options[0].googleplay })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('googleplay', { initialValue: options[0].googleplay })(<Input />)}
             </FormItem>
 
             <FormItem {...formItemLayout} label={<span>App Store</span>} style={{ float: 'unset' }}>
-              {getFieldDecorator('appstore', { initialValue: options[0].appstore })(<Input onChange={this.onChange} />)}
+              {getFieldDecorator('appstore', { initialValue: options[0].appstore })(<Input />)}
             </FormItem>
           </Form>
         ) : null}

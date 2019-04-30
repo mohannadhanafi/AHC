@@ -53,13 +53,10 @@ class Registration extends Component {
   };
 
   onChange =() => {
-    const { active } = this.state;
     this.props.form.validateFieldsAndScroll((err, values) => {
-      values.active = active;
       this.props.setForm(values);
     });
   }
-
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -105,6 +102,7 @@ class Registration extends Component {
     const { getFieldDecorator } = this.props.form;
 
     const { options } = this.props;
+    console.log(options);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -119,19 +117,19 @@ class Registration extends Component {
       <>
         {
   options.length ? (
-    <Form onSubmit={this.handleSubmit}>
+    <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
       <FormItem {...formItemLayout} label={<span>Website Name</span>}>
         {getFieldDecorator('name', {
           initialValue: options[0].name,
           rules: [{ max: 30, message: 'Only 30 Letter is allowed !' }],
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
 
       <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
         {getFieldDecorator('copyrights', {
           initialValue: options[0].copyrights,
           rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
 
       <FormItem
@@ -140,10 +138,9 @@ class Registration extends Component {
         label={<span>Active</span>}
             >
         {getFieldDecorator('active')(
-          <Checkbox
-            checked={this.state.active}
-            onChange={this.onChangeCheck}
+          <Checkbox defaultChecked={options[0].active}
                 >
+
                   Disable the webiste
           </Checkbox>,
         )}
