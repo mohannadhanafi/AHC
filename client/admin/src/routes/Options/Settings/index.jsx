@@ -11,7 +11,6 @@ import Social from '../Social';
 import Footer from '../Footer';
 import ContactUs from '../ContactUs';
 import General from '../General';
-import OpenningHours from '../Hours';
 import Additional from '../Additional';
 import './style.css';
 
@@ -103,10 +102,6 @@ render() {
 
         <TabPane tab="Footer" key="6">
           <Footer />
-        </TabPane>
-
-        <TabPane tab="Hours" key="7">
-          <OpenningHours />
         </TabPane>
 
       </Tabs>

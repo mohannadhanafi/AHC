@@ -319,6 +319,12 @@ class SidebarContent extends Component {
                   </span>
 )}
               >
+                <Menu.Item key="contact/hours">
+                <Link to="/admin/contact/hours">
+                    <i className="icon icon-button" />
+                    <IntlMessages id="sidebar.hours" />
+                  </Link>
+              </Menu.Item>
                 <Menu.Item key="contact/page">
                   <Link to="/admin/contact/page">
                     <i className="icon icon-button" />

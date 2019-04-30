@@ -152,7 +152,7 @@ class Registration extends Component {
       },
     };
     return (
-      <>
+      <Card className="gx-card" title="Openning Hours">
         <Form onSubmit={this.handleSubmit}>
           <Form.Item {...formItemLayout} label={<span>Monday</span>}>
             <Input.Group>
@@ -444,7 +444,7 @@ class Registration extends Component {
           </FormItem>
         </Form>
         <NotificationContainer />
-      </>
+      </Card>
     );
   }
 }
