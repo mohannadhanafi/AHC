@@ -33,3 +33,4 @@ export const SET_ALL_NOTIFICATIONS = 'SET_ALL_NOTIFICATIONS';
 export const SET_INSTALL = 'SET_INSTALL';
 export const SET_OPATIONS = 'SET_OPATIONS';
 export const GET_OPATIONS = 'GET_OPATIONS';
+export const SET_FORM = 'SET_FORM';

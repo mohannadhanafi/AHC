@@ -47,7 +47,6 @@ exports.update = async (req, res) => {
       res.status(200).send({ message: 'Updated is done' });
     }
   } catch (error) {
-    console.log(error)
     res.status(500).send({ message: 'Internal Server Error' });
   }
 };

@@ -55,7 +55,6 @@ exports.get = async (request, response) => {
 };
 
 exports.post = async (request, response) => {
-  console.log(request.body)
   try {
     const {
       // seo,

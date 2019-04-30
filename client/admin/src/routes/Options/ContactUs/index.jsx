@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Form, Input,
+  Form, Input,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -24,6 +24,7 @@ import {
   NotificationManager,
 } from 'react-notifications';
 import { connect } from 'react-redux/es';
+import { setForm } from '../../../appRedux/actions/form';
 
 const FormItem = Form.Item;
 
@@ -33,6 +34,11 @@ class Registration extends Component {
 
   };
 
+  onChange =() => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      this.props.setForm(values);
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -77,7 +83,6 @@ class Registration extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { options } = this.props;
-    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -88,18 +93,6 @@ class Registration extends Component {
         sm: { span: 18 },
       },
     };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
     return (
       <>
         {
@@ -107,27 +100,27 @@ class Registration extends Component {
     <Form onSubmit={this.handleSubmit}>
 
       <FormItem {...formItemLayout} label={<span>address</span>}>
-        {getFieldDecorator('address', { initialValue: options[0].address })(<Input />)}
+        {getFieldDecorator('address', { initialValue: options[0].address })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Mobile">
         {getFieldDecorator('mobile', {
           initialValue: options[0].mobile,
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('phone', {
           initialValue: options[0].phone,
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Tel">
         {getFieldDecorator('tel', {
           initialValue: options[0].tel,
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Fax">
         {getFieldDecorator('fax', {
           initialValue: options[0].fax,
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="E-mail">
         {getFieldDecorator('email', {
@@ -138,34 +131,17 @@ class Registration extends Component {
               message: 'The input is not valid E-mail!',
             },
           ],
-        })(<Input />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
-        {getFieldDecorator('copyrights', {
-          initialValue: options[0].copyrights,
-          rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label={<span>Latitude</span>}>
         {getFieldDecorator('latitude', {
           initialValue: options[0].latitude,
-        })(<Input type="number" />)}
+        })(<Input onChange={this.onChange} type="number" />)}
       </FormItem>
-      <FormItem {...formItemLayout} label={<span>Longitude</span>}>
+      <FormItem {...formItemLayout} label={<span>Longitude</span>} style={{ float: 'unset' }}>
         {getFieldDecorator('longitude', {
           initialValue: options[0].longitude,
-        })(<Input type="number" />)}
-      </FormItem>
-      <FormItem {...tailFormItemLayout}>
-        {!disable ? (
-          <Button type="primary" htmlType="submit">
-          Save
-          </Button>
-        ) : (
-          <Button type="primary" disabled htmlType="submit">
-          Save
-          </Button>
-        )}
+        })(<Input onChange={this.onChange} type="number" />)}
       </FormItem>
     </Form>
   ) : null}
@@ -184,4 +160,4 @@ const mapStateToProps = ({ opations }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(RegistrationForm);
+export default connect(mapStateToProps, { setForm })(RegistrationForm);

@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Input, Checkbox,
+  Form, Input, Checkbox,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -24,6 +24,7 @@ import {
   NotificationManager,
 } from 'react-notifications';
 import { connect } from 'react-redux/es';
+import { setForm } from '../../../appRedux/actions/form';
 
 const FormItem = Form.Item;
 
@@ -35,10 +36,30 @@ class Registration extends Component {
     active: false,
   };
 
+  componentDidMount() {
+    const { options } = this.props;
+    if (options.length) {
+      this.setState({ active: options[0].active });
+    }
+  }
+
 
   onChangeCheck = () => {
     this.setState({ active: !this.state.active });
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      values.active = this.state.active;
+      this.props.setForm(values);
+    });
   };
+
+  onChange =() => {
+    const { active } = this.state;
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      values.active = active;
+      this.props.setForm(values);
+    });
+  }
+
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -84,8 +105,6 @@ class Registration extends Component {
     const { getFieldDecorator } = this.props.form;
 
     const { options } = this.props;
-
-    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -96,39 +115,27 @@ class Registration extends Component {
         sm: { span: 18 },
       },
     };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
     return (
       <>
         {
   options.length ? (
     <Form onSubmit={this.handleSubmit}>
-
       <FormItem {...formItemLayout} label={<span>Website Name</span>}>
         {getFieldDecorator('name', {
           initialValue: options[0].name,
           rules: [{ max: 30, message: 'Only 30 Letter is allowed !' }],
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
 
       <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
         {getFieldDecorator('copyrights', {
           initialValue: options[0].copyrights,
           rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
 
       <FormItem
+        style={{ float: 'unset' }}
         {...formItemLayout}
         label={<span>Active</span>}
             >
@@ -141,18 +148,6 @@ class Registration extends Component {
           </Checkbox>,
         )}
       </FormItem>
-
-      <FormItem {...tailFormItemLayout}>
-        {!disable ? (
-          <Button type="primary" htmlType="submit">
-          Save
-          </Button>
-        ) : (
-          <Button type="primary" disabled htmlType="submit">
-          Save
-          </Button>
-        )}
-      </FormItem>
     </Form>
   ) : null}
 
@@ -163,11 +158,11 @@ class Registration extends Component {
 }
 
 const RegistrationForm = Form.create()(Registration);
-const mapStateToProps = ({ opations }) => {
-  const { opations: options } = opations;
+const mapStateToProps = (props) => {
+  const { opations: options } = props.opations;
   return {
     options,
   };
 };
 
-export default connect(mapStateToProps, null)(RegistrationForm);
+export default connect(mapStateToProps, { setForm })(RegistrationForm);

@@ -7,7 +7,6 @@ const INIT_STATE = {
 };
 
 export default (state = INIT_STATE, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case SET_OPATIONS: {
       return {

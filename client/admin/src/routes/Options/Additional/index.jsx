@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Input, Checkbox,
+  Button, Form,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -25,6 +25,7 @@ import {
 } from 'react-notifications';
 import TextArea from 'antd/lib/input/TextArea';
 import { connect } from 'react-redux/es';
+import { setForm } from '../../../appRedux/actions/form';
 
 const FormItem = Form.Item;
 
@@ -34,6 +35,11 @@ class Registration extends Component {
 
   };
 
+  onChange =() => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      this.props.setForm(values);
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -112,26 +118,14 @@ class Registration extends Component {
         {getFieldDecorator('header', {
           initialValue: options[0].header,
           rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
-        })(<TextArea rows={4} />)}
+        })(<TextArea onChange={this.onChange} rows={4} />)}
       </FormItem>
 
-      <FormItem {...formItemLayout} label={<span>Footer</span>}>
+      <FormItem {...formItemLayout} label={<span>Footer</span>} style={{ float: 'unset' }}>
         {getFieldDecorator('footer', {
           initialValue: options[0].footer,
           rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
-        })(<TextArea rows={4} />)}
-      </FormItem>
-
-      <FormItem {...tailFormItemLayout}>
-        {!disable ? (
-          <Button type="primary" htmlType="submit">
-          Save
-          </Button>
-        ) : (
-          <Button type="primary" disabled htmlType="submit">
-          Save
-          </Button>
-        )}
+        })(<TextArea onChange={this.onChange} rows={4} />)}
       </FormItem>
     </Form>
   ) : null
@@ -150,4 +144,4 @@ const mapStateToProps = ({ opations }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(RegistrationForm);
+export default connect(mapStateToProps, { setForm })(RegistrationForm);

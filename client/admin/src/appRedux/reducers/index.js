@@ -5,6 +5,7 @@ import Auth from './Auth';
 import Notifications from './Notifications';
 import install from './install';
 import opations from './opations';
+import form from './form';
 
 const reducers = combineReducers({
   routing: routerReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   notifications: Notifications,
   install,
   opations,
+  form,
 });
 
 export default reducers;

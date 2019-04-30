@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Input,
+  Button, Form, Input,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -24,6 +24,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
+import { setForm } from '../../../appRedux/actions/form';
 
 const FormItem = Form.Item;
 
@@ -32,6 +33,11 @@ class Registration extends Component {
     disable: false,
   };
 
+ onChange =() => {
+   this.props.form.validateFieldsAndScroll((err, values) => {
+     this.props.setForm(values);
+   });
+ }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -107,7 +113,7 @@ class Registration extends Component {
   options.length ? (
     <Form onSubmit={this.handleSubmit}>
       <FormItem {...formItemLayout} label={<span>Address</span>}>
-        {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input />)}
+        {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="E-mail">
         {getFieldDecorator('footer_email', {
@@ -118,34 +124,23 @@ class Registration extends Component {
               message: 'The input is not valid E-mail!',
             },
           ],
-        })(<Input />)}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Mobile">
         {getFieldDecorator('footer_mobile', {
           initialValue: options[0].footer_mobile,
-        })(<Input type="number" />)}
+        })(<Input onChange={this.onChange} type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('footer_phone', {
           initialValue: options[0].footer_phone,
-        })(<Input type="number" />)}
+        })(<Input onChange={this.onChange} type="number" />)}
       </FormItem>
-      <FormItem {...formItemLayout} label={<span>Copyrights</span>}>
+      <FormItem {...formItemLayout} label={<span>Copyrights</span>} style={{ float: 'unset' }}>
         {getFieldDecorator('copyrights', {
           initialValue: options[0].copyrights,
           rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-        })(<Input />)}
-      </FormItem>
-      <FormItem {...tailFormItemLayout}>
-        {!disable ? (
-          <Button type="primary" htmlType="submit">
-          Save
-          </Button>
-        ) : (
-          <Button type="primary" disabled htmlType="submit">
-          Save
-          </Button>
-        )}
+        })(<Input onChange={this.onChange} />)}
       </FormItem>
     </Form>
   ) : (null)

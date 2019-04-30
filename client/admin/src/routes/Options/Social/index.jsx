@@ -14,8 +14,6 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button,
-  Card,
   Form,
   Input,
 } from 'antd';
@@ -23,6 +21,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux/es';
+import { setForm } from '../../../appRedux/actions/form';
 
 const FormItem = Form.Item;
 
@@ -108,31 +107,16 @@ componentDidMount = async () => {
     }
   };
 
-  handleChange = ({ file, fileList }) => {
-    const isJPG = file.type === 'image/jpeg';
-    const isPNG = file.type === 'image/png';
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isJPG && !isPNG) {
-      NotificationManager.error('You can only upload image files!', 'ERROR', 2000);
-    } else if (!isLt2M) {
-      NotificationManager.error('Image must smaller than 2MB!', 'ERROR', 2000);
-    } else {
-      this.setState({ fileList });
-      const { status } = file;
-      if (status === 'done') {
-        const {
-          response: { fullName },
-        } = file;
-        this.setState({ fileName: fullName });
-      }
-    }
-  };
 
+  onChange =() => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      this.props.setForm(values);
+    });
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
     const { options } = this.props;
-    const { disable } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -143,77 +127,47 @@ componentDidMount = async () => {
         sm: { span: 18 },
       },
     };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
     return (
       <>
-        {
+        {options.length ? (
+          <Form onSubmit={this.handleSubmit}>
+            <FormItem {...formItemLayout} label={<span>Facebook</span>}>
+              {getFieldDecorator('facebook', { initialValue: options[0].facebook })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-          options.length ? (
-            <Form onSubmit={this.handleSubmit}>
-              { console.log(options)
-}
-              <FormItem {...formItemLayout} label={<span>Facebook</span>}>
-                {getFieldDecorator('facebook', { initialValue: options[0].facebook })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Twitter</span>}>
+              {getFieldDecorator('twitter', { initialValue: options[0].twitter })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Twitter</span>}>
-                {getFieldDecorator('twitter', { initialValue: options[0].twitter })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Youtube</span>}>
+              {getFieldDecorator('youtube', { initialValue: options[0].youtube })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Youtube</span>}>
-                {getFieldDecorator('youtube', { initialValue: options[0].youtube })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Google</span>}>
+              {getFieldDecorator('google', { initialValue: options[0].google })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Google</span>}>
-                {getFieldDecorator('google', { initialValue: options[0].google })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Instagram</span>}>
+              {getFieldDecorator('instagram', { initialValue: options[0].instagram })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Instagram</span>}>
-                {getFieldDecorator('instagram', { initialValue: options[0].instagram })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Whatsapp</span>}>
+              {getFieldDecorator('whats', { initialValue: options[0].whats })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Whatsapp</span>}>
-                {getFieldDecorator('whats', { initialValue: options[0].whats })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Linked In</span>}>
+              {getFieldDecorator('linkedin', { initialValue: options[0].linkedin })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Linked In</span>}>
-                {getFieldDecorator('linkedin', { initialValue: options[0].linkedin })(<Input />)}
-              </FormItem>
+            <FormItem {...formItemLayout} label={<span>Google Play</span>}>
+              {getFieldDecorator('googleplay', { initialValue: options[0].googleplay })(<Input onChange={this.onChange} />)}
+            </FormItem>
 
-              <FormItem {...formItemLayout} label={<span>Google Play</span>}>
-                {getFieldDecorator('googleplay', { initialValue: options[0].googleplay })(<Input />)}
-              </FormItem>
-
-              <FormItem {...formItemLayout} label={<span>App Store</span>}>
-                {getFieldDecorator('appstore', { initialValue: options[0].appstore })(<Input />)}
-              </FormItem>
-
-              <FormItem {...tailFormItemLayout}>
-                {!disable
-                  ? (
-                    <Button type="primary" htmlType="submit">
-        Save
-                    </Button>
-                  )
-                  : (
-                    <Button type="primary" disabled htmlType="submit">
-Save
-                    </Button>
-                  ) }
-              </FormItem>
-            </Form>
-          ) : null}
+            <FormItem {...formItemLayout} label={<span>App Store</span>} style={{ float: 'unset' }}>
+              {getFieldDecorator('appstore', { initialValue: options[0].appstore })(<Input onChange={this.onChange} />)}
+            </FormItem>
+          </Form>
+        ) : null}
 
         <NotificationContainer />
       </>
@@ -228,4 +182,4 @@ const mapStateToProps = ({ opations }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(RegistrationForm);
+export default connect(mapStateToProps, { setForm })(RegistrationForm);

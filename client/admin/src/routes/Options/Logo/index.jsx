@@ -15,7 +15,7 @@
 /* eslint-disable linebreak-style */
 import React, { Component } from 'react';
 import {
-  Button, Card, Form, Upload, Modal, Icon, Input,
+  Form, Upload, Modal, Icon, Input,
 } from 'antd';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
@@ -26,6 +26,8 @@ import {
 import TextArea from 'antd/lib/input/TextArea';
 import ColorPicker from 'rc-color-picker';
 import 'rc-color-picker/assets/index.css';
+import { connect } from 'react-redux/es';
+import { setForm } from '../../../appRedux/actions/form';
 
 const FormItem = Form.Item;
 
@@ -52,16 +54,8 @@ class Registration extends Component {
   };
 
   componentDidMount = async () => {
-    const res = await axios.get('/api/v2/getoptions');
-    const { data } = res;
-    const {
-      logo: pic,
-      ctatitle,
-      ctasub,
-      footer_logo,
-      favicon,
-      color,
-    } = data[0];
+    const { options } = this.props;
+    const { logo: pic, footer_logo, favicon } = options[0];
     const coloured = [];
     const white = [];
     const faviconList = [];
@@ -98,6 +92,13 @@ class Registration extends Component {
         });
       })
       .catch((error) => {});
+    const res = await axios.get('/api/v2/getoptions');
+    const { data } = res;
+    const {
+      ctatitle,
+      ctasub,
+      color,
+    } = data[0];
     this.setState({
       pic,
       coloured,
@@ -198,6 +199,7 @@ class Registration extends Component {
   };
 
   handleChange = ({ file, fileList }, type) => {
+    const values = {};
     const isJPG = file.type === 'image/svg';
     const isPNG = file.type === 'image/png';
     const isLt2M = file.size / 1024 / 1024 < 2;
@@ -222,12 +224,22 @@ class Registration extends Component {
         if (status === 'done') {
           if (type === 'faviconList') {
             const { response } = file;
+            values.favicon = response;
+            this.props.setForm(values);
             const name = `${[type]}Name`;
             this.setState(() => ({ [name]: response }));
           } else {
             const {
               response: { fullName },
             } = file;
+            if (type === 'coloured') {
+              values.logo = fullName;
+              this.props.setForm(values);
+            }
+            if (type === 'white') {
+              values.footer_logo = fullName;
+              this.props.setForm(values);
+            }
             const name = `${[type]}Name`;
             this.setState(() => ({ [name]: fullName }));
           }
@@ -238,6 +250,9 @@ class Registration extends Component {
 
   changeColour = ({ color }) => {
     this.setState({ color });
+    const values = {};
+    values.color = color;
+    this.props.setForm(values);
   };
 
   render() {
@@ -246,15 +261,13 @@ class Registration extends Component {
       white,
       previewVisible,
       pic,
-      ctatitle,
-      ctasub,
       coloured,
       colouredName,
       faviconList,
       faviconListName,
       color,
-      disable,
     } = this.state;
+    const { options } = this.props;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -263,18 +276,6 @@ class Registration extends Component {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 18 },
-      },
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
       },
     };
     const uploadButton = (
@@ -286,7 +287,21 @@ class Registration extends Component {
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
-          <FormItem {...formItemLayout} label="Coloured Logo">
+          <FormItem {...formItemLayout} label="Select Color">
+            {getFieldDecorator('colour', {})(
+              <ColorPicker color={color} onChange={this.changeColour}>
+                <Input
+                  className="colour-picker"
+                  style={{
+                    cursor: 'pointer !important',
+                    backgroundColor: color,
+                    width: '50px',
+                  }}
+                  />
+              </ColorPicker>,
+            )}
+          </FormItem>
+          <FormItem {...formItemLayout} label="Main Logo">
             <Upload
               action="/api/v2/uploadFile"
               listType="picture-card"
@@ -312,7 +327,7 @@ class Registration extends Component {
             </Modal>
           </FormItem>
 
-          <FormItem {...formItemLayout} label="White Logo">
+          <FormItem {...formItemLayout} label="Footer Logo">
             <Upload
               action="/api/v2/uploadFile"
               listType="picture-card"
@@ -338,7 +353,7 @@ class Registration extends Component {
             </Modal>
           </FormItem>
 
-          <FormItem {...formItemLayout} label="Icon">
+          <FormItem {...formItemLayout} label="Fav ico" style={{ float: 'unset' }}>
             <Upload
               action="/api/v2/uploadFav"
               listType="picture-card"
@@ -365,7 +380,7 @@ class Registration extends Component {
             </Modal>
           </FormItem>
 
-          <FormItem {...formItemLayout} label={<span>CTA Title</span>}>
+          {/* <FormItem {...formItemLayout} label={<span>CTA Title</span>}>
             {getFieldDecorator('ctatitle', {
               initialValue: ctatitle,
               rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
@@ -376,32 +391,7 @@ class Registration extends Component {
               initialValue: ctasub,
               rules: [{ max: 150, message: 'Only 150 Letter is allowed !' }],
             })(<TextArea rows={8} />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Choose Colour">
-            {getFieldDecorator('colour', {})(
-              <ColorPicker color={color} onChange={this.changeColour}>
-                <Input
-                  className="colour-picker"
-                  style={{
-                    cursor: 'pointer !important',
-                    backgroundColor: color,
-                    width: '50px',
-                  }}
-                  />
-              </ColorPicker>,
-            )}
-          </FormItem>
-          <FormItem {...tailFormItemLayout}>
-            {!disable ? (
-              <Button type="primary" htmlType="submit">
-                Save
-              </Button>
-            ) : (
-              <Button type="primary" disabled htmlType="submit">
-                Save
-              </Button>
-            )}
-          </FormItem>
+          </FormItem> */}
         </Form>
         <NotificationContainer />
       </>
@@ -410,4 +400,11 @@ class Registration extends Component {
 }
 
 const RegistrationForm = Form.create()(Registration);
-export default RegistrationForm;
+const mapStateToProps = ({ opations }) => {
+  const { opations: options } = opations;
+  return {
+    options,
+  };
+};
+
+export default connect(mapStateToProps, { setForm })(RegistrationForm);
