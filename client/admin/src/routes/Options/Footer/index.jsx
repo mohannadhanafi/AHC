@@ -35,6 +35,7 @@ class Registration extends Component {
 
  onChange =() => {
    this.props.form.validateFieldsAndScroll((err, values) => {
+     console.log(values);
      this.props.setForm(values);
    });
  }
@@ -111,9 +112,9 @@ class Registration extends Component {
       <>
         {
   options.length ? (
-    <Form onSubmit={this.handleSubmit}>
+    <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
       <FormItem {...formItemLayout} label={<span>Address</span>}>
-        {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input onChange={this.onChange} />)}
+        {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="E-mail">
         {getFieldDecorator('footer_email', {
@@ -124,23 +125,23 @@ class Registration extends Component {
               message: 'The input is not valid E-mail!',
             },
           ],
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Mobile">
         {getFieldDecorator('footer_mobile', {
           initialValue: options[0].footer_mobile,
-        })(<Input onChange={this.onChange} type="number" />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('footer_phone', {
           initialValue: options[0].footer_phone,
-        })(<Input onChange={this.onChange} type="number" />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label={<span>Copyrights</span>} style={{ float: 'unset' }}>
         {getFieldDecorator('copyrights', {
           initialValue: options[0].copyrights,
           rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-        })(<Input onChange={this.onChange} />)}
+        })(<Input />)}
       </FormItem>
     </Form>
   ) : (null)
@@ -160,4 +161,4 @@ const mapStateToProps = ({ opations }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(RegistrationForm);
+export default connect(mapStateToProps, { setForm })(RegistrationForm);
