@@ -77,3 +77,34 @@
 	line-height: 1.75rem;
 	color: #252729;
 }
+
+.site-header {
+	position: absolute;
+	z-index: 1000;
+	top: 20px;
+	left: 20px;
+}
+
+.logo img {
+	display: block;
+}
+
+@media screen and (min-width:1200px){
+
+	.site-header {
+		position: fixed;
+		top: 50px;
+		left: 50px;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+}
+.usefull-nav ul {
+	padding-left: 50px;
+}
+.usefull-nav ul li {
+	display: inline-block;
+	margin: 0 10px;
+	font-size: 16px;
+}
