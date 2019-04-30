@@ -220,3 +220,33 @@ a,
   width: 100px;
   height: auto !important;
 }
+
+.notification-success {
+  background-color: #f6ffed !important;
+  border: 1px solid #b7eb8f !important;
+  border-radius: 10px;
+  height: 90px !important;
+}
+.notification-error {
+  background-color: #fff1f0 !important;
+  border: 1px solid #ffa39e !important;
+  border-radius: 10px;
+  height: 90px !important;
+}
+.notification, .notification .title {
+  color: #545454 !important;
+  box-shadow: none !important;
+}
+
+.notification-success:before {
+  color: #b7eb8f
+}
+.notification-error:before {
+  color: #ffa39e !important;
+
+}
+
+.notification-container {
+  height: 90px;
+  overflow-y: hidden !important
+}

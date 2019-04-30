@@ -1,0 +1,79 @@
+.main--div {
+    background-position-x: right !important;
+    background-size: cover !important;
+	position: relative;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	white-space: normal;
+	min-height: 100vh;
+}
+
+.main-container {
+	clear: both;
+}
+
+.section {
+	position: relative;
+	padding: 135px 0 50px;
+}
+
+
+.home-block,
+.home-block-inner,
+.content-block,
+.content-block-inner {
+	position: relative;
+	overflow: hidden;
+}
+
+.content-block {
+	background-color: #fff;
+}
+
+@media screen and (min-width:1200px){
+
+	.home-block {
+		position: fixed;
+		width: 50%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 100;
+	}
+
+	.content-block {
+		position: relative;
+		width: 50%;
+		height: 100vh;
+		left: 50%;
+	}
+
+	.content-block-inner {
+		height: 100vh;
+		overflow-y: auto;
+	}
+	
+	.home-block .container,
+	.home-block .container-fluid,
+	.content-block .container,
+	.content-block .container-fluid {
+		max-width: 100%;
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+
+}
+
+/*------------------------------------------------------------------
+[2. Typography]
+*/
+
+.main--div {
+	font-family: 'Roboto', Helvetica, sans-serif;
+	font-size: .9375rem;
+	font-weight: normal;
+	line-height: 1.75rem;
+	color: #252729;
+}
