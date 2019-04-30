@@ -105,7 +105,7 @@ class Registration extends Component {
       <FormItem {...formItemLayout} label="Mobile">
         {getFieldDecorator('mobile', {
           initialValue: options[0].mobile,
-        })(<Input />)}
+        })(<Input type="number" />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('phone', {
