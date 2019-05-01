@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-exports.post = (request, response) => {
+exports.post = (request, response) => { 
   const { file } = request.files;
   const { name, data } = file;
   const splitName = name.split('.');

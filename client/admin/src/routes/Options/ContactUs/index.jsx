@@ -79,6 +79,13 @@ class Registration extends Component {
     });
   };
 
+  onChangeNumber = (e) => {
+    const { value } = e.target;
+    const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
+    if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
+      this.props.onChange(value);
+    }
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -104,8 +111,14 @@ class Registration extends Component {
       </FormItem>
       <FormItem {...formItemLayout} label="Mobile">
         {getFieldDecorator('mobile', {
+          rules: [
+            {
+              pattern: '/^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/',
+              message: 'invalid, please insert a number',
+            },
+          ],
           initialValue: options[0].mobile,
-        })(<Input type="number" />)}
+        })(<Input />)}
       </FormItem>
       <FormItem {...formItemLayout} label="Phone">
         {getFieldDecorator('phone', {

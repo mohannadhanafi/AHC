@@ -188,12 +188,16 @@ class Registration extends Component {
       const urlSplit = url.split('/');
       const fileName = urlSplit[urlSplit.length - 1];
       removedFile.push(fileName);
+      // removedFile.map(async (removed) => {
+      await axios.post('/api/v2/removeFile', { pic: removedFile[0] });
+      // });
     } else {
       const {
         response: { fullName },
       } = file;
 
       removedFile.push(fullName);
+      console.log(removedFile);
     }
     this.setState({ removedFile });
   };
