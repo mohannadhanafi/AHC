@@ -6,7 +6,7 @@ import asyncComponent from 'util/asyncComponent';
 
 const Table = ({ match }) => (
   <Switch>
-    <Redirect exact from={`${match.url}/`} to={`${match.url}/options/contact`} />
+    <Redirect exact from={`${match.url}/`} to={`${match.url}/contact`} />
     <Route path={`${match.url}/contact`} component={asyncComponent(() => import('./Contact'))} />
     <Route path={`${match.url}/newsletter`} component={asyncComponent(() => import('./NewsLetter'))} />
     <Route path={`${match.url}/settings`} component={asyncComponent(() => import('./Settings'))} />
