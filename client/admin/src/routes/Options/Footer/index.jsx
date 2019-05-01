@@ -136,12 +136,6 @@ class Registration extends Component {
           initialValue: options[0].footer_phone,
         })(<Input type="number" />)}
       </FormItem>
-      <FormItem {...formItemLayout} label={<span>Copyrights</span>} style={{ float: 'unset' }}>
-        {getFieldDecorator('copyrights', {
-          initialValue: options[0].copyrights,
-          rules: [{ max: 70, message: 'Only 70 Letter is allowed !' }],
-        })(<Input />)}
-      </FormItem>
     </Form>
   ) : (null)
 }

@@ -262,18 +262,18 @@ class index extends Component {
                     <h5 className="widget-title">Company</h5>
                     <ul>
                       <li>
-                        <address>{options[0].address || null}</address>
+                        <address>{options[0].footer_address || null}</address>
                       </li>
                       {options[0].mobile && (
                       <li>
                         <span>Phone: </span>
-                        <a>{options[0].mobile}</a>
+                        <a>{options[0].footer_mobile}</a>
                       </li>
                       )}
                       {options[0].email && (
                       <li>
                         <span>Email: </span>
-                        <a href={`mailto:${options[0].email}`}>{options[0].email}</a>
+                        <a href={`mailto:${options[0].footer_email}`}>{options[0].email}</a>
                       </li>
                       )}
                     </ul>
