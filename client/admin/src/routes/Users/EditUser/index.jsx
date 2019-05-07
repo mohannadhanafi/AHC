@@ -175,6 +175,7 @@ class Registration extends Component {
   handleCancel = () => this.setState({ previewVisible: false });
 
   handlePreview = (file) => {
+    console.log(file.url);
     this.setState({
       previewImage: file.url || file.thumbUrl,
       previewVisible: true,

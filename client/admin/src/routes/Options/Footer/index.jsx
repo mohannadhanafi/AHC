@@ -94,52 +94,42 @@ class Registration extends Component {
         sm: { span: 18 },
       },
     };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
     return (
-
       <>
-        {
-  options.length ? (
-    <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
-      <FormItem {...formItemLayout} label={<span>Address</span>}>
-        {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="E-mail">
-        {getFieldDecorator('footer_email', {
-          initialValue: options[0].footer_email,
-          rules: [
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-          ],
-        })(<Input />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="Mobile">
-        {getFieldDecorator('footer_mobile', {
-          initialValue: options[0].footer_mobile,
-        })(<Input type="number" />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="Phone">
-        {getFieldDecorator('footer_phone', {
-          initialValue: options[0].footer_phone,
-        })(<Input type="number" />)}
-      </FormItem>
-    </Form>
-  ) : (null)
+        {options.length ? (
+          <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
+            <FormItem {...formItemLayout} label="Description">
+              {getFieldDecorator('footer_description', {
+                initialValue: options[0].footer_description,
+              })(<Input />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Address">
+              {getFieldDecorator('footer_address', { initialValue: options[0].footer_address })(<Input />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="E-mail">
+              {getFieldDecorator('footer_email', {
+                initialValue: options[0].footer_email,
+                rules: [
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
+                  },
+                ],
+              })(<Input />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Mobile">
+              {getFieldDecorator('footer_mobile', {
+                initialValue: options[0].footer_mobile,
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Phone" style={{ float: 'unset' }}>
+              {getFieldDecorator('footer_phone', {
+                initialValue: options[0].footer_phone,
+              })(<Input type="number" />)}
+            </FormItem>
+          </Form>
+        ) : (null)
 }
-
         <NotificationContainer />
       </>
     );

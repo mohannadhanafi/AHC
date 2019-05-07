@@ -250,3 +250,8 @@ a,
   height: 90px;
   overflow-y: hidden !important
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}

@@ -79,13 +79,14 @@ class Registration extends Component {
     });
   };
 
-  onChangeNumber = (e) => {
-    const { value } = e.target;
-    const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
-    if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
-      this.props.onChange(value);
-    }
-  }
+  // onChangeNumber = (e) => {
+  //   const { value } = e.target;
+  //   console.log(value);
+  //   const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
+  //   if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
+  //     this.props.onChange(value);
+  //   }
+  // }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -100,64 +101,57 @@ class Registration extends Component {
         sm: { span: 18 },
       },
     };
+
     return (
       <>
-        {
-  options.length ? (
-    <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
-
-      <FormItem {...formItemLayout} label={<span>address</span>}>
-        {getFieldDecorator('address', { initialValue: options[0].address })(<Input />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="Mobile">
-        {getFieldDecorator('mobile', {
-          rules: [
-            {
-              pattern: '/^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/',
-              message: 'invalid, please insert a number',
-            },
-          ],
-          initialValue: options[0].mobile,
-        })(<Input />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="Phone">
-        {getFieldDecorator('phone', {
-          initialValue: options[0].phone,
-        })(<Input type="number" />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="Tel">
-        {getFieldDecorator('tel', {
-          initialValue: options[0].tel,
-        })(<Input type="number" />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="Fax">
-        {getFieldDecorator('fax', {
-          initialValue: options[0].fax,
-        })(<Input type="number" />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label="E-mail">
-        {getFieldDecorator('email', {
-          initialValue: options[0].email,
-          rules: [
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-          ],
-        })(<Input />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label={<span>Latitude</span>}>
-        {getFieldDecorator('latitude', {
-          initialValue: options[0].latitude,
-        })(<Input type="number" />)}
-      </FormItem>
-      <FormItem {...formItemLayout} label={<span>Longitude</span>} style={{ float: 'unset' }}>
-        {getFieldDecorator('longitude', {
-          initialValue: options[0].longitude,
-        })(<Input type="number" />)}
-      </FormItem>
-    </Form>
-  ) : null}
+        {options.length ? (
+          <Form onSubmit={this.handleSubmit} onChange={this.onChange}>
+            <FormItem {...formItemLayout} label="address">
+              {getFieldDecorator('address', { initialValue: options[0].address })(<Input />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Mobile">
+              {getFieldDecorator('mobile', {
+                initialValue: options[0].mobile,
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Phone">
+              {getFieldDecorator('phone', {
+                initialValue: options[0].phone,
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Tel">
+              {getFieldDecorator('tel', {
+                initialValue: options[0].tel,
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="Fax">
+              {getFieldDecorator('fax', {
+                initialValue: options[0].fax,
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="E-mail">
+              {getFieldDecorator('email', {
+                initialValue: options[0].email,
+                rules: [
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
+                  },
+                ],
+              })(<Input />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label={<span>Latitude</span>}>
+              {getFieldDecorator('latitude', {
+                initialValue: options[0].latitude,
+              })(<Input type="number" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label={<span>Longitude</span>} style={{ float: 'unset' }}>
+              {getFieldDecorator('longitude', {
+                initialValue: options[0].longitude,
+              })(<Input type="number" />)}
+            </FormItem>
+          </Form>
+        ) : null}
 
         <NotificationContainer />
       </>

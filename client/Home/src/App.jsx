@@ -24,8 +24,9 @@ class App extends Component {
   render() {
     const { options } = this.props;
     if (options.length) {
-      const { color } = options[0];
+      const { color, name } = options[0];
       document.documentElement.style.setProperty('--main-color', color);
+      document.title = name;
     }
     return (
       options.length && options[0].active ? (<Disable />) : (

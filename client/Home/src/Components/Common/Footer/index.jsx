@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { Component } from 'react';
@@ -72,6 +73,13 @@ class index extends Component {
     const { options } = this.props;
     return (
       <footer className="footer">
+        <div className="hidden">
+          {options.length ? (
+            options[0].footer ? (
+              options[0].footer
+            ) : null
+          ) : null}
+        </div>
         <div className="container">
           <div className="footer__widgets">
             <div className="row">
@@ -96,34 +104,72 @@ class index extends Component {
                       </a>
                     )}
                     <div className="socials mt-32">
-                      <a
-                        href={options[0].twitter || null}
-                        className="social social-twitter"
-                        aria-label="twitter"
-                        title="twitter"
-                        target="_blank"
-                      >
-                        <i className="ui-twitter" />
-                      </a>
-                      <a
-                        href={options[0].facebook || null}
-                        className="social social-facebook"
-                        aria-label="facebook"
-                        title="facebook"
-                        target="_blank"
-                      >
-                        <i className="ui-facebook" />
-                        {/* <img src={facebookIcon} alt="" /> */}
-                      </a>
-                      <a
-                        href={options[0].google || null}
-                        className="social social-google-plus"
-                        aria-label="google plus"
-                        title="google plus"
-                        target="_blank"
-                      >
-                        <i className="ui-google" />
-                      </a>
+                      {options[0].twitter ? (
+                        <a
+                          href={options[0].twitter || null}
+                          className="social social-twitter"
+                          aria-label="twitter"
+                          title="twitter"
+                          target="_blank"
+                        >
+                          <i className="ui-twitter" />
+                        </a>
+                      ) : null}
+                      {options[0].facebook ? (
+                        <a
+                          href={options[0].facebook || null}
+                          className="social social-facebook"
+                          aria-label="facebook"
+                          title="facebook"
+                          target="_blank"
+                        >
+                          <i className="ui-facebook" />
+                        </a>
+                      ) : null}
+                      {options[0].google ? (
+                        <a
+                          href={options[0].google || null}
+                          className="social social-google-plus"
+                          aria-label="google plus"
+                          title="google plus"
+                          target="_blank"
+                        >
+                          <i className="ui-google" />
+                        </a>
+                      ) : null}
+                      {options[0].youtube ? (
+                        <a
+                          href={options[0].youtube || null}
+                          className="social social-youtube"
+                          aria-label="youtube"
+                          title="youtube"
+                          target="_blank"
+                        >
+                          <i className="ui-youtube" />
+                        </a>
+                      ) : null}
+                      {options[0].instagram ? (
+                        <a
+                          href={options[0].instagram || null}
+                          className="social social-instagram"
+                          aria-label="instagram"
+                          title="instagram"
+                          target="_blank"
+                        >
+                          <i className="ui-instagram" />
+                        </a>
+                      ) : null}
+                      {options[0].linkedin ? (
+                        <a
+                          href={options[0].linkedin || null}
+                          className="social social-linkedin"
+                          aria-label="linkedin"
+                          title="linkedin"
+                          target="_blank"
+                        >
+                          <i className="ui-linkedin" />
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 ) : null}

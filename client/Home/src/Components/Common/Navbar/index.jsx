@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -62,6 +63,13 @@ class index extends Component {
     const { options } = this.props;
     return (
       <header className="nav">
+        <div className="hidden">
+          {options.length ? (
+            options[0].header ? (
+              options[0].header
+            ) : null
+          ) : null}
+        </div>
         <div className="nav__holder nav--sticky">
           <div className="container-fluid container-semi-fluid nav__container">
             <div className="flex-parent">

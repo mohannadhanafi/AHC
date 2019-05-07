@@ -36,7 +36,12 @@ class Registration extends Component {
     logo: '',
     copyrighrs: '',
     previewVisible: false,
+    previewVisiblecoloured: false,
+    previewVisiblewhite: false,
+    previewVisiblefaviconList: false,
     previewImage: '',
+    previewImageWhite: '',
+    previewImageFav: '',
     fileList: [],
     inputVisible: false,
     fileName: '',
@@ -101,6 +106,8 @@ class Registration extends Component {
     } = data[0];
     this.setState({
       pic,
+      footer_logo,
+      favicon,
       coloured,
       ctatitle,
       ctasub,
@@ -172,13 +179,31 @@ class Registration extends Component {
     });
   };
 
-  handleCancel = () => this.setState({ previewVisible: false });
+  handleCancel = () => this.setState({ previewVisiblecoloured: false, previewVisiblewhite: false, previewVisiblefaviconList: false });
 
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
+  handlePreview = (file, type) => {
+    switch (type) {
+      case 'coloured':
+        this.setState({
+          previewImage: file.url || file.thumbUrl,
+          previewVisiblecoloured: true,
+        });
+        break;
+      case 'white':
+        this.setState({
+          previewImage: file.url || file.thumbUrl,
+          previewVisiblewhite: true,
+        });
+        break;
+      case 'faviconList':
+        this.setState({
+          previewImage: file.url || file.thumbUrl,
+          previewVisiblefaviconList: true,
+        });
+        break;
+      default:
+        return null;
+    }
   };
 
   removeFile = async (file) => {
@@ -195,9 +220,7 @@ class Registration extends Component {
       const {
         response: { fullName },
       } = file;
-
       removedFile.push(fullName);
-      console.log(removedFile);
     }
     this.setState({ removedFile });
   };
@@ -264,14 +287,16 @@ class Registration extends Component {
     const {
       white,
       previewVisible,
+      previewVisiblecoloured,
       pic,
       coloured,
-      colouredName,
       faviconList,
       faviconListName,
       color,
+      previewVisiblewhite,
+      footer_logo,
+      favicon,
     } = this.state;
-    const { options } = this.props;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -310,7 +335,7 @@ class Registration extends Component {
               action="/api/v2/uploadFile"
               listType="picture-card"
               fileList={coloured}
-              onPreview={this.handlePreview}
+              onPreview={file => this.handlePreview(file, 'coloured')}
               onChange={file => this.handleChange(file, 'coloured')}
               withCredentials
               onRemove={this.removeFile}
@@ -319,7 +344,7 @@ class Registration extends Component {
               {coloured.length >= 1 ? null : uploadButton}
             </Upload>
             <Modal
-              visible={previewVisible}
+              visible={previewVisiblecoloured}
               footer={null}
               onCancel={this.handleCancel}
             >
@@ -336,7 +361,7 @@ class Registration extends Component {
               action="/api/v2/uploadFile"
               listType="picture-card"
               fileList={white}
-              onPreview={this.handlePreview}
+              onPreview={file => this.handlePreview(file, 'white')}
               onChange={file => this.handleChange(file, 'white')}
               withCredentials
               onRemove={this.removeFile}
@@ -345,14 +370,14 @@ class Registration extends Component {
               {white.length >= 1 ? null : uploadButton}
             </Upload>
             <Modal
-              visible={previewVisible}
+              visible={previewVisiblewhite}
               footer={null}
               onCancel={this.handleCancel}
             >
               <img
                 alt="example"
                 style={{ width: '100%' }}
-                src={`/api/v2/getFile/${colouredName}`}
+                src={`/api/v2/getFile/${footer_logo}`}
               />
             </Modal>
           </FormItem>
@@ -362,7 +387,7 @@ class Registration extends Component {
               action="/api/v2/uploadFav"
               listType="picture-card"
               fileList={faviconList}
-              onPreview={this.handlePreview}
+              onPreview={file => this.handlePreview(file, 'faviconList')}
               onChange={file => this.handleChange(file, 'faviconList')}
               withCredentials
               onRemove={this.removeFile}
