@@ -1363,7 +1363,12 @@ img.mfp-img {
 
 .socials .social-linkedin:hover {
 	background-color: #0e76a8; }
-
+	.socials .social-whatsapp {
+		color: green; }
+	
+	.socials .social-whatsapp:hover {
+		background-color: green; }
+	whatsapp
 .socials .social-pinterest {
 	color: #c8232c; }
 

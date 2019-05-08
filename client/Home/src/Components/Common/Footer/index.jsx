@@ -170,6 +170,16 @@ class index extends Component {
                           <i className="ui-linkedin" />
                         </a>
                       ) : null}
+                      {options[0].whats ? (
+                        <a
+                          href={`tel:${options[0].whats}` || null}
+                          className="social social-whatsapp"
+                          aria-label="whatsapp"
+                          title="whatsapp"
+                        >
+                          <i className="ui-whatsapp" />
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 ) : null}
@@ -312,8 +322,14 @@ class index extends Component {
                       </li>
                       {options[0].mobile && (
                       <li>
-                        <span>Phone: </span>
+                        <span>Mobile: </span>
                         <a>{options[0].footer_mobile}</a>
+                      </li>
+                      )}
+                      {options[0].phone && (
+                      <li>
+                        <span>Phone: </span>
+                        <a>{options[0].footer_phone}</a>
                       </li>
                       )}
                       {options[0].email && (

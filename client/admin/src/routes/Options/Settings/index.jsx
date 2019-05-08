@@ -35,9 +35,7 @@ onSave = () => {
       if (result.status === 200) {
         NotificationManager.success(message, 'SUCCESS', 2000);
         setTimeout(() => {
-          this.props.history.push('/admin/settings/settings');
           this.setState({ disable: false });
-          localStorage.removeItem('values');
         }, 3000);
       } else {
         NotificationManager.error(message || statusText, 'ERROR', 2000);
